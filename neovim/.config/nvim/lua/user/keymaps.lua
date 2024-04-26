@@ -1,3 +1,5 @@
+vim.keymap.set("n", "<leader> ", "<CMD>noh<CR>")
+
 -- Oil
 
 vim.keymap.set("n", "<leader>e", "<CMD>Oil<CR>")
@@ -14,10 +16,8 @@ local smart_find_files = function(git_files, find_files)
     end
 
     if is_inside_working_tree[cwd] then
-        print("git")
         return(git_files)
     else
-        print("nogit")
         return(find_files)
     end
 end
