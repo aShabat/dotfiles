@@ -13,9 +13,11 @@ local smart_find_files = function(git_files, find_files)
         is_inside_working_tree[cwd] = vim.v.shell_error == 0
     end
 
-    if is_inside_working_tree[cwd] == 0 then
+    if is_inside_working_tree[cwd] then
+        print("git")
         return(git_files)
     else
+        print("nogit")
         return(find_files)
     end
 end
