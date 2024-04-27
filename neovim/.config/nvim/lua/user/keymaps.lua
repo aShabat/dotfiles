@@ -25,3 +25,7 @@ end
 vim.keymap.set("n", "<leader>tf", smart_find_files(tb.git_files, tb.find_files))
 vim.keymap.set("n", "<leader>th", tb.help_tags)
 vim.keymap.set("n", "<leader>tb", tb.buffers)
+
+-- LazyGit
+
+vim.keymap.set("n", "<leader>lg", "<CMD>LazyGit<CR>")
