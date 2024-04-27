@@ -62,6 +62,9 @@ return({
                     line_down = "J",
                 },
             })
+
+            require("mini.splitjoin").setup({
+            })
         end
     },
 })
