@@ -8,7 +8,7 @@ vim.keymap.set("n", "<leader>e", MiniFiles.open)
 
 local tb = require("telescope.builtin")
 local is_inside_working_tree = {}
-local smart_find_files = function(git_files, find_files) 
+local smart_find_files = function(git_files, find_files)
     local cwd = vim.fn.getcwd()
     if is_inside_working_tree[cwd] == nil then
         vim.fn.system("git rev-parse --is-inside-working-tree")
@@ -29,3 +29,8 @@ vim.keymap.set("n", "<leader>tb", tb.buffers)
 -- LazyGit
 
 vim.keymap.set("n", "<leader>lg", "<CMD>LazyGit<CR>")
+
+-- MiniTrailSpace
+
+vim.keymap.set("n", "<leader>mts", MiniTrailspace.trim)
+vim.keymap.set("n", "<leader>mtl", MiniTrailspace.trim_last_lines)
