@@ -1,5 +1,6 @@
 {
   "hawtkeys.nvim": { "branch": "main", "commit": "aeba04a4ccded2aa8c8fb5d74a3bea05a8f89dab" },
+  "indent-blankline.nvim": { "branch": "master", "commit": "3d08501caef2329aba5121b753e903904088f7e6" },
   "lazy.nvim": { "branch": "main", "commit": "bef521ac89c8d423f9d092e37b58e8af0c099309" },
   "mini.nvim": { "branch": "main", "commit": "04f8d6e0acd5a52d01ec1c392e3947135dbfd8ef" },
   "nvim-treesitter": { "branch": "master", "commit": "3ef8d25df2d8eca6f15a6889cb2bc9d4c6101096" },
