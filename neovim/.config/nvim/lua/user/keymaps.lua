@@ -18,9 +18,9 @@ local smart_find_files = function(git_files, find_files)
     end
 
     if is_inside_working_tree[cwd] then
-        return(git_files)
+        return (git_files)
     else
-        return(find_files)
+        return (find_files)
     end
 end
 
@@ -61,4 +61,4 @@ M.map_lsp_keybinds = function(buffer_number)
     lsp_map("<leader>td", vim.lsp.buf.type_definition)
 end
 
-return(M)
+return (M)

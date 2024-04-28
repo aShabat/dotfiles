@@ -1,4 +1,4 @@
-return({
+return ({
     {
         "hrsh7th/nvim-cmp",
         dependencies = {
@@ -13,7 +13,7 @@ return({
                     if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
                         return
                     end
-                    return"make install_jsregexp"
+                    return "make install_jsregexp"
                 end)(),
             },
             "saadparwaiz1/cmp_luasnip",
@@ -37,7 +37,7 @@ return({
                 }, {
                     { name = "buffer" },
                 }),
-                mapping = cmp.mapping.preset.insert( {
+                mapping = cmp.mapping.preset.insert({
                     ["<C-n>"] = cmp.mapping.select_next_item(),
                     ["<C-p>"] = cmp.mapping.select_prev_item(),
 

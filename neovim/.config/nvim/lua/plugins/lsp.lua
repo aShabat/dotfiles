@@ -1,12 +1,13 @@
-return({
+return ({
     {
         "neovim/nvim-lspconfig",
         dependencies = {
             "williamboman/mason.nvim",
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            { "folke/neodev.nvim", opts = {} },
-        },
+            { "folke/neodev.nvim",        opts = {} },
+            { "khaveesh/vim-fish-syntax" },
+       },
         config = function()
             require("mason").setup({})
 
@@ -42,8 +43,6 @@ return({
                     end,
                 },
             })
-
-
         end,
     },
 })

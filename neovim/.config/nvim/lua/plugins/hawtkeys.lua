@@ -1,4 +1,4 @@
-return({
+return ({
     {
         "tris203/hawtkeys.nvim",
         dependencies = {
