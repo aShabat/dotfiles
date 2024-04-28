@@ -56,10 +56,10 @@ return({
                     up = "K",
                     down = "J",
 
-                    line_left = "H",
-                    line_right = "L",
-                    line_up = "K",
-                    line_down = "J",
+                    line_left = "",
+                    line_right = "",
+                    line_up = "",
+                    line_down = "",
                 },
             })
 

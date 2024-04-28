@@ -1,3 +1,5 @@
+local M = {}
+
 vim.keymap.set("n", "<leader> ", "<CMD>noh<CR>")
 
 -- Oil
@@ -34,3 +36,29 @@ vim.keymap.set("n", "<leader>lg", "<CMD>LazyGit<CR>")
 
 vim.keymap.set("n", "<leader>mts", MiniTrailspace.trim)
 vim.keymap.set("n", "<leader>mtl", MiniTrailspace.trim_last_lines)
+
+-- LSP
+M.map_lsp_keybinds = function(buffer_number)
+    print("test")
+    local lsp_map = function(keys, func)
+        vim.keymap.set("n", keys, func, { buffer = buffer_number })
+    end
+
+    lsp_map("<leader>rn", vim.lsp.buf.rename)
+    lsp_map("<leader>ca", vim.lsp.buf.code_action)
+    lsp_map("<leader>gd", vim.lsp.buf.definition)
+
+    lsp_map("gr", tb.lsp_references)
+    lsp_map("gi", tb.lsp_implementations)
+    lsp_map("<leader>bs", tb.lsp_document_symbols)
+    lsp_map("<leader>ps", tb.lsp_workspace_symbols)
+
+    lsp_map("<leader>F", vim.lsp.buf.format)
+
+    lsp_map("K", vim.lsp.buf.hover)
+    lsp_map("<leader>k", vim.lsp.buf.signature_help)
+    lsp_map("gD", vim.lsp.buf.declaration)
+    lsp_map("<leader>td", vim.lsp.buf.type_definition)
+end
+
+return(M)
