@@ -2,9 +2,9 @@ local M = {}
 
 vim.keymap.set("n", "<leader> ", "<CMD>noh<CR>")
 
--- Oil
+-- MiniFiles
 
-vim.keymap.set("n", "<leader>e", MiniFiles.open)
+vim.keymap.set("n", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end)
 
 -- Telescope
 
