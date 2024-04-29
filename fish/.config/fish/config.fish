@@ -6,5 +6,6 @@ set -g EDITOR nvim
 set -g VISUAL nvim
 
 abbr --add lg lazygit
+alias lf="lfcd"
 
 zoxide init fish --cmd cd | source
