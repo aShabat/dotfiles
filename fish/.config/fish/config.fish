@@ -8,5 +8,3 @@ set -g VISUAL nvim
 abbr --add lg lazygit
 
 zoxide init fish --cmd cd | source
-
-staschip init fish | source
