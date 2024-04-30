@@ -29,6 +29,9 @@ return ({
             require("mini.ai").setup({
             })
 
+            require("mini.surround").setup({
+            })
+
             require("mini.comment").setup({
             })
 
@@ -67,6 +70,9 @@ return ({
             })
 
             require("mini.trailspace").setup({
+            })
+
+            require("mini.jump2d").setup({
             })
         end
     },
