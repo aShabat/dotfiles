@@ -27,6 +27,7 @@ end
 vim.keymap.set("n", "<leader>tf", smart_find_files(tb.git_files, tb.find_files))
 vim.keymap.set("n", "<leader>th", tb.help_tags)
 vim.keymap.set("n", "<leader>tb", tb.buffers)
+vim.keymap.set("n", "<leader>tg", tb.live_grep)
 
 -- LazyGit
 
@@ -39,7 +40,6 @@ vim.keymap.set("n", "<leader>mtl", MiniTrailspace.trim_last_lines)
 
 -- LSP
 M.map_lsp_keybinds = function(buffer_number)
-    print("test")
     local lsp_map = function(keys, func)
         vim.keymap.set("n", keys, func, { buffer = buffer_number })
     end

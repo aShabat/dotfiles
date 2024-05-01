@@ -41,7 +41,6 @@ return ({
                 },
             })
             local files_set_cwd = function (path)
-                print("changed")
                 local cur_entry_path = MiniFiles.get_fs_entry().path
                 local cur_directory = vim.fs.dirname(cur_entry_path)
                 vim.fn.chdir(cur_directory)
