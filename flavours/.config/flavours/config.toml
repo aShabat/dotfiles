@@ -12,7 +12,7 @@
 # shell = "sh -c '{}'"
 #
 [[items]]
-file = "~/dotfiles/wezterm/theme.toml"
+file = "~/dotfiles/wezterm/.config/config/theme.toml"
 template = "wezterm"
 rewrite = true
 # [[items]]

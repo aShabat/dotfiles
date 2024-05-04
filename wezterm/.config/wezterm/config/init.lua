@@ -1,4 +1,4 @@
-local wezterm = require 'wezterm'
+local wezterm = require("wezterm")
 local act = wezterm.action
 
 local config = {}
@@ -7,7 +7,7 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-local colors, _ = wezterm.color.load_scheme("./theme.toml")
+local colors, _ = wezterm.color.load_scheme("/home/anton/.config/wezterm/config/theme.toml")
 config.colors = colors
 
 config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
