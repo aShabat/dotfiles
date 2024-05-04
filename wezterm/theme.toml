@@ -1,0 +1,33 @@
+# Base16 DanQing - wezterm color config
+# Scheme by Wenhan Zhu (Cosmos) (zhuwenhan950913@gmail.com)
+
+[colors]
+foreground    = "#e0f0ef"
+background    = "#2d302f"
+cursor_bg     = "#e0f0ef"
+cursor_border = "#e0f0ef"
+cursor_fg     = "#2d302f"
+selection_bg  = "#e0f0ef"
+selection_fg  = "#2d302f"
+
+ansi = [
+  "#2d302f",
+  "#f9906f",
+  "#8ab361",
+  "#f0c239",
+  "#b0a4e3",
+  "#cca4e3",
+  "#30dff3",
+  "#e0f0ef"
+]
+
+brights = [
+  "#9da8a3",
+  "#f9906f",
+  "#8ab361",
+  "#f0c239",
+  "#b0a4e3",
+  "#cca4e3",
+  "#30dff3",
+  "#fcfefd"
+]
