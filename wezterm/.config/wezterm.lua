@@ -1,1 +1,1 @@
-require("config")
+return require("config")

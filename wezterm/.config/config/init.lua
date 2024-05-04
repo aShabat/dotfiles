@@ -7,8 +7,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- local colors, _ = wezterm.color.load_scheme("./theme.toml")
--- config.colors = colors
+local colors, _ = wezterm.color.load_scheme("./theme.toml")
+config.colors = colors
 
 config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
 
