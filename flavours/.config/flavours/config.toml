@@ -15,6 +15,12 @@
 file = "~/dotfiles/wezterm/.config/wezterm/config/theme.toml"
 template = "wezterm"
 rewrite = true
+
+[[items]]
+file = "~/dotfiles/neovim/.config/nvim/lua/user/minibase16-theme.lua"
+template = "nvim"
+subtemplate = "mini16"
+rewrite = true
 # [[items]]
 # # File to inject to, supports tilde and env var expansion. required
 # file = "~/.config/example"

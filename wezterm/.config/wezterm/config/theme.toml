@@ -1,33 +1,33 @@
-# Base16 Zenburn - wezterm color config
-# Scheme by elnawe
+# Base16 Ocean - wezterm color config
+# Scheme by Chris Kempson (http://chriskempson.com)
 
 [colors]
-foreground    = "#dcdccc"
-background    = "#383838"
-cursor_bg     = "#dcdccc"
-cursor_border = "#dcdccc"
-cursor_fg     = "#383838"
-selection_bg  = "#dcdccc"
-selection_fg  = "#383838"
+foreground    = "#c0c5ce"
+background    = "#2b303b"
+cursor_bg     = "#c0c5ce"
+cursor_border = "#c0c5ce"
+cursor_fg     = "#2b303b"
+selection_bg  = "#c0c5ce"
+selection_fg  = "#2b303b"
 
 ansi = [
-  "#383838",
-  "#dca3a3",
-  "#5f7f5f",
-  "#e0cf9f",
-  "#7cb8bb",
-  "#dc8cc3",
-  "#93e0e3",
-  "#dcdccc"
+  "#2b303b",
+  "#bf616a",
+  "#a3be8c",
+  "#ebcb8b",
+  "#8fa1b3",
+  "#b48ead",
+  "#96b5b4",
+  "#c0c5ce"
 ]
 
 brights = [
-  "#6f6f6f",
-  "#dca3a3",
-  "#5f7f5f",
-  "#e0cf9f",
-  "#7cb8bb",
-  "#dc8cc3",
-  "#93e0e3",
-  "#ffffff"
+  "#65737e",
+  "#bf616a",
+  "#a3be8c",
+  "#ebcb8b",
+  "#8fa1b3",
+  "#b48ead",
+  "#96b5b4",
+  "#eff1f5"
 ]
