@@ -1,32 +1,33 @@
-# Base16 DanQing - wezterm color config
-# Scheme by Wenhan Zhu (Cosmos) (zhuwenhan950913@gmail.com)
+# Base16 Zenburn - wezterm color config
+# Scheme by elnawe
 
 [colors]
-foreground    = "#e0f0ef"
-background    = "#2d302f"
-cursor_bg     = "#e0f0ef"
-cursor_border = "#e0f0ef"
-cursor_fg     = "#2d302f"
-selection_bg  = "#e0f0ef"
-selection_fg  = "#2d302f"
+foreground    = "#dcdccc"
+background    = "#383838"
+cursor_bg     = "#dcdccc"
+cursor_border = "#dcdccc"
+cursor_fg     = "#383838"
+selection_bg  = "#dcdccc"
+selection_fg  = "#383838"
 
 ansi = [
-  "#2d302f",
-  "#f9906f",
-  "#8ab361",
-  "#f0c239",
-  "#b0a4e3",
-  "#cca4e3",
-  "#30dff3",
-  "#e0f0ef"
+  "#383838",
+  "#dca3a3",
+  "#5f7f5f",
+  "#e0cf9f",
+  "#7cb8bb",
+  "#dc8cc3",
+  "#93e0e3",
+  "#dcdccc"
 ]
 
 brights = [
-  "#9da8a3",
-  "#f9906f",
-  "#8ab361",
-  "#f0c239",
-  "#b0a4e3",
-  "#cca4e3",
-  "#30dff3",
-  "#fcfefd"
+  "#6f6f6f",
+  "#dca3a3",
+  "#5f7f5f",
+  "#e0cf9f",
+  "#7cb8bb",
+  "#dc8cc3",
+  "#93e0e3",
+  "#ffffff"
+]
