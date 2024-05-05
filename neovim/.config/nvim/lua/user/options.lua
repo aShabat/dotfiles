@@ -38,3 +38,5 @@ vim.opt.foldlevelstart = 99
 vim.opt.foldenable = false
 
 vim.opt.colorcolumn = "80"
+
+vim.opt.cmdheight = 0
