@@ -11,16 +11,18 @@ vim.keymap.set("n", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_
 local tb = require("telescope.builtin")
 local is_inside_working_tree = {}
 local smart_find_files = function(git_files, find_files)
-    local cwd = vim.fn.getcwd()
-    if is_inside_working_tree[cwd] == nil then
-        vim.fn.system("git rev-parse --is-inside-working-tree")
-        is_inside_working_tree[cwd] = vim.v.shell_error == 0
-    end
+    return function ()
+        local cwd = vim.fn.getcwd()
+        if is_inside_working_tree[cwd] == nil then
+            vim.fn.system("git rev-parse --is-inside-working-tree")
+            is_inside_working_tree[cwd] = vim.v.shell_error == 0
+        end
 
-    if is_inside_working_tree[cwd] then
-        return (git_files)
-    else
-        return (find_files)
+        if is_inside_working_tree[cwd] then
+            git_files({ show_untracked = true })
+        else
+            find_files({ hidden = true })
+        end
     end
 end
 
