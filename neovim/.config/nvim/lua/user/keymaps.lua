@@ -41,6 +41,7 @@ vim.keymap.set("n", "<leader>mts", MiniTrailspace.trim)
 vim.keymap.set("n", "<leader>mtl", MiniTrailspace.trim_last_lines)
 
 -- LSP
+
 M.map_lsp_keybinds = function(buffer_number)
     local lsp_map = function(keys, func)
         vim.keymap.set("n", keys, func, { buffer = buffer_number })
@@ -62,5 +63,9 @@ M.map_lsp_keybinds = function(buffer_number)
     lsp_map("gD", vim.lsp.buf.declaration)
     lsp_map("<leader>td", vim.lsp.buf.type_definition)
 end
+
+-- UndoTree
+
+vim.keymap.set("n", "<leader>ut", "<CMD>UndotreeToggle<CR>")
 
 return (M)
