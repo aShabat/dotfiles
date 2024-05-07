@@ -4,6 +4,7 @@ return {
         dependencies = {
             "nvim-tree/nvim-web-devicons",
             "lewis6991/gitsigns.nvim",
+            "nvim-treesitter/nvim-treesitter-textobjects",
         },
         config = function()
             require("mini.base16").setup({
@@ -11,6 +12,17 @@ return {
             })
 
             require("mini.ai").setup({
+                custom_textobjects = {
+                    -- Whole region
+                    g = function ()
+                        local from = { line = 1, col = 1 }
+                        local to = {
+                            line = vim.fn.line("$"),
+                            col = math.max(vim.fn.getline("$"):len(), 1)
+                        }
+                        return { from = from, to = to }
+                    end
+                },
             })
 
             require("mini.surround").setup({
