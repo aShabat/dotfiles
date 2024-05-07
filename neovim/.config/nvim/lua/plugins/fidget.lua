@@ -1,4 +1,4 @@
-return ({
+return {
     {
         "j-hui/fidget.nvim",
         config = function ()
@@ -16,4 +16,4 @@ return ({
             end
         end
     },
-})
+}

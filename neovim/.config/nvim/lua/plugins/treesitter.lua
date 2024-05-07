@@ -1,4 +1,4 @@
-return ({
+return {
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
@@ -28,4 +28,4 @@ return ({
         opts = {
         },
     },
-})
+}

@@ -1,4 +1,4 @@
-return ({
+return {
     {
         "kdheepak/lazygit.nvim",
         dependencies = {
@@ -9,4 +9,4 @@ return ({
         "lewis6991/gitsigns.nvim",
         opts = {},
     },
-})
+}

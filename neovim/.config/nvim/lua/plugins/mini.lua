@@ -1,4 +1,4 @@
-return ({
+return {
     {
         "echasnovski/mini.nvim",
         dependencies = {
@@ -91,4 +91,4 @@ return ({
             })
         end
     },
-})
+}

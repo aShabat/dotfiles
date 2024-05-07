@@ -68,4 +68,4 @@ end
 
 vim.keymap.set("n", "<leader>ut", "<CMD>UndotreeToggle<CR>")
 
-return (M)
+return M
