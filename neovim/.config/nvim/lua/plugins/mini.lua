@@ -3,6 +3,7 @@ return {
         "echasnovski/mini.nvim",
         dependencies = {
             "nvim-tree/nvim-web-devicons",
+            "lewis6991/gitsigns.nvim",
         },
         config = function()
             require("mini.base16").setup({
@@ -71,6 +72,11 @@ return {
             })
 
             require("mini.jump2d").setup({
+            })
+
+            require("mini.statusline").setup({
+                content = {
+                },
             })
         end
     },
