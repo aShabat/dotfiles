@@ -29,30 +29,13 @@ return {
                 },
             })
 
-            local files_set_cwd = function (path)
-                local cur_entry_path = MiniFiles.get_fs_entry().path
-                local cur_directory = vim.fs.dirname(cur_entry_path)
-                vim.fn.chdir(cur_directory)
-            end
-
-            local show_dot = false
-            local filter_show = function(fs_entry)
-                return true
-            end
-            local filter_hide = function(fs_entry)
-                return not vim.startswith(fs_entry.name, '.')
-            end
-            local toggle_dotfiles = function()
-                show_dot = not show_dot
-                local filter = show_dot and filter_show or filter_hide
-                MiniFiles.refresh({ content = { filter = filter } })
-            end
-
+            local miniFilesHelpers = require("user.minifileshelpers")
             vim.api.nvim_create_autocmd("User", {
                 pattern = "MiniFilesBufferCreate",
                 callback = function (args)
-                    vim.keymap.set("n", "g~", files_set_cwd, { buffer = args.data.buf_id, desc = "Set cwd" })
-                    vim.keymap.set("n", "g.", toggle_dotfiles, { buffer = args.data.buf_id, desc = "Toggle hidden" })
+                    vim.keymap.set("n", "g~", miniFilesHelpers.files_set_cwd, { buffer = args.data.buf_id, desc = "Set cwd" })
+                    vim.keymap.set("n", "g.", miniFilesHelpers.toggle_dotfiles, { buffer = args.data.buf_id, desc = "Toggle hidden" })
+                    vim.keymap.set("n", "gp", miniFilesHelpers.toggle_preview, { buffer = args.data.buf_id, desc = "Toggle preview" })
                 end,
             })
 
