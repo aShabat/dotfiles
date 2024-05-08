@@ -13,6 +13,8 @@ return {
 
             require("mini.ai").setup({
                 custom_textobjects = {
+                    -- REMEMBER TO ADD TO leap-spooky
+
                     -- Whole region
                     g = function ()
                         local from = { line = 1, col = 1 }

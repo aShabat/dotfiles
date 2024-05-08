@@ -11,6 +11,7 @@ return {
     },
     {
         "ggandor/leap-spooky.nvim",
+        lazy = false,
         opts = {
             extra_text_objects = {
                 "ig", "ag",
