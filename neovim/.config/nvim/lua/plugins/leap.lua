@@ -7,6 +7,7 @@ return {
 
             leap.opts.safe_labels = ""
 
+            leap.opts.equivalence_classes = { " \t\r\n", "({[", ")}]", "!@#$%^&*=~:;+-_", "\'\"`" }
         end
     },
     {
