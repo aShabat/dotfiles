@@ -2,6 +2,25 @@ local M = {}
 
 vim.keymap.set("n", "<leader> ", "<CMD>noh<CR>")
 
+-- MiniAi
+
+local map_previous = function(lhs, side, textobj_id)
+    for _, mode in ipairs({ "n", "x", "o" }) do
+        vim.keymap.set(mode, lhs, function() MiniAi.move_cursor(side, "a", textobj_id, { search_method = "prev" }) end)
+    end
+end
+
+local map_next = function(lhs, side, textobj_id)
+    for _, mode in ipairs({ "n", "x", "o" }) do
+        vim.keymap.set(mode, lhs, function() MiniAi.move_cursor(side, "a", textobj_id, { search_method = "next" }) end)
+    end
+end
+
+map_previous("[f", "left", "F")
+map_previous("[F", "right", "F")
+map_next("]f", "left", "F")
+map_next("]F", "right", "F")
+
 -- MiniFiles
 
 vim.keymap.set("n", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end)
