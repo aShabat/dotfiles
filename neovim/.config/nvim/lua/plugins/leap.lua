@@ -8,6 +8,7 @@ return {
             leap.opts.safe_labels = ""
 
             leap.opts.equivalence_classes = { " \t\r\n", "({[", ")}]", "!@#$%^&*=~:;+-_", "\'\"`" }
+
         end
     },
     {
@@ -16,6 +17,10 @@ return {
         opts = {
             extra_text_objects = {
                 "ig", "ag",
+                "iq", "aq",
+                "ia", "aa",
+                "if", "af",
+                "iF", "aF",
             },
         },
         dependencies = {

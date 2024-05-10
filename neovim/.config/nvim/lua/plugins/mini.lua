@@ -13,7 +13,7 @@ return {
 
             require("mini.ai").setup({
                 custom_textobjects = {
-                    -- REMEMBER TO ADD TO leap-spooky
+                    -- REMEMBER TO ADD TO leap-spooky AND [] MOTIONS IN user.keymaps
 
                     -- Whole region
                     g = function ()
@@ -23,7 +23,10 @@ return {
                             col = math.max(vim.fn.getline("$"):len(), 1)
                         }
                         return { from = from, to = to }
-                    end
+                    end,
+
+                    -- function definition
+                    F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
                 },
             })
 
