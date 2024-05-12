@@ -50,6 +50,8 @@ vim.keymap.set("n", "<leader>th", tb.help_tags)
 vim.keymap.set("n", "<leader>tb", tb.buffers)
 vim.keymap.set("n", "<leader>tg", tb.live_grep)
 
+vim.keymap.set("n", "<leader>tz", require("telescope").extensions.zoxide.list)
+
 -- LazyGit
 
 vim.keymap.set("n", "<leader>lg", "<CMD>LazyGit<CR>")

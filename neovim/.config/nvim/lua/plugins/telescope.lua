@@ -1,6 +1,27 @@
 return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
-        "nvim-lua/plenary.nvim"
+        "nvim-lua/popup.nvim",
+        "nvim-lua/plenary.nvim",
+        "jvgrootveld/telescope-zoxide",
     },
+    config = function ()
+        local t = require("telescope")
+        local z_utils = require("telescope._extensions.zoxide.utils")
+
+        t.setup({
+            extensions = {
+                zoxide = {
+                    mappings = {
+                        default = {
+                            after_action = function(selection)
+                                vim.fn.chdir(selection.path)
+                                require("mini.files").open(selection.path)
+                            end
+                        },
+                    },
+                },
+            },
+        })
+    end
 }
