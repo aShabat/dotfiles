@@ -88,9 +88,6 @@ return {
             require("mini.trailspace").setup({
             })
 
-            -- require("mini.jump2d").setup({
-            -- })
-
             require("mini.statusline").setup({
                 content = {
                     active = function()
