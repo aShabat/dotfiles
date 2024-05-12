@@ -35,7 +35,7 @@ vim.keymap.set("n", "<leader>tz", require("telescope").extensions.zoxide.list)
 
 -- LazyGit
 
-vim.keymap.set("n", "<leader>lg", "<CMD>LazyGit<CR>")
+vim.keymap.set("n", "<leader>git", "<CMD>LazyGit<CR>")
 
 -- MiniTrailSpace
 
