@@ -10,6 +10,12 @@ return {
         local z_utils = require("telescope._extensions.zoxide.utils")
 
         t.setup({
+            defaults = {
+                path_display = {
+                    filename_first = {
+                    },
+                },
+            },
             extensions = {
                 zoxide = {
                     mappings = {
