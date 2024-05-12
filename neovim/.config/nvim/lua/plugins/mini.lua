@@ -121,6 +121,10 @@ return {
                     end
                 },
             })
+
+            require("mini.bracketed").setup({
+                undo = { suffix = "" },
+            })
         end
     },
 }
