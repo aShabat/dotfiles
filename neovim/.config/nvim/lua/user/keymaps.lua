@@ -77,7 +77,7 @@ vim.keymap.set("n", "F", "<Plug>(leap-from-window)")
 vim.keymap.set({ "x", "o" }, "f", "<Plug>(leap-forward)")
 vim.keymap.set({ "x", "o" }, "F", "<Plug>(leap-backward)")
 
--- Focus
+-- Windows
 
 local focusmap = function(direction)
     vim.keymap.set('n', '<Leader>'..direction, function()
@@ -89,5 +89,14 @@ focusmap('h')
 focusmap('j')
 focusmap('k')
 focusmap('l')
+
+local quit_window = function ()
+    if #vim.api.nvim_tabpage_list_wins(0) > 1 then
+        vim.cmd.quit()
+    end
+end
+vim.keymap.set("n", "<leader>q", quit_window)
+
+vim.keymap.set("n", "<leader>ws", "<CMD>WinShift<CR>")
 
 return M
