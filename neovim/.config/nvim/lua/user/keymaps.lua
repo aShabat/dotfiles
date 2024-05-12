@@ -77,4 +77,17 @@ vim.keymap.set("n", "F", "<Plug>(leap-from-window)")
 vim.keymap.set({ "x", "o" }, "f", "<Plug>(leap-forward)")
 vim.keymap.set({ "x", "o" }, "F", "<Plug>(leap-backward)")
 
+-- Focus
+
+local focusmap = function(direction)
+    vim.keymap.set('n', '<Leader>'..direction, function()
+        require('focus').split_command(direction)
+    end)
+end
+
+focusmap('h')
+focusmap('j')
+focusmap('k')
+focusmap('l')
+
 return M
