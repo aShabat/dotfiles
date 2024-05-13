@@ -9,7 +9,7 @@ return {
                 hybridnumber = true,
                 absolutenumber_unfocussed = true,
                 colorcolumn = {
-                    enable = true,
+                    enable = false,
                 },
             },
         },

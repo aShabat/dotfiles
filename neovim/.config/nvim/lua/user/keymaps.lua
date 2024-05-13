@@ -97,6 +97,21 @@ local quit_window = function ()
 end
 vim.keymap.set("n", "<leader>q", quit_window)
 
-vim.keymap.set("n", "<leader>ws", "<CMD>WinShift<CR>")
+vim.keymap.set("n", "<leader>wsi", "<CMD>WinShift<CR>")
+
+for letter, move in pairs({
+    h = "left",
+    H = "far_left",
+    k = "up",
+    K = "far_up",
+    j = "down",
+    J = "far_down",
+    l = "right",
+    L = "far_right",
+    s = "swap",
+}) do
+    print("<CMD>WinShift " .. "move" .. "<CR>")
+    vim.keymap.set("n", "<leader>ws" .. letter, "<CMD>WinShift " .. move .. "<CR>")
+end
 
 return M
