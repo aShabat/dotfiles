@@ -110,7 +110,6 @@ for letter, move in pairs({
     L = "far_right",
     s = "swap",
 }) do
-    print("<CMD>WinShift " .. "move" .. "<CR>")
     vim.keymap.set("n", "<leader>ws" .. letter, "<CMD>WinShift " .. move .. "<CR>")
 end
 
