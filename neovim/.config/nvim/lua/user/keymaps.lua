@@ -11,7 +11,7 @@ vim.keymap.set("n", "<leader>e", function() MiniFiles.open(vim.api.nvim_buf_get_
 local tb = require("telescope.builtin")
 local is_inside_working_tree = {}
 local smart_find_files = function(git_files, find_files)
-    return function ()
+    return function()
         local cwd = vim.fn.getcwd()
         if is_inside_working_tree[cwd] == nil then
             vim.fn.system("git rev-parse --is-inside-working-tree")
@@ -64,6 +64,8 @@ M.map_lsp_keybinds = function(buffer_number)
     lsp_map("<leader>k", vim.lsp.buf.signature_help)
     lsp_map("gD", vim.lsp.buf.declaration)
     lsp_map("<leader>td", vim.lsp.buf.type_definition)
+
+    lsp.map("<leader>F", vim.lsp.buf.format)
 end
 
 -- UndoTree
@@ -80,7 +82,7 @@ vim.keymap.set({ "x", "o" }, "F", "<Plug>(leap-backward)")
 -- Windows
 
 local focusmap = function(direction)
-    vim.keymap.set('n', '<Leader>'..direction, function()
+    vim.keymap.set('n', '<Leader>' .. direction, function()
         require('focus').split_command(direction)
     end)
 end
@@ -90,7 +92,7 @@ focusmap('j')
 focusmap('k')
 focusmap('l')
 
-local quit_window = function ()
+local quit_window = function()
     if #vim.api.nvim_tabpage_list_wins(0) > 1 then
         vim.cmd.quit()
     end
