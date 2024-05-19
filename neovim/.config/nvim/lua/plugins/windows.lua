@@ -1,14 +1,9 @@
 return {
     {
         "nvim-focus/focus.nvim",
-        opts = {
-            autoresize = {
-                enable = false,
-            },
-            ui = {
-                hybridnumber = true,
-                absolutenumber_unfocussed = true,
-                colorcolumn = {
+        config = function ()
+            require("focus").setup({
+                autoresize = {
                     enable = false,
                 },
                 ui = {
