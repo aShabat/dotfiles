@@ -16,7 +16,7 @@ return {
                     -- REMEMBER TO ADD TO leap-spooky AND [] MOTIONS IN user.keymaps
 
                     -- Whole region
-                    g = function ()
+                    g = function()
                         local from = { line = 1, col = 1 }
                         local to = {
                             line = vim.fn.line("$"),
@@ -26,7 +26,10 @@ return {
                     end,
 
                     -- function definition
-                    F = require("mini.ai").gen_spec.treesitter({ a = "@function.outer", i = "@function.inner" }),
+                    F = require("mini.ai").gen_spec.treesitter({
+                        a = "@function.outer",
+                        i = "@function.inner"
+                    }),
                 },
             })
 
@@ -45,24 +48,30 @@ return {
                         return not vim.startswith(fs_entry.name, '.')
                     end
                 },
+                windows = {
+                    width_preview = 100,
+                },
             })
 
             local miniFilesHelpers = require("user.minifileshelpers")
             vim.api.nvim_create_autocmd("User", {
                 pattern = "MiniFilesBufferCreate",
-                callback = function (args)
-                    vim.keymap.set("n", "g~", miniFilesHelpers.files_set_cwd, { buffer = args.data.buf_id, desc = "Set cwd" })
-                    vim.keymap.set("n", "g.", miniFilesHelpers.toggle_dotfiles, { buffer = args.data.buf_id, desc = "Toggle hidden" })
-                    vim.keymap.set("n", "gp", miniFilesHelpers.toggle_preview, { buffer = args.data.buf_id, desc = "Toggle preview" })
+                callback = function(args)
+                    vim.keymap.set("n", "g~", miniFilesHelpers.files_set_cwd,
+                        { buffer = args.data.buf_id, desc = "Set cwd" })
+                    vim.keymap.set("n", "g.", miniFilesHelpers.toggle_dotfiles,
+                        { buffer = args.data.buf_id, desc = "Toggle hidden" })
+                    vim.keymap.set("n", "gp", miniFilesHelpers.toggle_preview,
+                        { buffer = args.data.buf_id, desc = "Toggle preview" })
                 end,
             })
 
             require("mini.hipatterns").setup({
                 highlighters = {
-                    fixme     = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
-                    hack      = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
-                    todo      = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
-                    note      = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+                    fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+                    hack = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+                    todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+                    note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
 
                     hex_color = require("mini.hipatterns").gen_highlighter.hex_color(),
                 },
@@ -96,24 +105,24 @@ return {
                         if reg_recording ~= "" then
                             reg_recording = "Recording: @" .. reg_recording
                         end
-                        local git           = MiniStatusline.section_git({ trunc_width = 75 })
-                        local diagnostics   = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-                        local filename      = MiniStatusline.section_filename({ trunc_width = 140 })
-                        local fileinfo      = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-                        local location      = MiniStatusline.section_location({ trunc_width = 75 })
-                        local search        = MiniStatusline.section_searchcount({ trunc_width = 75 })
+                        local git = MiniStatusline.section_git({ trunc_width = 75 })
+                        local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+                        local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+                        local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+                        local location = MiniStatusline.section_location({ trunc_width = 75 })
+                        local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
                         local showcmd = vim.api.nvim_eval_statusline("%S", {}).str
 
                         return MiniStatusline.combine_groups({
                             { hl = 'MiniStatuslineDevinfo', strings = { reg_recording } },
-                            { hl = mode_hl,                  strings = { mode } },
-                            { hl = 'MiniStatuslineDevinfo',  strings = { git, diagnostics } },
+                            { hl = mode_hl,                 strings = { mode } },
+                            { hl = 'MiniStatuslineDevinfo', strings = { git, diagnostics } },
                             '%<', -- Mark general truncate point
                             { hl = 'MiniStatuslineFilename', strings = { filename } },
                             '%=', -- End left alignment
                             { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
                             { hl = mode_hl,                  strings = { search, location } },
-                            { hl = 'MiniStatuslineDevinfo', strings = { showcmd } },
+                            { hl = 'MiniStatuslineDevinfo',  strings = { showcmd } },
                         })
                     end
                 },
