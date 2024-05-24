@@ -51,6 +51,10 @@ return {
                 windows = {
                     width_preview = 100,
                 },
+                mappings = {
+                    go_in = "L",
+                    go_in_plus = "l",
+                },
             })
 
             local miniFilesHelpers = require("user.minifileshelpers")
