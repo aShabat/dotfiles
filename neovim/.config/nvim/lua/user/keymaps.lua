@@ -65,7 +65,7 @@ M.map_lsp_keybinds = function(buffer_number)
     lsp_map("gD", vim.lsp.buf.declaration)
     lsp_map("<leader>td", vim.lsp.buf.type_definition)
 
-    lsp.map("<leader>F", vim.lsp.buf.format)
+    lsp_map("<leader>F", vim.lsp.buf.format)
 end
 
 -- UndoTree
