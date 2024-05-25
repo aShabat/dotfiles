@@ -115,4 +115,19 @@ for letter, move in pairs({
     vim.keymap.set("n", "<leader>ws" .. letter, "<CMD>WinShift " .. move .. "<CR>")
 end
 
+-- GitPad
+
+local gitpad = require("gitpad")
+
+vim.keymap.set("n", "<leader>pp", gitpad.toggle_gitpad)
+vim.keymap.set("n", "<leader>pb", gitpad.toggle_gitpad_branch)
+vim.keymap.set("n", "<leader>pf", function ()
+    local filename = vim.fn.bufname()
+    if filename == "" then
+        vim.notify("empty bufname")
+    end
+    filename = vim.fn.pathshorten(filename, 2) .. ".md"
+    gitpad.toggle_gitpad({ filename = filename })
+end)
+
 return M
