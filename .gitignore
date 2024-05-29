@@ -1,2 +1,3 @@
 neovim/.config/nvim/lua/user/minibase16-theme.lua
 wezterm/.config/wezterm/config/theme.toml
+wezterm/.config/wezterm/base16-theme.toml
