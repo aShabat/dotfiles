@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-local act = wezterm.action
+local keys = require("keys")
 
 local config = {}
 
@@ -12,9 +12,6 @@ config.colors = colors
 
 config.font = wezterm.font 'JetBrainsMono Nerd Font Mono'
 
-config.keys = {
-    { key = "PageUp", mods = "SHIFT", action = act.ScrollByPage(-0.5) },
-    { key = "PageDown", mods = "SHIFT", action = act.ScrollByPage(0.5) }
-}
+keys.apply(config)
 
 return config
