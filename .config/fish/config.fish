@@ -6,3 +6,4 @@ abbr -a lg lazygit
 abbr -a s systemctl
 
 zoxide init fish --cmd cd | source
+fzf --fish | source
