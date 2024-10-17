@@ -5,6 +5,7 @@ set -gx TERMINAL wezterm
 abbr -a lg lazygit
 abbr -a s systemctl
 abbr -a c config
+abbr -a ca config add
 
 zoxide init fish --cmd cd | source
 fzf --fish | source
