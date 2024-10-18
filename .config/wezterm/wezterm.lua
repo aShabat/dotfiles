@@ -1,22 +1,9 @@
 local wezterm = require 'wezterm'
 local mux = wezterm.mux
 
-wezterm.on('window-config-reloaded', function(window, pane)
-  -- approximately identify this gui window, by using the associated mux id
-  local id = tostring(window:window_id())
-
-  -- maintain a mapping of windows that we have previously seen before in this event handler
-  local seen = wezterm.GLOBAL.seen_windows or {}
-  -- set a flag if we haven't seen this window before
-  local is_new_window = not seen[id]
-  -- and update the mapping
-  seen[id] = true
-  wezterm.GLOBAL.seen_windows = seen
-
-  -- now act upon the flag
-  if is_new_window then
-    window:maximize()
-  end
+wezterm.on('gui-startup', function(cmd)
+    local tab, pane, window = mux.spawn_window(cmd or {})
+    window:gui_window():maximize()
 end)
 
 local config = wezterm.config_builder()
