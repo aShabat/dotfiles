@@ -1,9 +1,16 @@
 local wezterm = require 'wezterm'
 local mux = wezterm.mux
 
-wezterm.on('gui-startup', function(cmd)
-    local tab, pane, window = mux.spawn_window(cmd or {})
-    window:gui_window():maximize()
+wezterm.on('window-config-reloaded', function(window, pane)
+    local id = tostring(window:window_id())
+
+    local seen = wezterm.GLOBAL.seen_open_windows or {}
+    local is_seen = not seen[id]
+    seen[id] = true
+    wezterm.GLOBAL.seen_open_windows = seen
+    if is_seen then
+        window:maximize()
+    end
 end)
 
 local config = wezterm.config_builder()
@@ -17,5 +24,6 @@ if colors_file ~= nil then
 end
 
 config.window_close_confirmation = "NeverPrompt"
+config.enable_wayland = false
 
 return config
