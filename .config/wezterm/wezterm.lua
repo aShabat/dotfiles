@@ -26,4 +26,8 @@ end
 config.window_close_confirmation = "NeverPrompt"
 config.enable_wayland = false
 
+config.disable_default_key_bindings = true
+config.keys = require("keys").keys
+config.key_tables = require("keys").key_tables
+
 return config
