@@ -8,7 +8,7 @@ abbr -a c config
 abbr -a ca config add
 
 bind --erase --all
-source keys.fish
+source ~/.config/fish/keys.fish
 
 zoxide init fish --cmd cd | source
 fzf --fish | source
