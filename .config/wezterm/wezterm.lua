@@ -16,6 +16,7 @@ end)
 local config = wezterm.config_builder()
 
 config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
+config.harfbuzz_features = { "clig=0", "liga=0", "calt=0" }
 
 local colors_file = io.open("/home/anton/.config/wezterm/base16-scheme.toml", "r")
 if colors_file ~= nil then
