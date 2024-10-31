@@ -3,6 +3,7 @@ local act = wezterm.action
 
 return {
     keys = {
+        { key = 'l',          mods = 'ALT|SHIFT',      action = act.EmitEvent("toggle-ligature") },
         { key = 'Tab',        mods = 'CTRL',           action = act.ActivateTabRelative(1) },
         { key = 'Tab',        mods = 'SHIFT|CTRL',     action = act.ActivateTabRelative(-1) },
         { key = 'Enter',      mods = 'ALT',            action = act.ToggleFullScreen },
