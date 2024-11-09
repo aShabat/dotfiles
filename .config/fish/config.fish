@@ -12,3 +12,6 @@ source ~/.config/fish/keys.fish
 
 zoxide init fish --cmd cd | source
 fzf --fish | source
+
+# Created by `pipx` on 2024-11-09 11:27:28
+set PATH $PATH /home/anton/.local/bin
