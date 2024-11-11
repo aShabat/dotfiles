@@ -44,10 +44,10 @@ vim.keymap.set("n", "<leader>tz", require("telescope").extensions.zoxide.list)
 
 -- Leap
 
-vim.keymap.set("n", "f", "<Plug>(leap)")
-vim.keymap.set("n", "F", "<Plug>(leap-from-window)")
-vim.keymap.set({ "x", "o" }, "f", "<Plug>(leap-forward)")
-vim.keymap.set({ "x", "o" }, "F", "<Plug>(leap-backward)")
+vim.keymap.set("n", "t", "<Plug>(leap)")
+vim.keymap.set("n", "T", "<Plug>(leap-from-window)")
+vim.keymap.set({ "x", "o" }, "t", "<Plug>(leap-forward)")
+vim.keymap.set({ "x", "o" }, "T", "<Plug>(leap-backward)")
 
 vim.keymap.set("n", "gs", require("leap.remote").action)
 
@@ -88,7 +88,6 @@ M.map_lsp_keybinds = function(buffer_number)
     lsp_map("<leader>k", vim.lsp.buf.signature_help)
     lsp_map("gD", vim.lsp.buf.declaration)
     lsp_map("<leader>td", vim.lsp.buf.type_definition)
-
 end
 
 -- Conform
