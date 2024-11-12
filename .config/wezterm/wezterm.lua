@@ -4,7 +4,12 @@ require("events")
 
 local config = wezterm.config_builder()
 
-config.font = wezterm.font("JetBrainsMono Nerd Font Mono")
+config.font = wezterm.font_with_fallback {
+    "JetBrainsMono Nerd Font Mono",
+    "Unifont",
+    "Unifont Upper",
+    "Unifont CSUR",
+}
 
 local colors_file = io.open("/home/anton/.config/wezterm/base16-scheme.toml", "r")
 if colors_file ~= nil then
