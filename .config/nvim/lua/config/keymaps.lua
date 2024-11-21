@@ -96,6 +96,8 @@ vim.keymap.set({ "n", "v" }, "<leader>F", vim.lsp.buf.format)
 
 -- UndoTree
 
-vim.keymap.set("n", "<leader>ut", "<CMD>UndotreeToggle<CR>")
+vim.api.nvim_create_user_command("Sw", "SudaWrite", {})
 
+-- Suda
+vim.keymap.set("n", "<CMD>sw<CR>", "<CMD>SudaWrite<CR>")
 return M

@@ -1,4 +1,4 @@
-set -g EDITOR nvim
+set -gx EDITOR nvim
 set -g VISUAL nvim
 set -gx TERMINAL wezterm
 set PATH $PATH /home/anton/.local/bin
