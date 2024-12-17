@@ -5,6 +5,9 @@ return {
     keys = {
         { key = 'l',          mods = 'ALT|SHIFT',      action = act.EmitEvent 'toggle-ligature' },
         { key = 'RightArrow', mods = 'ALT',            action = act.ActivateTabRelative(1) },
+        { key = '[',          mods = 'ALT',            action = act.ActivateTab(0) },
+        { key = '{',          mods = 'ALT|SHIFT',      action = act.MoveTab(0) },
+        { key = ']',          mods = 'ALT',            action = act.ActivateTab(-1) },
         { key = 'RightArrow', mods = 'ALT|SHIFT',      action = act.MoveTabRelative(1) },
         { key = 'LeftArrow',  mods = 'ALT',            action = act.ActivateTabRelative(-1) },
         { key = 'LeftArrow',  mods = 'ALT|SHIFT',      action = act.MoveTabRelative(-1) },
@@ -34,7 +37,7 @@ return {
         { key = 'Enter',      mods = 'ALT',            action = act.SpawnTab 'CurrentPaneDomain' },
         { key = 'Enter',      mods = 'ALT|SHIFT',      action = act.SpawnWindow },
         { key = 'q',          mods = 'ALT',            action = act.EmitEvent 'close-pane' },
-        { key = 'q',          mods = 'ALT|SHIFT',      action = act.CloseCurrentTab {confirm = true}},
+        { key = 'q',          mods = 'ALT|SHIFT',      action = act.CloseCurrentTab { confirm = true } },
         { key = 'u',          mods = 'ALT',            action = act.CharSelect { copy_on_select = true, copy_to = 'ClipboardAndPrimarySelection' } },
         { key = 'V',          mods = 'CTRL',           action = act.PasteFrom 'Clipboard' },
         { key = 'V',          mods = 'SHIFT|CTRL',     action = act.PasteFrom 'Clipboard' },
