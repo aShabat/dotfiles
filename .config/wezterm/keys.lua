@@ -3,13 +3,17 @@ local act = wezterm.action
 
 return {
     keys = {
-        { key = 'l',          mods = 'ALT|SHIFT',      action = act.EmitEvent("toggle-ligature") },
+        { key = 'l',          mods = 'ALT|SHIFT',      action = act.EmitEvent 'toggle-ligature' },
         { key = 'RightArrow', mods = 'ALT',            action = act.ActivateTabRelative(1) },
         { key = 'RightArrow', mods = 'ALT|SHIFT',      action = act.MoveTabRelative(1) },
         { key = 'LeftArrow',  mods = 'ALT',            action = act.ActivateTabRelative(-1) },
         { key = 'LeftArrow',  mods = 'ALT|SHIFT',      action = act.MoveTabRelative(-1) },
         { key = 'f',          mods = 'ALT',            action = act.ToggleFullScreen },
         { key = '\"',         mods = 'ALT|CTRL',       action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
+        { key = 'l',          mods = 'ALT',            action = act.EmitEvent 'move-spawn-right' },
+        { key = 'h',          mods = 'ALT',            action = act.EmitEvent 'move-spawn-left' },
+        { key = 'k',          mods = 'ALT',            action = act.EmitEvent 'move-spawn-top' },
+        { key = 'j',          mods = 'ALT',            action = act.EmitEvent 'move-spawn-bottom' },
         { key = '\"',         mods = 'SHIFT|ALT|CTRL', action = act.SplitVertical { domain = 'CurrentPaneDomain' } },
         { key = '%',          mods = 'ALT|CTRL',       action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
         { key = '%',          mods = 'SHIFT|ALT|CTRL', action = act.SplitHorizontal { domain = 'CurrentPaneDomain' } },
@@ -29,7 +33,8 @@ return {
         { key = 'r',          mods = 'ALT',            action = act.ReloadConfiguration },
         { key = 'Enter',      mods = 'ALT',            action = act.SpawnTab 'CurrentPaneDomain' },
         { key = 'Enter',      mods = 'ALT|SHIFT',      action = act.SpawnWindow },
-        { key = 'q',          mods = 'ALT',            action = act.CloseCurrentTab { confirm = false } },
+        { key = 'q',          mods = 'ALT',            action = act.EmitEvent 'close-pane' },
+        { key = 'q',          mods = 'ALT|SHIFT',      action = act.CloseCurrentTab {confirm = true}},
         { key = 'u',          mods = 'ALT',            action = act.CharSelect { copy_on_select = true, copy_to = 'ClipboardAndPrimarySelection' } },
         { key = 'V',          mods = 'CTRL',           action = act.PasteFrom 'Clipboard' },
         { key = 'V',          mods = 'SHIFT|CTRL',     action = act.PasteFrom 'Clipboard' },
