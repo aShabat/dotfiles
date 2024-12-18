@@ -13,6 +13,17 @@ wezterm.on('window-config-reloaded', function(window, pane)
     end
 end)
 
+wezterm.on('window-resized', function(window, pane)
+    local overrides = window:get_config_overrides() or {}
+    wezterm.log_info(window:get_dimensions())
+    if window:get_dimensions().is_full_screen then
+        overrides.enable_tab_bar = false
+    else
+        overrides.enable_tab_bar = true
+    end
+    window:set_config_overrides(overrides)
+end)
+
 -- Key-emitted events
 
 wezterm.on('toggle-ligature', function(window, pane)
@@ -28,7 +39,6 @@ wezterm.on('toggle-ligature', function(window, pane)
 end)
 
 wezterm.on('move-spawn-right', function(window, pane)
-    wezterm.log_info 'called'
     local tab = pane:tab()
     if tab:get_pane_direction 'Right' ~= nil then
         window:perform_action(act.ActivatePaneDirection 'Right', pane)
@@ -38,7 +48,6 @@ wezterm.on('move-spawn-right', function(window, pane)
     end
 end)
 wezterm.on('move-spawn-left', function(window, pane)
-    wezterm.log_info 'called'
     local tab = pane:tab()
     if tab:get_pane_direction 'Left' ~= nil then
         window:perform_action(act.ActivatePaneDirection 'Left', pane)
@@ -48,7 +57,6 @@ wezterm.on('move-spawn-left', function(window, pane)
     end
 end)
 wezterm.on('move-spawn-top', function(window, pane)
-    wezterm.log_info 'called'
     local tab = pane:tab()
     if tab:get_pane_direction 'Up' ~= nil then
         window:perform_action(act.ActivatePaneDirection 'Up', pane)
@@ -58,7 +66,6 @@ wezterm.on('move-spawn-top', function(window, pane)
     end
 end)
 wezterm.on('move-spawn-bottom', function(window, pane)
-    wezterm.log_info 'called'
     local tab = pane:tab()
     if tab:get_pane_direction 'Down' ~= nil then
         window:perform_action(act.ActivatePaneDirection 'Down', pane)
@@ -70,10 +77,8 @@ end)
 
 wezterm.on('close-pane', function(window, pane)
     if pane:tab():panes()[2] == nil then
-        wezterm.log_info 'tab'
         window:perform_action(act.CloseCurrentTab { confirm = false }, pane)
     else
-        wezterm.log_info 'pane'
         window:perform_action(act.CloseCurrentPane { confirm = false }, pane)
     end
 end)
