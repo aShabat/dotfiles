@@ -4,8 +4,8 @@ bind --preset -k right forward-char
 bind --preset -k left backward-char
 bind --preset \e\[C forward-char
 bind --preset \e\[D backward-char
-bind --preset \e\[1\;5C forward-word
-bind --preset \e\[1\;5D backward-word
+bind --preset \c\[1\;5C forward-word
+bind --preset \c\[1\;5D backward-word
 bind --preset -k ppage beginning-of-history
 bind --preset -k npage end-of-history
 bind --preset \cx fish_clipboard_copy
