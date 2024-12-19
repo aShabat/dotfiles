@@ -15,7 +15,6 @@ end)
 
 wezterm.on('window-resized', function(window, pane)
     local overrides = window:get_config_overrides() or {}
-    wezterm.log_info(window:get_dimensions())
     if window:get_dimensions().is_full_screen then
         overrides.enable_tab_bar = false
     else
@@ -81,4 +80,8 @@ wezterm.on('close-pane', function(window, pane)
     else
         window:perform_action(act.CloseCurrentPane { confirm = false }, pane)
     end
+end)
+
+wezterm.on('move-tab-last', function(window, pane)
+    window:perform_action(act.MoveTab(#(window:mux_window():tabs()) - 1), pane)
 end)

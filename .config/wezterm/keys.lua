@@ -11,6 +11,7 @@ return {
         { key = 'UpArrow',    mods = 'ALT',            action = act.ActivateTab(0) },
         { key = 'UpArrow',    mods = 'ALT|SHIFT',      action = act.MoveTab(0) },
         { key = 'DownArrow',  mods = 'ALT',            action = act.ActivateTab(-1) },
+        { key = 'DownArrow',  mods = 'ALT|SHIFT',      action = act.EmitEvent 'move-tab-last' },
         { key = '[',          mods = 'ALT',            action = act.ActivateTab(0) },
         { key = '{',          mods = 'ALT|SHIFT',      action = act.MoveTab(0) },
         { key = ']',          mods = 'ALT',            action = act.ActivateTab(-1) },
