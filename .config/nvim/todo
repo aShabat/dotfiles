@@ -1,0 +1,10 @@
+Plugins
+	treesitter
+		context
+	mini
+	snacks
+	leap
+	conform
+	nvim-lspconfig(no mason)
+	suda
+	undotree
