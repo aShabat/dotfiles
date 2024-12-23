@@ -16,3 +16,10 @@ require'mini.files'.setup{
         go_in_plus = 'l',
     },
 }
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFileActionRename',
+    callback = function (event)
+        Snacks.rename.on_rename_file(event.data.from, event.data.to)
+    end,
+})
