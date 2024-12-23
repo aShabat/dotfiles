@@ -19,7 +19,10 @@ return {
     config = function (_, opts)
         local lspconfig = require'lspconfig'
         for server, config in pairs(opts.servers) do
-            config.capabilities = require'blink.cmp'.get_lsp_capabilities(config.capabilities)
+            config.capabilities = require'blink.cmp'.get_lsp_capabilities(config.capabilities, true)
+            config.on_attach = function (event)
+                require'config.keymaps'.set_lsp_keybinds(event.buf)
+            end
             lspconfig[server].setup(config)
         end
     end,
