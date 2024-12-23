@@ -31,4 +31,8 @@ M.set_lsp_keybinds = function (buffer)
     set('<leader>ws', fzf.lsp_live_workspace_symbols)
 end
 
+-- Leap
+vim.keymap.set('n', 'f', '<Plug>(leap)')
+vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
+
 return M
