@@ -21,6 +21,7 @@ return {
             keyword = { range = 'prefix' },
             accept = { auto_brackets = { enabled = false } },
             documentation = { auto_show = true },
+            list = { selection = 'auto_insert' },
         },
         signature = { enabled = true },
     },
