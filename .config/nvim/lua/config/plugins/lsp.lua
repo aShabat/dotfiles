@@ -14,6 +14,7 @@ return {
     opts = {
         servers = {
             lua_ls = {},
+            gopls = {},
         },
     },
     config = function (_, opts)
