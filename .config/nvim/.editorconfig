@@ -17,9 +17,6 @@ continuation_indent = 4
 # continuation_indent.in_expr = 4
 # continuation_indent.in_table = 4
 
-# optional crlf/lf/cr/auto, if it is 'auto', in windows it is crlf other platforms are lf
-# in neovim the value 'auto' is not a valid option, please use 'unset' 
-end_of_line = auto
 
 #optional keep/never/always/smart
 trailing_table_separator = smart
