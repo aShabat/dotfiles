@@ -35,4 +35,7 @@ end
 vim.keymap.set('n', 'f', '<Plug>(leap)')
 vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
 
+-- Snacks
+vim.keymap.set('n', '<leader>nh', Snacks.notifier.show_history)
+
 return M
