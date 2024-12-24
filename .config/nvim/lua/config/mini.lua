@@ -1,3 +1,4 @@
+M = {}
 -- Base16
 if vim.fn.filereadable(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua') ~= 0 then
     dofile(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua')
@@ -79,9 +80,43 @@ require'mini.trailspace'.setup{}
 require'mini.notify'.setup{}
 
 -- Files
+local files_set_cwd = function (_)
+    local cur_entry_path = MiniFiles.get_fs_entry().path
+    local cur_directory = vim.fs.dirname(cur_entry_path)
+    vim.fn.chdir(cur_directory)
+end
+
+local files_show_dot = false
+local files_filter_show = function (_)
+    return true
+end
+local files_filter_hide = function (fs_entry)
+    return not vim.startswith(fs_entry.name, '.')
+end
+
+local files_toggle_dotfiles = function ()
+    files_show_dot = not files_show_dot
+
+    local filter = files_show_dot and files_filter_show or files_filter_hide
+    MiniFiles.refresh{ content = { filter = filter } }
+end
+
+local files_show_preview = false
+local files_toggle_preview = function ()
+    files_show_preview = not files_show_preview
+    MiniFiles.refresh{ windows = { preview = files_show_preview } }
+    MiniFiles.trim_right()
+end
+M.hide_preview = function ()
+    files_show_preview = false
+end
+
 require'mini.files'.setup{
     options = {
         use_as_default_explorer = true,
+    },
+    content = {
+        filter = files_filter_hide,
     },
     windows = {
         width_preview = 100,
@@ -91,6 +126,15 @@ require'mini.files'.setup{
         go_in_plus = 'l',
     },
 }
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesBufferCreate',
+    callback = function (args)
+        vim.keymap.set('n', 'g~', files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
+        vim.keymap.set('n', 'g.', files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
+        vim.keymap.set('n', 'gp', files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
+    end,
+})
 
 -- Move
 require'mini.move'.setup{
@@ -131,3 +175,5 @@ require'mini.bracketed'.setup{
 -- Surround
 require'mini.surround'.setup{
 }
+
+return M

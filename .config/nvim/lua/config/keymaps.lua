@@ -11,6 +11,7 @@ vim.keymap.set('n', '<leader>fg', fzf.grep)
 
 -- Mini
 vim.keymap.set('n', '<leader>e', function ()
+    require'config.mini'.hide_preview()
     MiniFiles.open(vim.api.nvim_buf_get_name(0))
     MiniFiles.trim_right()
 end)
