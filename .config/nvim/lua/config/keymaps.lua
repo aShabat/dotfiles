@@ -1,104 +1,47 @@
 local M = {}
+-- My
+vim.keymap.set('n', '<esc>', '<cmd>noh<cr>')
 
-vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>")
+-- FZF
+local fzf = require'fzf-lua'
+vim.keymap.set('n', '<leader>ff', fzf.files)
+vim.keymap.set('n', '<leader>fh', fzf.helptags)
+vim.keymap.set('n', '<leader>fb', fzf.buffers)
+vim.keymap.set('n', '<leader>fg', fzf.grep)
 
--- MiniFiles
-
-vim.keymap.set("n", "<leader>e", function()
-    require("config.mini").hide_preview()
+-- Mini
+vim.keymap.set('n', '<leader>e', function ()
     MiniFiles.open(vim.api.nvim_buf_get_name(0))
     MiniFiles.trim_right()
 end)
+vim.keymap.set('n', '<leader>gn', MiniNotify.show_history)
+vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim)
+vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines)
 
--- MiniTrailspace
-
-vim.keymap.set("n", "<leader>mt", MiniTrailspace.trim)
-vim.keymap.set("n", "<leader>mll", MiniTrailspace.trim_last_lines)
-
--- Telescope
-
-local tb = require("telescope.builtin")
-local is_inside_working_tree = {}
-local smart_find_files = function(git_files, find_files)
-    return function()
-        local cwd = vim.fn.getcwd()
-        if is_inside_working_tree[cwd] == nil then
-            vim.fn.system("git rev-parse --is-inside-working-tree")
-            is_inside_working_tree[cwd] = vim.v.shell_error == 0
-        end
-
-        if is_inside_working_tree[cwd] then
-            git_files({ show_untracked = true })
-        else
-            find_files({ hidden = true })
-        end
+-- LSP
+M.set_lsp_keybinds = function (buffer)
+    local set = function (keys, func)
+        vim.keymap.set('n', keys, func, { buffer = buffer })
     end
+    set('<leader>rn', vim.lsp.buf.rename)
+    set('<leader>ca', vim.lsp.buf.code_action)
+    set('gd', fzf.lsp_definitions)
+    set('gD', vim.lsp.buf.declaration)
+    set('gr', fzf.lsp_references)
+    set('gI', fzf.lsp_implementations)
+    set('<leader>D', fzf.lsp_typedefs)
+    set('<leader>ds', fzf.lsp_document_symbols)
+    set('<leader>ws', fzf.lsp_live_workspace_symbols)
 end
-
-vim.keymap.set("n", "<leader>tf", smart_find_files(tb.git_files, tb.find_files))
-vim.keymap.set("n", "<leader>th", tb.help_tags)
-vim.keymap.set("n", "<leader>tb", tb.buffers)
-vim.keymap.set("n", "<leader>tg", tb.live_grep)
-
-vim.keymap.set("n", "<leader>tz", require("telescope").extensions.zoxide.list)
 
 -- Leap
-
-vim.keymap.set("n", "t", "<Plug>(leap)")
-vim.keymap.set("n", "T", "<Plug>(leap-from-window)")
-vim.keymap.set({ "x", "o" }, "t", "<Plug>(leap-forward)")
-vim.keymap.set({ "x", "o" }, "T", "<Plug>(leap-backward)")
-
-vim.keymap.set("n", "gs", require("leap.remote").action)
-
-local default_text_objects = {
-    'iw', 'iW', 'is', 'ip', 'i[', 'i]', 'i(', 'i)', 'ib',
-    'i>', 'i<', 'it', 'i{', 'i}', 'iB', 'i"', 'i\'', 'i`',
-    'aw', 'aW', 'as', 'ap', 'a[', 'a]', 'a(', 'a)', 'ab',
-    'a>', 'a<', 'at', 'a{', 'a}', 'aB', 'a"', 'a\'', 'a`',
-}
-
--- Create remote versions of all native text objects by inserting `r`
--- into the middle (`iw` becomes `irw`, etc.):
-for _, tobj in ipairs(default_text_objects) do
-    vim.keymap.set({ 'x', 'o' }, tobj:sub(1, 1) .. 'r' .. tobj:sub(2), function()
-        require('leap.remote').action({ input = tobj })
-    end)
-end
-
--- Lsp
-
-M.map_lsp_keybinds = function(buffer_number)
-    local lsp_map = function(keys, func)
-        vim.keymap.set("n", keys, func, { buffer = buffer_number })
-    end
-
-    lsp_map("<leader>rn", vim.lsp.buf.rename)
-    lsp_map("<leader>ca", vim.lsp.buf.code_action)
-    lsp_map("<leader>gd", vim.lsp.buf.definition)
-
-    lsp_map("gr", tb.lsp_references)
-    lsp_map("gi", tb.lsp_implementations)
-    lsp_map("<leader>bs", tb.lsp_document_symbols)
-    lsp_map("<leader>ps", tb.lsp_workspace_symbols)
-
-    lsp_map("<leader>F", vim.lsp.buf.format)
-
-    lsp_map("K", vim.lsp.buf.hover)
-    lsp_map("<leader>k", vim.lsp.buf.signature_help)
-    lsp_map("gD", vim.lsp.buf.declaration)
-    lsp_map("<leader>td", vim.lsp.buf.type_definition)
-end
-
--- Conform
-
-vim.keymap.set({ "n", "v" }, "<leader>F", vim.lsp.buf.format)
+vim.keymap.set('n', 'f', '<Plug>(leap)')
+vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
 
 -- UndoTree
-
-vim.keymap.set("n", "<leader>ut", "<CMD>UndotreeToggle<CR>")
-
+vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>')
 
 -- Suda
-vim.api.nvim_create_user_command("W", "SudaWrite", {})
+vim.api.nvim_create_user_command('W', 'SudaWrite', {})
+
 return M
