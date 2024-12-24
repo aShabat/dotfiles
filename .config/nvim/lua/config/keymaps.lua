@@ -14,6 +14,9 @@ vim.keymap.set('n', '<leader>e', function ()
     MiniFiles.open(vim.api.nvim_buf_get_name(0))
     MiniFiles.trim_right()
 end)
+vim.keymap.set('n', '<leader>gn', MiniNotify.show_history)
+vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim)
+vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines)
 
 -- LSP
 M.set_lsp_keybinds = function (buffer)
@@ -35,7 +38,7 @@ end
 vim.keymap.set('n', 'f', '<Plug>(leap)')
 vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
 
--- Snacks
-vim.keymap.set('n', '<leader>nh', Snacks.notifier.show_history)
+-- UndoTree
+vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>')
 
 return M
