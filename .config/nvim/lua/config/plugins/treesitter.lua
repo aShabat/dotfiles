@@ -1,11 +1,16 @@
 return {
-    'nvim-treesitter/nvim-treesitter',
-    config = function ()
-        require'nvim-treesitter.configs'.setup{
+    {
+        'nvim-treesitter/nvim-treesitter',
+        main = 'nvim-treesitter.configs',
+        opts = {
             auto_install = true,
             highlight = {
                 enable = true,
             },
-        }
-    end,
+        },
+    },
+    {
+        'nvim-treesitter/nvim-treesitter-context',
+        opts = '',
+    },
 }
