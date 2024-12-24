@@ -1,9 +1,8 @@
 return {
     'ggandor/leap.nvim',
     config = function ()
-        require'leap'.opts = {
-            equivalence_classes = { ' \t\r\n', '({[', ']})', '\'"`' },
-            safe_labels = 'fnut/SFNLHMUGTZ?',
-        }
+        local leap = require'leap'
+        leap.opts.equivalence_classes = { ' \t\r\n', '({[', ']})', '\'"`' }
+        leap.opts.safe_labels = 'fnut/SFNLHMUGTZ?'
     end,
 }
