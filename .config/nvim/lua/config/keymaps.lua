@@ -41,4 +41,7 @@ vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
 -- UndoTree
 vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>')
 
+-- Suda
+vim.api.nvim_create_user_command('W', 'SudaWrite', {})
+
 return M
