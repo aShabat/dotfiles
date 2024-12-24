@@ -23,7 +23,10 @@ return {
             documentation = { auto_show = true },
             list = { selection = 'auto_insert' },
         },
-        signature = { enabled = true },
+        signature = {
+            enabled = true,
+            window = { direction_priority = { 's', 'n' } },
+        },
     },
     opts_extend = { 'sources.default' },
 }
