@@ -1,3 +1,5 @@
 Plugins
-	suda
     change fzf-lua to telescope?
+    snippets
+        LuaSnip
+        mini.snip
