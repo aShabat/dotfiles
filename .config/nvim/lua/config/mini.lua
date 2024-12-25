@@ -80,6 +80,8 @@ require'mini.trailspace'.setup{}
 
 -- Notify
 require'mini.notify'.setup{}
+vim.notify = MiniNotify.make_notify{
+}
 
 -- Files
 local files_set_cwd = function (_)
