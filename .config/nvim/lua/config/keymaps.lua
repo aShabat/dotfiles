@@ -41,6 +41,19 @@ M.set_lsp_keybinds = function (buffer)
     set('<leader>ws', minilsp'workspace_symbol')
 end
 
+-- LuaSnip
+local ls = require'luasnip'
+vim.keymap.set('i', '<c-l>', function ()
+                   if ls.expand_or_jumpable() then
+                       ls.expand_or_jump()
+                   end
+               end, { silent = true })
+vim.keymap.set('i', '<c-h>', function ()
+                   if ls.jumpable(-1) then
+                       ls.jump(-1)
+                   end
+               end, { silent = true })
+
 -- Leap
 vim.keymap.set('n', 'f', '<Plug>(leap)')
 vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')

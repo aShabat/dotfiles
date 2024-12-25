@@ -4,12 +4,11 @@ return {
     dependencies = {
         -- 'rafamadriz/friendly-snippets',
         'echasnovski/mini.nvim',
+        'L3MON4D3/LuaSnip',
     },
     opts = {
         keymap = {
             preset = 'default',
-            ['<C-l>'] = { 'snippet_forward' },
-            ['<C-h>'] = { 'snippet_backward' },
         },
         appearance = {
             use_nvim_cmp_as_default = true,
@@ -17,6 +16,16 @@ return {
         },
         sources = {
             default = { 'lsp', 'path', 'buffer' },
+        },
+        snippets = {
+            expand = function (snippet) require'luasnip'.lsp_expand(snippet) end,
+            jump = function (direction) require'luasnip'.jump(direction) end,
+            active = function (filter)
+                if filter and filter.direction then
+                    return require'luasnip'.jumpable(filter.direction)
+                end
+                return require'luasnip'.in_snippet()
+            end,
         },
         completion = {
             keyword = { range = 'prefix' },
