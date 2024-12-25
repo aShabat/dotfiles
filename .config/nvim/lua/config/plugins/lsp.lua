@@ -10,6 +10,12 @@ return {
                 },
             },
         },
+        {
+            'Chaitanyabsprip/fastaction.nvim',
+            opts = {
+                dismiss_keys = { 'j', 'k', 'q', '<esc>' },
+            },
+        },
     },
     opts = {
         servers = {

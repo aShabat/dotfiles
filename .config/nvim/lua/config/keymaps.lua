@@ -31,7 +31,7 @@ M.set_lsp_keybinds = function (buffer)
         end
     end
     set('<leader>rn', vim.lsp.buf.rename)
-    set('<leader>ca', vim.lsp.buf.code_action)
+    set('<leader>ca', require'fastaction'.code_action)
     set('gd', minilsp'definition')
     set('gD', vim.lsp.buf.declaration)
     set('gr', minilsp'references')
