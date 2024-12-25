@@ -1,4 +1,6 @@
 M = {}
+-- Extra
+require'mini.extra'.setup{}
 -- Base16
 if vim.fn.filereadable(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua') ~= 0 then
     dofile(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua')
@@ -135,6 +137,16 @@ vim.api.nvim_create_autocmd('User', {
         vim.keymap.set('n', 'gp', files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
     end,
 })
+
+-- Pick
+require'mini.pick'.setup{
+    mappings = {
+        choose_marked = '<C-CR>',
+    },
+    options = {
+        use_cache = true,
+    },
+}
 
 -- Move
 require'mini.move'.setup{
