@@ -7,6 +7,12 @@ subtemplate = "miniBase16"
 rewrite = true
 
 [[items]]
+file = "~/.config/nvimpager/lua/config/minibase16.lua"
+template = "nvim"
+subtemplate = "miniBase16"
+rewrite = true
+
+[[items]]
 file = "~/.config/wezterm/base16-scheme.toml"
 template = "wezterm"
 rewrite = true
