@@ -40,7 +40,7 @@ hipatterns.setup{
 }
 
 -- StatusLine
--- vim.opt.cmdheight = 0
+vim.opt.cmdheight = 0
 vim.opt.showcmdloc = 'statusline'
 
 require'mini.statusline'.setup{
@@ -171,7 +171,17 @@ H.pick_dirs_action = function ()
         },
     }
     MiniPick.set_picker_opts(opts)
-    MiniPick.set_picker_items_from_cli{ 'fd', '--type=d', '--no-follow', '--color=never' }
+    MiniPick.set_picker_items_from_cli(
+        { 'fd', '--type=d', '--no-follow', '--color=never' },
+        {
+            postprocess = function (items)
+                local new_items = { '.' }
+                for i, item in ipairs(items) do
+                    new_items[i + 1] = item
+                end
+                return new_items
+            end,
+        })
 end
 H.pick_files_action = function ()
     local opts = {
@@ -236,6 +246,13 @@ M.pick_files = function (local_opts, opts)
             'force',
             {
                 command = { 'fd', '--type=d', '--no-follow', '--color=never' },
+                postprocess = function (items)
+                    local new_items = { '.' }
+                    for i, item in ipairs(items) do
+                        new_items[i + 1] = item
+                    end
+                    return new_items
+                end,
             },
             local_opts or {})
         MiniPick.builtin.cli(local_opts, opts)
