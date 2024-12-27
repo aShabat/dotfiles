@@ -1,4 +1,5 @@
-M = {}
+local M = {}
+local H = {}
 -- Extra
 require'mini.extra'.setup{}
 -- Base16
@@ -39,7 +40,7 @@ hipatterns.setup{
 }
 
 -- StatusLine
-vim.opt.cmdheight = 0
+-- vim.opt.cmdheight = 0
 vim.opt.showcmdloc = 'statusline'
 
 require'mini.statusline'.setup{
@@ -148,7 +149,98 @@ require'mini.pick'.setup{
     options = {
         use_cache = true,
     },
+    window = {
+        config = {
+            relative = 'editor',
+            row = 0,
+            col = 0,
+        },
+    },
 }
+
+H.pick_dirs_action = function ()
+    local opts = {
+        mappings = {
+            toggle_files_dirs = {
+                char = '<c-d>',
+                func = H.pick_files_action,
+            },
+        },
+        source = {
+            choose = H.open_dir,
+        },
+    }
+    MiniPick.set_picker_opts(opts)
+    MiniPick.set_picker_items_from_cli{ 'fd', '--type=d', '--no-follow', '--color=never' }
+end
+H.pick_files_action = function ()
+    local opts = {
+        mappings = {
+            toggle_files_dirs = {
+                char = '<c-d>',
+                func = H.pick_dirs_action,
+            },
+        },
+        source = {
+            choose = MiniPick.default_choose,
+        },
+    }
+    MiniPick.set_picker_opts(opts)
+    MiniPick.set_picker_items_from_cli{ 'fd', '--type=f', '--no-follow', '--color=never' }
+end
+H.open_dir = function (item)
+    local path = MiniPick.get_picker_opts().source.cwd .. '/' .. item
+    vim.schedule(function ()
+        MiniFiles.open(path, false)
+    end)
+end
+M.pick_files = function (local_opts, opts)
+    if not local_opts or not local_opts.dirs then
+        opts = vim.tbl_deep_extend(
+            'force',
+            {
+                mappings = {
+                    toggle_files_dirs = {
+                        char = '<c-d>',
+                        func = H.pick_dirs_action,
+                    },
+                },
+                source = {
+                    name = 'Files/Dirs',
+                },
+            },
+            opts or {}
+        )
+        MiniPick.builtin.files(local_opts, opts)
+    else
+        opts = vim.tbl_deep_extend(
+            'force',
+            {
+                mappings = {
+                    toggle_files_dirs = {
+                        char = '<c-d>',
+                        func = H.pick_files_action,
+                    },
+                },
+                source = {
+                    chose = H.open_dir,
+                    name = 'Files/Dirs',
+                    show = function (buf_id, items_to_show, query)
+                        return MiniPick.default_show(buf_id, items_to_show, query, { show_icons = true })
+                    end,
+                },
+            },
+            opts or {}
+        )
+        local_opts = vim.tbl_deep_extend(
+            'force',
+            {
+                command = { 'fd', '--type=d', '--no-follow', '--color=never' },
+            },
+            local_opts or {})
+        MiniPick.builtin.cli(local_opts, opts)
+    end
+end
 
 -- Move
 require'mini.move'.setup{

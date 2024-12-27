@@ -1,6 +1,6 @@
 return {
     'echasnovski/mini.nvim',
     config = function ()
-        require'config/mini'
+        require'config.mini'
     end,
 }
