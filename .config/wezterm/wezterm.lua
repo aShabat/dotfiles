@@ -1,27 +1,28 @@
-local wezterm = require 'wezterm'
+local wezterm = require'wezterm'
 local mux = wezterm.mux
-require("events")
+require'events'
 
 local config = wezterm.config_builder()
 
-config.font = wezterm.font_with_fallback {
-    "JetBrainsMono Nerd Font Mono",
-    "Unifont",
-    "Unifont Upper",
-    "Unifont CSUR",
+config.font = wezterm.font_with_fallback{
+    'Maple Mono NF',
+    -- "JetBrainsMono Nerd Font Mono",
+    'Unifont',
+    'Unifont Upper',
+    'Unifont CSUR',
 }
 
-local colors_file = io.open("/home/anton/.config/wezterm/base16-scheme.toml", "r")
+local colors_file = io.open('/home/anton/.config/wezterm/base16-scheme.toml', 'r')
 if colors_file ~= nil then
-    local colors, _ = wezterm.color.load_scheme("/home/anton/.config/wezterm/base16-scheme.toml")
+    local colors, _ = wezterm.color.load_scheme'/home/anton/.config/wezterm/base16-scheme.toml'
     config.colors = colors
 end
 
-config.window_close_confirmation = "NeverPrompt"
+config.window_close_confirmation = 'NeverPrompt'
 config.enable_wayland = false
 
 config.disable_default_key_bindings = true
-config.keys = require("keys").keys
-config.key_tables = require("keys").key_tables
+config.keys = require'keys'.keys
+config.key_tables = require'keys'.key_tables
 
 return config
