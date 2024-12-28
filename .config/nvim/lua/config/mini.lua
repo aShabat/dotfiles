@@ -1,11 +1,29 @@
 local M = {}
+
 local H = {}
 -- Extra
 require'mini.extra'.setup{}
 -- Base16
 if vim.fn.filereadable(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua') ~= 0 then
     dofile(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua')
+else
+    local base16 = require'mini.base16'
+    base16.setup{ palette = base16.mini_palette('#112641', '#e2e98f', 75) }
 end
+
+local palette = MiniBase16.config.palette
+local hl_configs = {
+    LeapLabel = { fg = palette.base05, bg = palette.base08 },
+    Comment = { italic = true },
+}
+for group, config in pairs(hl_configs) do
+    vim.api.nvim_set_hl(
+        0,
+        group,
+        vim.tbl_extend('force', vim.api.nvim_get_hl(0, { name = group }), config)
+    )
+end
+
 
 -- Coments
 require'mini.comment'.setup{}

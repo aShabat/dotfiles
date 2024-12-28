@@ -11,7 +11,7 @@ vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)
 
 vim.keymap.set('n', '<leader>e', function ()
     require'config.mini'.hide_preview()
-    MiniFiles.open(nil, false)
+    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
     MiniFiles.trim_right()
 end)
 

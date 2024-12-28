@@ -35,3 +35,8 @@ vim.opt.clipboard = ''
 vim.opt.cursorline = true
 
 vim.opt.colorcolumn = '80'
+
+vim.opt.autoread = true
+vim.opt.undofile = true
+vim.opt.swapfile = false
+vim.opt.backup = false
