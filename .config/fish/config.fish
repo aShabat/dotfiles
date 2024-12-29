@@ -12,8 +12,7 @@ abbr -a ca config add
 abbr -a np nvimpager
 abbr -a n nvim
 
-bind --erase --all
-source ~/.config/fish/keys.fish
+set -g fish_key_bindings set_custom_keys
 
 zoxide init fish --cmd cd | source
 fzf --fish | source
