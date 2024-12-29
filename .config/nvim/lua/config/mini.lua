@@ -130,8 +130,12 @@ local files_toggle_preview = function ()
     MiniFiles.refresh{ windows = { preview = files_show_preview } }
     MiniFiles.trim_right()
 end
-M.hide_preview = function ()
+local hide_preview = function ()
     files_show_preview = false
+end
+
+local preview_image = function ()
+    -- todo
 end
 
 require'mini.files'.setup{
@@ -158,6 +162,12 @@ vim.api.nvim_create_autocmd('User', {
         vim.keymap.set('n', 'gp', files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
     end,
 })
+
+M.file_explorer = function ()
+    hide_preview()
+    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+    MiniFiles.trim_right()
+end
 
 -- Pick
 require'mini.pick'.setup{

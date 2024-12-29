@@ -9,11 +9,7 @@ vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)
 
-vim.keymap.set('n', '<leader>e', function ()
-    require'config.mini'.hide_preview()
-    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
-    MiniFiles.trim_right()
-end)
+vim.keymap.set('n', '<leader>e', require'config.mini'.file_explorer)
 
 vim.keymap.set('n', '<leader>gn', MiniNotify.show_history)
 
