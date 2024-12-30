@@ -1,4 +1,4 @@
-function _set_custom_keys
+function set_custom_keys
     bind --erase --all --preset
 
     bind right forward-char
