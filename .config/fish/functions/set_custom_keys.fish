@@ -1,5 +1,5 @@
 function set_custom_keys
-    bind --erase --all --preset
+    bind --erase --all
 
     bind right forward-char
     bind left backward-char
