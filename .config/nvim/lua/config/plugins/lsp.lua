@@ -22,6 +22,7 @@ return {
             lua_ls = {},
             gopls = {},
             bashls = {},
+            ts_ls = {},
         },
     },
     config = function (_, opts)
