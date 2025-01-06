@@ -4,7 +4,7 @@ local M = {}
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>')
 
 -- Mini
-vim.keymap.set('n', '<leader>ff', require'config.mini'.pick_files)
+vim.keymap.set('n', '<leader>ff', MiniPick.registry.files)
 vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
 vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live)

@@ -186,6 +186,8 @@ require'mini.pick'.setup{
     },
 }
 
+
+
 H.pick_dirs_action = function ()
     local opts = {
         mappings = {
@@ -232,7 +234,7 @@ H.open_dir = function (item)
         MiniFiles.open(path, false)
     end)
 end
-M.pick_files = function (local_opts, opts)
+MiniPick.registry.files = function (local_opts, opts)
     if not local_opts or not local_opts.dirs then
         opts = vim.tbl_deep_extend(
             'force',
