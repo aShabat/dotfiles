@@ -1,6 +1,6 @@
 local wezterm = require'wezterm'
 local mux = wezterm.mux
-require'events'
+local events = require'events'
 
 local config = wezterm.config_builder()
 
@@ -12,7 +12,8 @@ config.font = wezterm.font_with_fallback{
     'Unifont Upper',
     'Unifont CSUR',
 }
-config.font_size = 13
+config.font_size = 12.5
+config.harfbuzz_features = events.default_harfbuzz
 
 local colors_file = io.open('/home/anton/.config/wezterm/base16-scheme.toml', 'r')
 if colors_file ~= nil then

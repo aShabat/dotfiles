@@ -1,5 +1,6 @@
 local wezterm = require'wezterm'
 local act = wezterm.action
+local M = {}
 
 wezterm.on('window-config-reloaded', function (window, pane)
     local id = tostring(window:window_id())
@@ -25,14 +26,36 @@ end)
 
 -- Key-emitted events
 
+M.default_harfbuzz = {
+    'cv01', -- a
+    'cv02', -- g
+    'ss01', -- r
+    'cv13', -- 0
+    'ss05', -- @
+    'ss04', -- $
+    'ss03', -- &
+    'cv16', -- *
+    'cv31', -- ()
+    'cv29', -- {}
+    'cv30', -- |
+    'ss02', -- >= <=
+    'cv27', -- []
+    'ss06', -- \\
+    'ss07', -- =~ !~
+}
+local enable_ligatures = true
 wezterm.on('toggle-ligature', function (window, pane)
+    enable_ligatures = not enable_ligatures
     local overrides = window:get_config_overrides() or {}
-    if not overrides.harfbuzz_features then
-        -- If we haven't overridden it yet, then override with ligatures disabled
-        overrides.harfbuzz_features = { 'calt=0', 'clig=0', 'liga=0' }
+    overrides.harfbuzz_features = M.default_harfbuzz
+    local add
+    if enable_ligatures then
+        add = { 'calt=1', 'clig=1', 'liga=1' }
     else
-        -- else we did already, and we should disable out override now
-        overrides.harfbuzz_features = nil
+        add = { 'calt=0', 'clig=0', 'liga=0' }
+    end
+    for _, a in pairs(add) do
+        overrides.harfbuzz_features[#overrides.harfbuzz_features + 1] = a
     end
     window:set_config_overrides(overrides)
 end)
@@ -85,3 +108,5 @@ end)
 wezterm.on('move-tab-last', function (window, pane)
     window:perform_action(act.MoveTab(#(window:mux_window():tabs()) - 1), pane)
 end)
+
+return M
