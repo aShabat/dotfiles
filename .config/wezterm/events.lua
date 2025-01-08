@@ -1,7 +1,7 @@
-local wezterm = require 'wezterm'
+local wezterm = require'wezterm'
 local act = wezterm.action
 
-wezterm.on('window-config-reloaded', function(window, pane)
+wezterm.on('window-config-reloaded', function (window, pane)
     local id = tostring(window:window_id())
 
     local seen = wezterm.GLOBAL.seen_open_windows or {}
@@ -13,7 +13,7 @@ wezterm.on('window-config-reloaded', function(window, pane)
     end
 end)
 
-wezterm.on('window-resized', function(window, pane)
+wezterm.on('window-resized', function (window, pane)
     local overrides = window:get_config_overrides() or {}
     if window:get_dimensions().is_full_screen then
         overrides.enable_tab_bar = false
@@ -25,7 +25,7 @@ end)
 
 -- Key-emitted events
 
-wezterm.on('toggle-ligature', function(window, pane)
+wezterm.on('toggle-ligature', function (window, pane)
     local overrides = window:get_config_overrides() or {}
     if not overrides.harfbuzz_features then
         -- If we haven't overridden it yet, then override with ligatures disabled
@@ -37,51 +37,51 @@ wezterm.on('toggle-ligature', function(window, pane)
     window:set_config_overrides(overrides)
 end)
 
-wezterm.on('move-spawn-right', function(window, pane)
+wezterm.on('move-spawn-right', function (window, pane)
     local tab = pane:tab()
-    if tab:get_pane_direction 'Right' ~= nil then
-        window:perform_action(act.ActivatePaneDirection 'Right', pane)
+    if tab:get_pane_direction'Right' ~= nil then
+        window:perform_action(act.ActivatePaneDirection'Right', pane)
         return
     else
-        pane:split { direction = 'Right' }
+        pane:split{ direction = 'Right' }
     end
 end)
-wezterm.on('move-spawn-left', function(window, pane)
+wezterm.on('move-spawn-left', function (window, pane)
     local tab = pane:tab()
-    if tab:get_pane_direction 'Left' ~= nil then
-        window:perform_action(act.ActivatePaneDirection 'Left', pane)
+    if tab:get_pane_direction'Left' ~= nil then
+        window:perform_action(act.ActivatePaneDirection'Left', pane)
         return
     else
-        pane:split { direction = 'Left' }
+        pane:split{ direction = 'Left' }
     end
 end)
-wezterm.on('move-spawn-top', function(window, pane)
+wezterm.on('move-spawn-top', function (window, pane)
     local tab = pane:tab()
-    if tab:get_pane_direction 'Up' ~= nil then
-        window:perform_action(act.ActivatePaneDirection 'Up', pane)
+    if tab:get_pane_direction'Up' ~= nil then
+        window:perform_action(act.ActivatePaneDirection'Up', pane)
         return
     else
-        pane:split { direction = 'Top' }
+        pane:split{ direction = 'Top' }
     end
 end)
-wezterm.on('move-spawn-bottom', function(window, pane)
+wezterm.on('move-spawn-bottom', function (window, pane)
     local tab = pane:tab()
-    if tab:get_pane_direction 'Down' ~= nil then
-        window:perform_action(act.ActivatePaneDirection 'Down', pane)
+    if tab:get_pane_direction'Down' ~= nil then
+        window:perform_action(act.ActivatePaneDirection'Down', pane)
         return
     else
-        pane:split { direction = 'Bottom' }
+        pane:split{ direction = 'Bottom' }
     end
 end)
 
-wezterm.on('close-pane', function(window, pane)
+wezterm.on('close-pane', function (window, pane)
     if pane:tab():panes()[2] == nil then
-        window:perform_action(act.CloseCurrentTab { confirm = false }, pane)
+        window:perform_action(act.CloseCurrentTab{ confirm = false }, pane)
     else
-        window:perform_action(act.CloseCurrentPane { confirm = false }, pane)
+        window:perform_action(act.CloseCurrentPane{ confirm = false }, pane)
     end
 end)
 
-wezterm.on('move-tab-last', function(window, pane)
+wezterm.on('move-tab-last', function (window, pane)
     window:perform_action(act.MoveTab(#(window:mux_window():tabs()) - 1), pane)
 end)

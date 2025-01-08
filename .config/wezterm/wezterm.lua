@@ -5,12 +5,14 @@ require'events'
 local config = wezterm.config_builder()
 
 config.font = wezterm.font_with_fallback{
-    'Maple Mono NF',
+    'FiraCode Nerd Font Mono',
+    -- 'Maple Mono NF',
     -- "JetBrainsMono Nerd Font Mono",
     'Unifont',
     'Unifont Upper',
     'Unifont CSUR',
 }
+config.font_size = 13
 
 local colors_file = io.open('/home/anton/.config/wezterm/base16-scheme.toml', 'r')
 if colors_file ~= nil then
