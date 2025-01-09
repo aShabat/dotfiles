@@ -15,6 +15,13 @@ local palette = MiniBase16.config.palette
 local hl_configs = {
     LeapLabel = { fg = palette.base05, bg = palette.base08 },
     Comment = { italic = true },
+    Constant = { bold = true },
+    Conditional = { italic = true },
+    Repeat = { italic = true },
+    Label = { italic = true },
+    Keyword = { italic = true },
+    String = { italic = true },
+    Boolean = { bold = true },
 }
 for group, config in pairs(hl_configs) do
     vim.api.nvim_set_hl(
