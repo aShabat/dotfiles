@@ -31,7 +31,11 @@ return {
             keyword = { range = 'prefix' },
             accept = { auto_brackets = { enabled = false } },
             documentation = { auto_show = true },
-            list = { selection = 'auto_insert' },
+            list = {
+                selection = {
+                    auto_insert = true,
+                },
+            },
             menu = {
                 draw = {
                     columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
