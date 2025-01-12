@@ -2,8 +2,9 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx TERMINAL wezterm
 set -gx PAGER nvimpager
-set PATH $PATH /home/anton/.local/bin /home/anton/.cargo/bin
 set -gx GOPATH /home/anton/.local
+
+fish_add_path -a /home/anton/.local/bin /home/anton/.cargo/bin
 
 abbr -a lg lazygit
 abbr -a s systemctl
