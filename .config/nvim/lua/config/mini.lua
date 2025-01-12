@@ -20,7 +20,7 @@ local hl_configs = {
     Repeat = { italic = true },
     Label = { italic = true },
     Keyword = { italic = true },
-    String = { italic = true },
+    String = { italic = true, bold = true },
     Boolean = { bold = true },
 }
 for group, config in pairs(hl_configs) do

@@ -6,11 +6,19 @@ local config = wezterm.config_builder()
 
 config.font = wezterm.font_with_fallback{
     'FiraCode Nerd Font Mono',
-    -- 'Maple Mono NF',
-    -- "JetBrainsMono Nerd Font Mono",
     'Unifont',
     'Unifont Upper',
     'Unifont CSUR',
+}
+config.font_rules = {
+    {
+        italic = true,
+        intensity = 'Normal',
+        font = wezterm.font{
+            family = 'VictorMono',
+            style = 'Italic',
+        },
+    },
 }
 config.font_size = 12.5
 config.harfbuzz_features = events.default_harfbuzz
