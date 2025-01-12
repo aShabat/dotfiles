@@ -20,7 +20,14 @@ return {
     opts = {
         servers = {
             lua_ls = {},
-            gopls = {},
+            gopls = {
+                settings = {
+                    gopls = {
+                        gofumpt = true,
+                        usePlaceholders = true,
+                    },
+                },
+            },
             bashls = {},
             ts_ls = {},
         },
