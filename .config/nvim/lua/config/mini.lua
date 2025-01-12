@@ -18,7 +18,6 @@ local hl_configs = {
     Constant = { bold = true },
     Conditional = { italic = true },
     Repeat = { italic = true },
-    Label = { italic = true },
     Keyword = { italic = true },
     String = { italic = true, bold = true },
     Boolean = { bold = true },
