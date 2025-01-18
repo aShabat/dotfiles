@@ -39,7 +39,7 @@ function set_custom_keys
     bind ctrl-u capitalize-word
     bind ctrl-U upcase-word
     bind ctrl-backspace backward-kill-word
-    bind cltr-h backward-kill-word
+    bind ctrl-h backward-kill-word
     bind ctrl-r fzf-history-widget
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
