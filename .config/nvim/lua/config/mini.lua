@@ -2,13 +2,13 @@ local M = {}
 
 local H = {}
 -- Extra
-require('mini.extra').setup({})
+require('mini.extra').setup {}
 -- Base16
-if vim.fn.filereadable(vim.fn.stdpath('config') .. '/lua/config/minibase16.lua') ~= 0 then
-	dofile(vim.fn.stdpath('config') .. '/lua/config/minibase16.lua')
+if vim.fn.filereadable(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua') ~= 0 then
+	dofile(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua')
 else
-	local base16 = require('mini.base16')
-	base16.setup({ palette = base16.mini_palette('#112641', '#e2e98f', 75) })
+	local base16 = require 'mini.base16'
+	base16.setup { palette = base16.mini_palette('#112641', '#e2e98f', 75) }
 end
 
 local palette = MiniBase16.config.palette
@@ -32,7 +32,7 @@ for group, config in pairs(hl_configs) do
 end
 
 -- Coments
-require('mini.comment').setup({})
+require('mini.comment').setup {}
 
 -- Icons
 require('mini.icons').setup()
@@ -46,13 +46,13 @@ vim.api.nvim_create_autocmd('User', {
 })
 
 -- Git
-require('mini.git').setup({})
+require('mini.git').setup {}
 
 -- Hipatterns
 
-local hipatterns = require('mini.hipatterns')
+local hipatterns = require 'mini.hipatterns'
 
-hipatterns.setup({
+hipatterns.setup {
 	highlighters = {
 		fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
 		hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
@@ -61,31 +61,31 @@ hipatterns.setup({
 
 		hex_color = hipatterns.gen_highlighter.hex_color(),
 	},
-})
+}
 
 -- StatusLine
 vim.opt.cmdheight = 0
 vim.opt.showcmdloc = 'statusline'
 
-require('mini.statusline').setup({
+require('mini.statusline').setup {
 	content = {
 		active = function()
 			local reg_recording = vim.fn.reg_recording()
 			if reg_recording ~= '' then
 				reg_recording = 'Recording: @' .. reg_recording
 			end
-			local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
-			local git = MiniStatusline.section_git({ trunc_width = 40 })
-			local diff = MiniStatusline.section_diff({ trunc_width = 75 })
-			local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
-			local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
-			local filename = MiniStatusline.section_filename({ trunc_width = 140 })
-			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-			local location = MiniStatusline.section_location({ trunc_width = 75 })
-			local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+			local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
+			local git = MiniStatusline.section_git { trunc_width = 40 }
+			local diff = MiniStatusline.section_diff { trunc_width = 75 }
+			local diagnostics = MiniStatusline.section_diagnostics { trunc_width = 75 }
+			local lsp = MiniStatusline.section_lsp { trunc_width = 75 }
+			local filename = MiniStatusline.section_filename { trunc_width = 140 }
+			local fileinfo = MiniStatusline.section_fileinfo { trunc_width = 120 }
+			local location = MiniStatusline.section_location { trunc_width = 75 }
+			local search = MiniStatusline.section_searchcount { trunc_width = 75 }
 			local showcmd = vim.api.nvim_eval_statusline('%S', {}).str
 
-			return MiniStatusline.combine_groups({
+			return MiniStatusline.combine_groups {
 				{ hl = 'MiniStatuslineDevinfo', strings = { reg_recording } },
 				{ hl = mode_hl, strings = { mode } },
 				{ hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
@@ -95,17 +95,17 @@ require('mini.statusline').setup({
 				{ hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
 				{ hl = mode_hl, strings = { search, location } },
 				{ hl = 'MiniStatuslineDevinfo', strings = { showcmd } },
-			})
+			}
 		end,
 	},
-})
+}
 
 -- TrailSpace
-require('mini.trailspace').setup({})
+require('mini.trailspace').setup {}
 
 -- Notify
-require('mini.notify').setup({})
-vim.notify = MiniNotify.make_notify({})
+require('mini.notify').setup {}
+vim.notify = MiniNotify.make_notify {}
 
 -- Files
 local files_set_cwd = function(_)
@@ -126,24 +126,20 @@ local files_toggle_dotfiles = function()
 	files_show_dot = not files_show_dot
 
 	local filter = files_show_dot and files_filter_show or files_filter_hide
-	MiniFiles.refresh({ content = { filter = filter } })
+	MiniFiles.refresh { content = { filter = filter } }
 end
 
 local files_show_preview = false
 local files_toggle_preview = function()
 	files_show_preview = not files_show_preview
-	MiniFiles.refresh({ windows = { preview = files_show_preview } })
+	MiniFiles.refresh { windows = { preview = files_show_preview } }
 	MiniFiles.trim_right()
 end
 local hide_preview = function()
 	files_show_preview = false
 end
 
-local preview_image = function()
-	-- todo
-end
-
-require('mini.files').setup({
+require('mini.files').setup {
 	options = {
 		use_as_default_explorer = true,
 	},
@@ -157,7 +153,7 @@ require('mini.files').setup({
 		go_in = 'L',
 		go_in_plus = 'l',
 	},
-})
+}
 
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'MiniFilesBufferCreate',
@@ -176,7 +172,7 @@ M.file_explorer = function()
 end
 
 -- Pick
-require('mini.pick').setup({
+require('mini.pick').setup {
 	mappings = {
 		choose_marked = '<C-CR>',
 	},
@@ -190,7 +186,7 @@ require('mini.pick').setup({
 			col = 0,
 		},
 	},
-})
+}
 
 H.pick_dirs_action = function()
 	local opts = {
@@ -228,7 +224,7 @@ H.pick_files_action = function()
 		},
 	}
 	MiniPick.set_picker_opts(opts)
-	MiniPick.set_picker_items_from_cli({ 'fd', '--type=f', '--no-follow', '--color=never' })
+	MiniPick.set_picker_items_from_cli { 'fd', '--type=f', '--no-follow', '--color=never' }
 end
 H.open_dir = function(item)
 	local path = MiniPick.get_picker_opts().source.cwd .. '/' .. item
@@ -281,7 +277,7 @@ MiniPick.registry.files = function(local_opts, opts)
 end
 
 -- Move
-require('mini.move').setup({
+require('mini.move').setup {
 	mappings = {
 		left = 'H',
 		right = 'L',
@@ -292,30 +288,34 @@ require('mini.move').setup({
 		line_up = '<C-k>',
 		line_down = '<C-j>',
 	},
-})
+}
 
 -- SplitJoin
-require('mini.splitjoin').setup({})
+require('mini.splitjoin').setup {}
 
 -- AI
-require('mini.ai').setup({
+require('mini.ai').setup {
 	custom_textobjects = {
 		-- Whole region
 		G = function()
 			local from = { line = 1, col = 1 }
 			local to = {
-				line = vim.fn.line('$'),
+				line = vim.fn.line '$',
 				col = math.max(vim.fn.getline('$'):len(), 1),
 			}
 			return { from = from, to = to }
 		end,
 	},
-})
+}
 
 -- Bracketed
-require('mini.bracketed').setup({})
+require('mini.bracketed').setup {
+	diagnostic = {
+		options = { float = false },
+	},
+}
 
 -- Surround
-require('mini.surround').setup({})
+require('mini.surround').setup {}
 
 return M
