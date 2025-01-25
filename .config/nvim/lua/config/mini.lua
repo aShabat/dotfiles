@@ -25,9 +25,7 @@ H.hl_configs = {
 }
 for group, config in pairs(H.hl_configs) do
 	local opts = config.opts
-	if not config.overwrite then
-		opts = vim.tbl_deep_extend('force', vim.api.nvim_get_hl(0, { name = group }), opts)
-	end
+	if not config.overwrite then opts = vim.tbl_deep_extend('force', vim.api.nvim_get_hl(0, { name = group }), opts) end
 	vim.api.nvim_set_hl(0, group, opts)
 end
 
@@ -40,9 +38,7 @@ MiniIcons.mock_nvim_web_devicons()
 
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'MiniFilesActionRename',
-	callback = function(event)
-		Snacks.rename.on_rename_file(event.data.from, event.data.to)
-	end,
+	callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
 })
 
 -- Git
@@ -71,9 +67,7 @@ require('mini.statusline').setup {
 	content = {
 		active = function()
 			local reg_recording = vim.fn.reg_recording()
-			if reg_recording ~= '' then
-				reg_recording = 'Recording: @' .. reg_recording
-			end
+			if reg_recording ~= '' then reg_recording = 'Recording: @' .. reg_recording end
 			local mode, mode_hl = MiniStatusline.section_mode { trunc_width = 120 }
 			local git = MiniStatusline.section_git { trunc_width = 40 }
 			local diff = MiniStatusline.section_diff { trunc_width = 75 }
@@ -115,12 +109,8 @@ H.files_set_cwd = function(_)
 end
 
 H.files_show_dot = false
-H.files_filter_show = function(_)
-	return true
-end
-H.files_filter_hide = function(fs_entry)
-	return not vim.startswith(fs_entry.name, '.')
-end
+H.files_filter_show = function(_) return true end
+H.files_filter_hide = function(fs_entry) return not vim.startswith(fs_entry.name, '.') end
 
 H.files_toggle_dotfiles = function()
 	H.files_show_dot = not H.files_show_dot
@@ -135,9 +125,7 @@ H.files_toggle_preview = function()
 	MiniFiles.refresh { windows = { preview = H.files_show_preview } }
 	MiniFiles.trim_right()
 end
-H.hide_preview = function()
-	H.files_show_preview = false
-end
+H.hide_preview = function() H.files_show_preview = false end
 
 require('mini.files').setup {
 	options = {
@@ -161,6 +149,37 @@ vim.api.nvim_create_autocmd('User', {
 		vim.keymap.set('n', 'g~', H.files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
 		vim.keymap.set('n', 'g.', H.files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
 		vim.keymap.set('n', 'gp', H.files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
+	end,
+})
+
+H.preview = {}
+vim.api.nvim_create_autocmd('User', {
+	pattern = 'MiniFilesWindowUpdate',
+	callback = function(args)
+		local buf_id, win_id = args.data.buf_id, args.data.win_id
+		if not win_id then return end
+		local win_config = vim.api.nvim_win_get_config(win_id)
+		if not win_config.title[1] then return end
+		local image_extensions = { '.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif' }
+		local is_image = false
+		for _, ext in ipairs(image_extensions) do
+			is_image = is_image or win_config.title[1][1]:match(ext)
+		end
+		if not is_image then return end
+
+		vim.api.nvim_buf_set_lines(buf_id, 0, -1, true, {})
+
+		local image = MiniFiles.get_explorer_state().windows[#MiniFiles.get_explorer_state().windows].path
+		if H.preview.image then H.preview.image:clear() end
+		H.preview.image = require('image').from_file(image, {
+			window = win_id,
+			with_virtual_padding = true,
+		})
+
+		win_config.height = 40
+		win_config.width = 100
+		vim.api.nvim_win_set_config(win_id, win_config)
+		H.preview.image:render()
 	end,
 })
 
@@ -228,9 +247,7 @@ H.pick_files_action = function()
 end
 H.open_dir = function(item)
 	local path = MiniPick.get_picker_opts().source.cwd .. '/' .. item
-	vim.schedule(function()
-		MiniFiles.open(path, false)
-	end)
+	vim.schedule(function() MiniFiles.open(path, false) end)
 end
 MiniPick.registry.files = function(local_opts, opts)
 	if not local_opts or not local_opts.dirs then
