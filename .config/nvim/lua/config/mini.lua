@@ -11,9 +11,9 @@ else
 	base16.setup { palette = base16.mini_palette('#112641', '#e2e98f', 75) }
 end
 
-local palette = MiniBase16.config.palette
-local hl_configs = {
-	LeapLabel = { opts = { fg = palette.base06, bg = palette.base0A } },
+H.palette = MiniBase16.config.palette
+H.hl_configs = {
+	LeapLabel = { opts = { fg = H.palette.base06, bg = H.palette.base0A } },
 	LeapBackdrop = { opts = { italic = false }, overwrite = true },
 	Comment = { opts = { italic = true } },
 	Constant = { opts = { bold = true } },
@@ -23,7 +23,7 @@ local hl_configs = {
 	String = { opts = { italic = true, bold = true } },
 	Boolean = { opts = { bold = true } },
 }
-for group, config in pairs(hl_configs) do
+for group, config in pairs(H.hl_configs) do
 	local opts = config.opts
 	if not config.overwrite then
 		opts = vim.tbl_deep_extend('force', vim.api.nvim_get_hl(0, { name = group }), opts)
@@ -108,35 +108,35 @@ require('mini.notify').setup {}
 vim.notify = MiniNotify.make_notify {}
 
 -- Files
-local files_set_cwd = function(_)
+H.files_set_cwd = function(_)
 	local cur_entry_path = MiniFiles.get_fs_entry().path
 	local cur_directory = vim.fs.dirname(cur_entry_path)
 	vim.fn.chdir(cur_directory)
 end
 
-local files_show_dot = false
-local files_filter_show = function(_)
+H.files_show_dot = false
+H.files_filter_show = function(_)
 	return true
 end
-local files_filter_hide = function(fs_entry)
+H.files_filter_hide = function(fs_entry)
 	return not vim.startswith(fs_entry.name, '.')
 end
 
-local files_toggle_dotfiles = function()
-	files_show_dot = not files_show_dot
+H.files_toggle_dotfiles = function()
+	H.files_show_dot = not H.files_show_dot
 
-	local filter = files_show_dot and files_filter_show or files_filter_hide
+	local filter = H.files_show_dot and H.files_filter_show or H.files_filter_hide
 	MiniFiles.refresh { content = { filter = filter } }
 end
 
-local files_show_preview = false
-local files_toggle_preview = function()
-	files_show_preview = not files_show_preview
-	MiniFiles.refresh { windows = { preview = files_show_preview } }
+H.files_show_preview = false
+H.files_toggle_preview = function()
+	H.files_show_preview = not H.files_show_preview
+	MiniFiles.refresh { windows = { preview = H.files_show_preview } }
 	MiniFiles.trim_right()
 end
-local hide_preview = function()
-	files_show_preview = false
+H.hide_preview = function()
+	H.files_show_preview = false
 end
 
 require('mini.files').setup {
@@ -144,7 +144,7 @@ require('mini.files').setup {
 		use_as_default_explorer = true,
 	},
 	content = {
-		filter = files_filter_hide,
+		filter = H.files_filter_hide,
 	},
 	windows = {
 		width_preview = 100,
@@ -158,15 +158,15 @@ require('mini.files').setup {
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'MiniFilesBufferCreate',
 	callback = function(args)
-		vim.keymap.set('n', 'g~', files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
-		vim.keymap.set('n', 'g.', files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
-		vim.keymap.set('n', 'gp', files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
+		vim.keymap.set('n', 'g~', H.files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
+		vim.keymap.set('n', 'g.', H.files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
+		vim.keymap.set('n', 'gp', H.files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
 	end,
 })
 
 M.file_explorer = function()
-	files_show_dot = false
-	hide_preview()
+	H.files_show_dot = false
+	H.hide_preview()
 	MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
 	MiniFiles.trim_right()
 end
