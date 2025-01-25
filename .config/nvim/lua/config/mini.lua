@@ -160,6 +160,7 @@ vim.api.nvim_create_autocmd('User', {
 		if not win_id then return end
 		local win_config = vim.api.nvim_win_get_config(win_id)
 		if not win_config.title[1] then return end
+		if H.preview.image then H.preview.image:clear() end
 		local image_extensions = { '.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif' }
 		local is_image = false
 		for _, ext in ipairs(image_extensions) do
@@ -170,7 +171,6 @@ vim.api.nvim_create_autocmd('User', {
 		vim.api.nvim_buf_set_lines(buf_id, 0, -1, true, {})
 
 		local image = MiniFiles.get_explorer_state().windows[#MiniFiles.get_explorer_state().windows].path
-		if H.preview.image then H.preview.image:clear() end
 		H.preview.image = require('image').from_file(image, {
 			window = win_id,
 			with_virtual_padding = true,
