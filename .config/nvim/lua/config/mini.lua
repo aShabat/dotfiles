@@ -127,6 +127,17 @@ H.files_toggle_preview = function()
 end
 H.hide_preview = function() H.files_show_preview = false end
 
+H.sync_and_go_in = function()
+	if not MiniFiles.get_explorer_state() then return end
+	local fs_entry = MiniFiles.get_fs_entry()
+	if fs_entry and fs_entry.fs_type == 'directory' then
+		MiniFiles.go_in()
+	else
+		local synced = MiniFiles.synchronize()
+		if synced then MiniFiles.go_in { close_on_file = true } end
+	end
+end
+
 require('mini.files').setup {
 	options = {
 		use_as_default_explorer = true,
@@ -139,13 +150,14 @@ require('mini.files').setup {
 	},
 	mappings = {
 		go_in = 'L',
-		go_in_plus = 'l',
+		go_in_plus = '',
 	},
 }
 
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'MiniFilesBufferCreate',
 	callback = function(args)
+		vim.keymap.set('n', 'l', H.sync_and_go_in, { buffer = args.data.buf_id, desc = 'Synchronize and go in' })
 		vim.keymap.set('n', 'g~', H.files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
 		vim.keymap.set('n', 'g.', H.files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
 		vim.keymap.set('n', 'gp', H.files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
