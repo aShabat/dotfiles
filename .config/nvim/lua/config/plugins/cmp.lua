@@ -26,7 +26,7 @@ return {
 		},
 		snippets = { preset = 'luasnip' },
 		completion = {
-			keyword = { range = 'prefix' },
+			keyword = { range = 'full' },
 			accept = { auto_brackets = { enabled = false } },
 			documentation = { auto_show = true },
 			list = {
@@ -50,9 +50,7 @@ return {
 							end,
 						},
 						kind = {
-							text = function(ctx)
-								return '< ' .. ctx.kind .. ' >'
-							end,
+							text = function(ctx) return '< ' .. ctx.kind .. ' >' end,
 							highlight = function(ctx)
 								local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
 								return hl
