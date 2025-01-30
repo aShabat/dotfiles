@@ -1,12 +1,6 @@
 shell = "bash -c '{}'"
 
 [[items]]
-file = "~/.config/nvim/lua/config/minibase16.lua"
-template = "nvim"
-subtemplate = "miniBase16"
-rewrite = true
-
-[[items]]
 file = "~/.config/nvimpager/lua/config/minibase16.lua"
 template = "nvim"
 subtemplate = "miniBase16"
@@ -19,5 +13,6 @@ rewrite = true
 
 # [[items]]
 # file = "~/.local/share/color-schemes/flavours.colors"
+# hook = "plasma-apply-colorscheme Generated"
 # template = "kde"
 # rewrite = true
