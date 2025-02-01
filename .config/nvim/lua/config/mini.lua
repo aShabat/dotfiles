@@ -4,9 +4,7 @@ local H = {}
 -- Extra
 require('mini.extra').setup {}
 -- Base16
-if vim.fn.filereadable(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua') ~= 0 then
-	dofile(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua')
-else
+if not pcall(function() require 'config.minibase16' end) then
 	local base16 = require 'mini.base16'
 	base16.setup { palette = base16.mini_palette('#112641', '#e2e98f', 75) }
 end
