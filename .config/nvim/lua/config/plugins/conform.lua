@@ -4,6 +4,7 @@ return {
 		formatters_by_ft = {
 			lua = { 'stylua' },
 			cmake = { 'gersemi' },
+			cpp = { 'clang-format' },
 		},
 		default_format_opts = {
 			lsp_format = 'fallback',
