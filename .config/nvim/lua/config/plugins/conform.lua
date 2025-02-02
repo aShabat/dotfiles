@@ -13,5 +13,20 @@ return {
 			timeout_ms = 500,
 			lsp_format = 'fallback',
 		},
+		formatters = {
+			stylua = {
+				args = {
+					'--quote-style',
+					'AutoPreferSingle',
+					'--collapse-simple-statement',
+					'ConditionalOnly',
+					'--call-parentheses',
+					'Always',
+					'--',
+					'$FILENAME',
+				},
+				stdin = false,
+			},
+		},
 	},
 }
