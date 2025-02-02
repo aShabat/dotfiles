@@ -18,35 +18,35 @@ vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines)
 
 -- LSP
 M.set_lsp_keybinds = function(buffer)
-	local set = function(keys, func)
-		vim.keymap.set('n', keys, func, { buffer = buffer })
-	end
-	local minilsp = function(scope)
-		return function()
-			MiniExtra.pickers.lsp { scope = scope }
-		end
-	end
-	set('<leader>rn', vim.lsp.buf.rename)
-	set('<leader>ca', require('fastaction').code_action)
-	set('gd', minilsp 'definition')
-	set('gD', vim.lsp.buf.declaration)
-	set('gr', minilsp 'references')
-	set('gI', minilsp 'implementation')
-	set('<leader>D', minilsp 'type_definition')
-	set('<leader>ds', minilsp 'document_symbol')
-	set('<leader>ws', minilsp 'workspace_symbol')
+    local set = function(keys, func)
+        vim.keymap.set('n', keys, func, { buffer = buffer })
+    end
+    local minilsp = function(scope)
+        return function()
+            MiniExtra.pickers.lsp { scope = scope }
+        end
+    end
+    set('<leader>rn', vim.lsp.buf.rename)
+    set('<leader>ca', require('fastaction').code_action)
+    set('gd', minilsp 'definition')
+    set('gD', vim.lsp.buf.declaration)
+    set('gr', minilsp 'references')
+    set('gI', minilsp 'implementation')
+    set('<leader>D', minilsp 'type_definition')
+    set('<leader>ds', minilsp 'document_symbol')
+    set('<leader>ws', minilsp 'workspace_symbol')
 end
 
 -- LuaSnip
 local ls = require 'luasnip'
 vim.keymap.set({ 's', 'i' }, '<c-l>', function()
-	if ls.expand_or_jumpable() then ls.expand_or_jump() end
+    if ls.expand_or_jumpable() then ls.expand_or_jump() end
 end, { silent = true })
 vim.keymap.set({ 's', 'i' }, '<c-h>', function()
-	if ls.jumpable(-1) then ls.jump(-1) end
+    if ls.jumpable(-1) then ls.jump(-1) end
 end, { silent = true })
 vim.keymap.set({ 's', 'i' }, '<c-k>', function()
-	if ls.choice_active() then ls.change_choice() end
+    if ls.choice_active() then ls.change_choice() end
 end)
 
 -- Leap

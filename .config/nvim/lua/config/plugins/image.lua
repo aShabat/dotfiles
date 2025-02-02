@@ -1,6 +1,6 @@
 return {
-	{
-		'3rd/image.nvim',
-		opts = {},
-	},
+    {
+        '3rd/image.nvim',
+        opts = {},
+    },
 }
