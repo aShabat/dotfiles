@@ -9,9 +9,7 @@ wezterm.on('window-config-reloaded', function(window, pane)
 	local is_seen = not seen[id]
 	seen[id] = true
 	wezterm.GLOBAL.seen_open_windows = seen
-	if is_seen then
-		window:maximize()
-	end
+	if is_seen then window:maximize() end
 end)
 
 wezterm.on('window-resized', function(window, pane)
