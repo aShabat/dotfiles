@@ -50,7 +50,9 @@ return {
 							end,
 						},
 						kind = {
-							text = function(ctx) return '< ' .. ctx.kind .. ' >' end,
+							text = function(ctx)
+								return '< ' .. ctx.kind .. ' >'
+							end,
 							highlight = function(ctx)
 								local _, hl, _ = require('mini.icons').get('lsp', ctx.kind)
 								return hl

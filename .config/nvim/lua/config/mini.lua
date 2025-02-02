@@ -4,7 +4,9 @@ local H = {}
 -- Extra
 require('mini.extra').setup {}
 -- Base16
-if not pcall(function() require 'config.minibase16' end) then
+if not pcall(function()
+	require 'config.minibase16'
+end) then
 	local base16 = require 'mini.base16'
 	base16.setup { palette = base16.mini_palette('#112641', '#e2e98f', 75) }
 end
@@ -36,7 +38,9 @@ MiniIcons.mock_nvim_web_devicons()
 
 vim.api.nvim_create_autocmd('User', {
 	pattern = 'MiniFilesActionRename',
-	callback = function(event) Snacks.rename.on_rename_file(event.data.from, event.data.to) end,
+	callback = function(event)
+		Snacks.rename.on_rename_file(event.data.from, event.data.to)
+	end,
 })
 
 -- Git
@@ -107,8 +111,12 @@ H.files_set_cwd = function(_)
 end
 
 H.files_show_dot = false
-H.files_filter_show = function(_) return true end
-H.files_filter_hide = function(fs_entry) return not vim.startswith(fs_entry.name, '.') end
+H.files_filter_show = function(_)
+	return true
+end
+H.files_filter_hide = function(fs_entry)
+	return not vim.startswith(fs_entry.name, '.')
+end
 
 H.files_toggle_dotfiles = function()
 	H.files_show_dot = not H.files_show_dot
@@ -123,7 +131,9 @@ H.files_toggle_preview = function()
 	MiniFiles.refresh { windows = { preview = H.files_show_preview } }
 	MiniFiles.trim_right()
 end
-H.hide_preview = function() H.files_show_preview = false end
+H.hide_preview = function()
+	H.files_show_preview = false
+end
 
 H.sync_and_go_in = function()
 	if not MiniFiles.get_explorer_state() then return end
@@ -257,7 +267,9 @@ H.pick_files_action = function()
 end
 H.open_dir = function(item)
 	local path = MiniPick.get_picker_opts().source.cwd .. '/' .. item
-	vim.schedule(function() MiniFiles.open(path, false) end)
+	vim.schedule(function()
+		MiniFiles.open(path, false)
+	end)
 end
 MiniPick.registry.files = function(local_opts, opts)
 	if not local_opts or not local_opts.dirs then
