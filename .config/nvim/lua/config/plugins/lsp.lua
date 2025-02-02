@@ -32,6 +32,7 @@ return {
 				bashls = {},
 				ts_ls = {},
 				basedpyright = {},
+				clangd = {},
 			},
 		},
 		config = function(_, opts)
