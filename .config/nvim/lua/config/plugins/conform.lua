@@ -1,6 +1,7 @@
 return {
     'stevearc/conform.nvim',
     opts = {
+        -- log_level = vim.log.levels.TRACE,
         formatters_by_ft = {
             lua = { 'stylua' },
             cmake = { 'gersemi' },
@@ -15,7 +16,7 @@ return {
         },
         formatters = {
             stylua = {
-                args = {
+                prepend_args = {
                     '--quote-style',
                     'AutoPreferSingle',
                     '--collapse-simple-statement',
@@ -24,12 +25,10 @@ return {
                     'None',
                     '--indent-type',
                     'Tabs',
-                    '--',
-                    '-',
                 },
             },
-            clangformat = {
-                args = {},
+            ['clang-format'] = {
+                append_args = { '-style={IndentWidth: 4}' },
             },
         },
     },
