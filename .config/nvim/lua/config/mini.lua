@@ -46,8 +46,8 @@ vim.api.nvim_create_autocmd('User', {
 -- Git
 require('mini.git').setup {}
 
--- Diff
-require('mini.diff').setup {}
+-- -- Diff
+-- require('mini.diff').setup {}
 
 -- Hipatterns
 
