@@ -33,7 +33,7 @@ end
 require('mini.comment').setup {}
 
 -- Icons
-require('mini.icons').setup()
+require('mini.icons').setup {}
 MiniIcons.mock_nvim_web_devicons()
 
 vim.api.nvim_create_autocmd('User', {
@@ -45,6 +45,9 @@ vim.api.nvim_create_autocmd('User', {
 
 -- Git
 require('mini.git').setup {}
+
+-- Diff
+require('mini.diff').setup {}
 
 -- Hipatterns
 
