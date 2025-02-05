@@ -46,6 +46,15 @@ M.set_git_keybinds = function(buf)
 
     set('<leader>gp', gitsigns.preview_hunk_inline)
     set('<leader>gb', gitsigns.toggle_current_line_blame)
+    vim.keymap.set('v', 'gh', function()
+        local line_start = vim.fn.getpos("'<")[2]
+        local line_end = vim.fn.getpos("'>")[2]
+        gitsigns.stage_hunk { line_start, line_end }
+    end, { buffer = buf })
+    set('ghh', function()
+        local line = vim.api.nvim_win_get_cursor(0)[1]
+        gitsigns.stage_hunk { line, line }
+    end)
     set('ghH', gitsigns.stage_hunk)
 
     local nav_hunk = function(direction)
