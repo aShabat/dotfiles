@@ -28,7 +28,7 @@ vim.opt.undofile = true
 
 vim.opt.termguicolors = true
 
-vim.opt.signcolumn = 'auto'
+vim.opt.signcolumn = 'auto:9'
 
 vim.opt.clipboard = ''
 
