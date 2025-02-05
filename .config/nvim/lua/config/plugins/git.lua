@@ -11,9 +11,7 @@ return {
         numhl = true,
         diff_opts = {
             algorithm = 'histogram',
-            internal = true,
         },
-        word_diff = true,
         on_attach = function(buf)
             require('config.keymaps').set_git_keybinds(buf)
         end,
