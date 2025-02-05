@@ -6,9 +6,11 @@ return {
                 toplevel = vim.env.HOME,
                 gitdir = vim.env.HOME .. '/.config/dotfiles.git',
             },
-            signcolumn = false,
+            -- signcolumn = false,
             numhl = true,
-            on_attach = function(buf) end,
         },
+        on_attach = function(buf)
+            require('config.keymaps').set_git_keybinds(buf)
+        end,
     },
 }

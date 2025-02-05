@@ -17,9 +17,9 @@ vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim)
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines)
 
 -- LSP
-M.set_lsp_keybinds = function(buffer)
+M.set_lsp_keybinds = function(buf)
     local set = function(keys, func)
-        vim.keymap.set('n', keys, func, { buffer = buffer })
+        vim.keymap.set('n', keys, func, { buffer = buf })
     end
     local minilsp = function(scope)
         return function()
@@ -35,6 +35,36 @@ M.set_lsp_keybinds = function(buffer)
     set('<leader>D', minilsp 'type_definition')
     set('<leader>ds', minilsp 'document_symbol')
     set('<leader>ws', minilsp 'workspace_symbol')
+end
+
+-- Git
+M.set_git_keybinds = function(buf)
+    local set = function(keys, func)
+        vim.keymap.set('n', keys, func, { buffer = buf })
+    end
+    local gitsigns = require 'gitsigns'
+
+    set('<leader>gp', gitsigns.preview_hunk_inline)
+    set('<leader>gb', gitsigns.toggle_current_line_blame)
+    set('ghH', gitsigns.stage_hunk)
+
+    local nav_hunk = function(direction)
+        gitsigns.nav_hunk(direction, {
+            preview = true,
+        })
+    end
+    set(']h', function()
+        nav_hunk 'next'
+    end)
+    set('[h', function()
+        nav_hunk 'prev'
+    end)
+    set('[H', function()
+        nav_hunk 'first'
+    end)
+    set(']H', function()
+        nav_hunk 'last'
+    end)
 end
 
 -- LuaSnip
