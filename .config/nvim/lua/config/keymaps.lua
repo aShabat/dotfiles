@@ -13,7 +13,7 @@ vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live, { desc = '[F]ind [
 
 vim.keymap.set('n', '<leader>e', require('config.mini').file_explorer, { desc = 'file [E]xplorer' })
 
-vim.keymap.set('n', '<leader>gn', MiniNotify.show_history, { desc = '[G]et [N]otifications' })
+vim.keymap.set('n', '<leader>mnh', MiniNotify.show_history, { desc = '[M]ini.[N]otify [H]istory' })
 
 vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim, { desc = '[M]ini.[T]rail[S]pace' })
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]ini.[T]rim[L]ines' })
