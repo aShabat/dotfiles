@@ -24,7 +24,6 @@ return {
                 gopls = {
                     settings = {
                         gopls = {
-                            gofumpt = true,
                             usePlaceholders = true,
                         },
                     },

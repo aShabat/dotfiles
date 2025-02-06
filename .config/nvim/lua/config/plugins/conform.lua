@@ -6,6 +6,7 @@ return {
             lua = { 'stylua' },
             cmake = { 'gersemi' },
             cpp = { 'clang-format' },
+            go = { 'gofumpt', 'goimports-reviser' },
         },
         default_format_opts = {
             lsp_format = 'fallback',
@@ -29,6 +30,13 @@ return {
             },
             ['clang-format'] = {
                 append_args = { '-style={IndentWidth: 4}' },
+            },
+            ['goimports-reviser'] = {
+                prepend_args = {
+                    '-rm-unused',
+                    '-set-alias',
+                    '-separate-named',
+                },
             },
         },
     },
