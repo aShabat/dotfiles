@@ -1,9 +1,11 @@
 local M = {}
 
 -- My
+
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>')
 
 -- Mini
+
 vim.keymap.set('n', '<leader>ff', MiniPick.registry.files)
 vim.keymap.set('n', '<leader>fh', MiniPick.builtin.help)
 vim.keymap.set('n', '<leader>fb', MiniPick.builtin.buffers)
@@ -17,6 +19,7 @@ vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim)
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines)
 
 -- LSP
+
 M.set_lsp_keybinds = function(buf)
     local set = function(keys, func)
         vim.keymap.set('n', keys, func, { buffer = buf })
@@ -38,6 +41,7 @@ M.set_lsp_keybinds = function(buf)
 end
 
 -- Git
+
 M.set_git_keybinds = function(buf)
     local set = function(keys, func)
         vim.keymap.set('n', keys, func, { buffer = buf })
@@ -77,6 +81,7 @@ M.set_git_keybinds = function(buf)
 end
 
 -- LuaSnip
+
 local ls = require 'luasnip'
 vim.keymap.set({ 's', 'i' }, '<c-l>', function()
     if ls.expand_or_jumpable() then ls.expand_or_jump() end
@@ -89,13 +94,30 @@ vim.keymap.set({ 's', 'i' }, '<c-k>', function()
 end)
 
 -- Leap
+
 vim.keymap.set('n', 'f', '<Plug>(leap)')
 vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
 
 -- UndoTree
+
 vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>')
 
 -- Suda
+
 vim.api.nvim_create_user_command('W', 'SudaWrite', {})
+
+-- QuickFix
+
+vim.keymap.set('n', '<leader>qc', '<CMD>cclose<CR>')
+vim.keymap.set('n', '<leader>qo', '<CMD>copen<CR>')
+vim.keymap.set('n', '<leader>qn', '<CMD>cnext<CR>')
+vim.keymap.set('n', '<leader>qp', '<CMD>cprev<CR>')
+
+-- LocList
+
+vim.keymap.set('n', '<leader>lc', '<CMD>lclose<CR>')
+vim.keymap.set('n', '<leader>lo', '<CMD>lopen<CR>')
+vim.keymap.set('n', '<leader>ln', '<CMD>lnext<CR>')
+vim.keymap.set('n', '<leader>lp', '<CMD>lprev<CR>')
 
 return M
