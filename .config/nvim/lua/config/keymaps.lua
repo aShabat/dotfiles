@@ -120,4 +120,17 @@ vim.keymap.set('n', '<leader>lc', '<CMD>lclose<CR>', { desc = '[L]oclist [C]lose
 vim.keymap.set('n', '<leader>ln', '<CMD>lnext<CR>', { desc = '[L]oclist [N]ext' })
 vim.keymap.set('n', '<leader>lp', '<CMD>lprev<CR>', { desc = '[L]oclist [P]rev' })
 
+-- WinTab
+
+vim.keymap.set('n', '<C-Tab>', function()
+    local windows = vim.api.nvim_tabpage_list_wins(0)
+    if #windows == 1 then return end
+    local current_win = vim.api.nvim_tabpage_get_win(0)
+    local current_index
+    for index, window in ipairs(windows) do
+        if window == current_win then current_index = index end
+    end
+    vim.api.nvim_tabpage_set_win(0, windows[(current_index % #windows) + 1])
+end)
+
 return M
