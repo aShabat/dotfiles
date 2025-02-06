@@ -181,10 +181,12 @@ vim.api.nvim_create_autocmd('User', {
     callback = function(args)
         local buf_id, win_id = args.data.buf_id, args.data.win_id
         if not win_id then return end
+
         local win_config = vim.api.nvim_win_get_config(win_id)
         if not win_config.title[1] then return end
+
         if H.preview.image then H.preview.image:clear() end
-        local image_extensions = { '.png', '.jpg', '.jpeg', '.gif', '.webp', '.avif' }
+        local image_extensions = { '%.png$', '%.jpg$', '%.jpeg$', '%.gif$', '%.webp$', '%.avif$' }
         local is_image = false
         for _, ext in ipairs(image_extensions) do
             is_image = is_image or win_config.title[1][1]:match(ext)
