@@ -216,9 +216,16 @@ M.file_explorer = function()
 end
 
 -- Pick
+
 require('mini.pick').setup {
     mappings = {
         choose_marked = '<C-CR>',
+        choose_all = {
+            char = '<SC-CR>',
+            func = function()
+                vim.api.nvim_input '<C-a><C-CR>'
+            end,
+        },
     },
     options = {
         use_cache = true,
