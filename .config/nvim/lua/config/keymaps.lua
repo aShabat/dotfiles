@@ -25,7 +25,7 @@ vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]
 
 -- LSP
 
-M.set_lsp_keybinds = function(buf)
+require('config.plugins.lsp').set_lsp_on_attach(function(buf)
     local set = function(keys, func, desc)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
     end
@@ -43,7 +43,7 @@ M.set_lsp_keybinds = function(buf)
     set('<leader>D', minilsp 'type_definition', '[D]efinition')
     set('<leader>ds', minilsp 'document_symbol', '[D]ocument [S]ymbols')
     set('<leader>ws', minilsp 'workspace_symbol', '[W]orkspace [S]ymbols')
-end
+end)
 
 -- Git
 
