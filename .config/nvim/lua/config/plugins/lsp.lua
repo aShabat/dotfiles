@@ -1,4 +1,4 @@
-H = {}
+local H = {}
 H.saved_lsp_on_attach = function(_) end
 return {
     {
