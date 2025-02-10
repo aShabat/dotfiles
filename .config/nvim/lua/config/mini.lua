@@ -411,7 +411,7 @@ M.add_submod = function(opts)
     config.triggers[#config.triggers + 1] = { mode = 'n', keys = prefix }
     for _, key in ipairs(opts.keys) do
         if type(key.lhs) == 'string' then
-            vim.keymap.set('n', prefix .. key.lhs, key.rhs, { desc = key.desc })
+            vim.keymap.set('n', prefix .. key.lhs, key.rhs, { desc = key.desc, buffer = key.buffer })
             config.clues[#config.clues + 1] = {
                 mode = 'n',
                 keys = prefix .. key.lhs,
