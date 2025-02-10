@@ -83,6 +83,38 @@ require('config.plugins.git').set_git_on_attach(function(buf)
     set(']H', function()
         nav_hunk 'last'
     end)
+
+    require('config.mini').add_submod {
+        prefix = '<leader>gg',
+        keys = {
+            {
+                lhs = 'n',
+                rhs = function()
+                    nav_hunk 'next'
+                end,
+                desc = '[N]ext hunk',
+                buffer = buf,
+            },
+            {
+                lhs = 'p',
+                rhs = function()
+                    nav_hunk 'prev'
+                end,
+                desc = '[P]rev hunk',
+                buffer = buf,
+            },
+            {
+                lhs = 'h',
+                rhs = function()
+                    local line = vim.api.nvim_win_get_cursor(0)[1]
+                    gitsigns.stage_hunk { line, line }
+                end,
+                desc = 'Stage line',
+                buffer = buf,
+            },
+            { lhs = 'H', rhs = gitsigns.stage_hunk, desc = 'Stage hunk', buffer = buf },
+        },
+    }
 end)
 
 -- LuaSnip
