@@ -47,7 +47,7 @@ end)
 
 -- Git
 
-M.set_git_keybinds = function(buf)
+require('config.plugins.git').set_git_on_attach(function(buf)
     local set = function(keys, func, desc)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
     end
@@ -83,7 +83,7 @@ M.set_git_keybinds = function(buf)
     set(']H', function()
         nav_hunk 'last'
     end)
-end
+end)
 
 -- LuaSnip
 

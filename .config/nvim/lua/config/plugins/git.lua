@@ -1,3 +1,6 @@
+local H = {}
+H.saved_git_on_attach = function(_) end
+
 return {
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -13,7 +16,13 @@ return {
             algorithm = 'histogram',
         },
         on_attach = function(buf)
-            require('config.keymaps').set_git_keybinds(buf)
+            require('config.plugins.git').git_on_attach(buf)
         end,
     },
+    git_on_attach = function(buf)
+        H.saved_git_on_attach(buf)
+    end,
+    set_git_on_attach = function(func)
+        H.saved_git_on_attach = func
+    end,
 }
