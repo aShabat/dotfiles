@@ -3,6 +3,7 @@ local M = {}
 -- My
 
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
+vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
 
 -- TreeSitter
 
