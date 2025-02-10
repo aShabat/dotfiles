@@ -118,12 +118,32 @@ vim.keymap.set('n', '<leader>qc', '<CMD>cclose<CR>', { desc = '[Q]uickFix [C]los
 vim.keymap.set('n', '<leader>qn', '<CMD>cnext<CR>', { desc = '[Q]uickFix [N]ext' })
 vim.keymap.set('n', '<leader>qp', '<CMD>cprev<CR>', { desc = '[Q]uickFix [P]rev' })
 
+require('config.mini').add_submod {
+    prefix = '<leader>qq',
+    keys = {
+        { lhs = 'o', rhs = '<CMD>lclose<CR><CMD>copen<CR>', desc = '[Q]uickFix [O]pen' },
+        { lhs = 'c', rhs = '<CMD>cclose<CR>', desc = '[Q]uickFix [C]lose' },
+        { lhs = 'n', rhs = '<CMD>cnext<CR>', desc = '[Q]uickFix [N]ext' },
+        { lhs = 'p', rhs = '<CMD>cprev<CR>', desc = '[Q]uickFix [P]rev' },
+    },
+}
+
 -- LocList
 
 vim.keymap.set('n', '<leader>lo', '<CMD>cclose<CR><CMD>lopen<CR>', { desc = '[L]oclist [O]pen' })
 vim.keymap.set('n', '<leader>lc', '<CMD>lclose<CR>', { desc = '[L]oclist [C]lose' })
 vim.keymap.set('n', '<leader>ln', '<CMD>lnext<CR>', { desc = '[L]oclist [N]ext' })
 vim.keymap.set('n', '<leader>lp', '<CMD>lprev<CR>', { desc = '[L]oclist [P]rev' })
+
+require('config.mini').add_submod {
+    prefix = '<leader>ll',
+    keys = {
+        { lhs = 'o', rhs = '<CMD>cclose<CR><CMD>lopen<CR>', desc = '[L]oclist [O]pen' },
+        { lhs = 'c', rhs = '<CMD>lclose<CR>', desc = '[L]oclist [C]lose' },
+        { lhs = 'n', rhs = '<CMD>lnext<CR>', desc = '[L]oclist [N]ext' },
+        { lhs = 'p', rhs = '<CMD>lprev<CR>', desc = '[L]oclist [P]rev' },
+    },
+}
 
 -- WinTab
 
