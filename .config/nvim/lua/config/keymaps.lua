@@ -18,7 +18,21 @@ vim.keymap.set('n', '<leader>fg', MiniPick.builtin.grep_live, { desc = '[F]ind [
 
 vim.keymap.set('n', '<leader>e', require('config.mini').file_explorer, { desc = 'file [E]xplorer' })
 
-vim.keymap.set('n', '<leader>mnh', MiniNotify.show_history, { desc = '[M]ini.[N]otify [H]istory' })
+vim.keymap.set('n', '<leader>mnh', function()
+    local editor_width = vim.o.columns
+    local editor_height = vim.o.lines
+    local win = vim.api.nvim_open_win(vim.api.nvim_create_buf(0, 1), true, {
+        relative = 'editor',
+        width = math.floor(editor_width * 0.9),
+        height = math.floor(editor_height * 0.8),
+        row = math.floor(editor_height * 0.05),
+        col = math.floor(editor_width * 0.05),
+        border = 'single',
+        title = { { 'Notification History', 'MiniFilesTitle' } },
+    })
+    MiniNotify.show_history()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<CMD>q<CR>', {})
+end, { desc = '[M]ini.[N]otify [H]istory' })
 
 vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim, { desc = '[M]ini.[T]rail[S]pace' })
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]ini.[T]rim[L]ines' })
