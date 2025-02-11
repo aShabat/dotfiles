@@ -88,6 +88,16 @@ require('config.plugins.git').set_git_on_attach(function(buf)
         prefix = '<leader>gg',
         keys = {
             {
+                lhs = 'j',
+                rhs = 'j',
+                buffer = buf,
+            },
+            {
+                lhs = 'k',
+                rhs = 'k',
+                buffer = buf,
+            },
+            {
                 lhs = 'n',
                 rhs = function()
                     nav_hunk 'next'
@@ -117,6 +127,18 @@ require('config.plugins.git').set_git_on_attach(function(buf)
         },
     }
 end)
+
+vim.api.nvim_create_user_command('GitHunksInit', function()
+    vim.api.nvim_create_autocmd('User', {
+        pattern = 'LazyLoad',
+        callback = function(args)
+            if args.data == 'mini.nvim' then
+                vim.notify '"mini.nvim" is loaded'
+                vim.api.nvim_input ' gg'
+            end
+        end,
+    })
+end, {})
 
 -- LuaSnip
 
