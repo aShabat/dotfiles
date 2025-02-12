@@ -153,7 +153,7 @@ require('config.plugins.git').set_git_on_attach(function(buf)
                 buffer = buf,
             },
             { lhs = 'H', rhs = gitsigns.stage_hunk, desc = 'Stage hunk', buffer = buf },
-            { lhs = '<C-Q>', rhs = '<CMD>q<CR>', desc = 'Quit', buffer = buf },
+            { lhs = 'q', rhs = '<CMD>q<CR>', desc = 'Quit', buffer = buf },
         },
     }
 end)
