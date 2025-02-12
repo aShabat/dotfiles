@@ -37,6 +37,22 @@ end, { desc = '[M]ini.[N]otify [H]istory' })
 vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim, { desc = '[M]ini.[T]rail[S]pace' })
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]ini.[T]rim[L]ines' })
 
+vim.api.nvim_create_user_command('MSWrite', function(args)
+    local opts = {
+        force = args.bang,
+    }
+    local name = args.fargs[1]
+    if not name then
+        if vim.api.nvim_get_vvar 'this_session' == '' then
+            MiniSessions.write(MiniSessions.config.file, opts)
+        else
+            MiniSessions.write(nil, opts)
+        end
+    else
+        MiniSessions.write(name, opts)
+    end
+end, { nargs = '?', bang = true })
+
 -- LSP
 
 require('config.plugins.lsp').set_lsp_on_attach(function(buf)

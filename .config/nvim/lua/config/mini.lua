@@ -424,4 +424,10 @@ M.add_submod = function(opts)
     MiniClue.setup(config)
 end
 
+-- Sessions
+
+require('mini.sessions').setup {
+    files = '.session.vim',
+}
+
 return M
