@@ -239,6 +239,8 @@ require('mini.pick').setup {
     },
 }
 
+vim.ui.select = MiniPick.ui_select
+
 H.pick_dirs_action = function()
     local opts = {
         mappings = {
