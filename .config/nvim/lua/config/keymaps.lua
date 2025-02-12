@@ -224,6 +224,10 @@ require('config.mini').add_submod {
     },
 }
 
+vim.keymap.set('n', '<leader>ld', function()
+    vim.diagnostic.setloclist {}
+end)
+
 -- WinTab
 
 vim.keymap.set('n', '<C-Tab>', function()
