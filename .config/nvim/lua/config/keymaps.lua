@@ -21,7 +21,7 @@ vim.keymap.set('n', '<leader>e', require('config.mini').file_explorer, { desc = 
 vim.keymap.set('n', '<leader>mnh', function()
     local editor_width = vim.o.columns
     local editor_height = vim.o.lines
-    local win = vim.api.nvim_open_win(vim.api.nvim_create_buf(0, 1), true, {
+    local win = vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
         relative = 'editor',
         width = math.floor(editor_width * 0.9),
         height = math.floor(editor_height * 0.8),
