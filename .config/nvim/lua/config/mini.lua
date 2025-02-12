@@ -416,7 +416,7 @@ M.add_submod = function(opts)
                 mode = 'n',
                 keys = prefix .. key.lhs,
                 desc = key.desc,
-                postkeys = prefix,
+                postkeys = key.quit and '' or prefix,
             }
         end
     end
