@@ -1,9 +1,15 @@
 local M = {}
+local H = {}
 
 -- My
 
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
 vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
+
+-- Hydra
+
+H.hydras = {}
+local Hydra = require 'hydra'
 
 -- TreeSitter
 
@@ -76,12 +82,51 @@ require('config.plugins.lsp').set_lsp_on_attach(function(buf)
 end)
 
 -- Git
+local gitsigns = require 'gitsigns'
+local nav_hunk = function(direction)
+    gitsigns.nav_hunk(direction, {})
+end
+
+H.hydras.git = Hydra {
+    name = 'LazyGit',
+    mode = 'n',
+    config = {
+        invoke_on_body = true,
+        color = 'pink',
+    },
+    heads = {
+        {
+            'n',
+            function()
+                nav_hunk 'next'
+            end,
+            {},
+        },
+        {
+            'p',
+            function()
+                nav_hunk 'prev'
+            end,
+            {},
+        },
+        { 'q', '<CMD>q<CR>', {} },
+        {
+            'h',
+            function()
+                local line = vim.api.nvim_win_get_cursor(0)[1]
+                gitsigns.stage_hunk { line, line }
+            end,
+            {},
+        },
+        { 'H', gitsigns.stage_hunk, {} },
+        -- { 'P', gitsigns.preview_hunk, {} },
+    },
+}
 
 require('config.plugins.git').set_git_on_attach(function(buf)
     local set = function(keys, func, desc)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
     end
-    local gitsigns = require 'gitsigns'
 
     set('<leader>gp', gitsigns.preview_hunk_inline, '[G]it [P]review')
     set('<leader>gb', gitsigns.toggle_current_line_blame)
@@ -96,11 +141,6 @@ require('config.plugins.git').set_git_on_attach(function(buf)
     end, '[G]it stage line ')
     set('ghH', gitsigns.stage_hunk, '[G]it stage [H]unk')
 
-    local nav_hunk = function(direction)
-        gitsigns.nav_hunk(direction, {
-            preview = true,
-        })
-    end
     set(']h', function()
         nav_hunk 'next'
     end)
@@ -113,55 +153,14 @@ require('config.plugins.git').set_git_on_attach(function(buf)
     set(']H', function()
         nav_hunk 'last'
     end)
-
-    require('config.mini').add_submod {
-        prefix = '<leader>gg',
-        keys = {
-            {
-                lhs = 'j',
-                rhs = 'j',
-                buffer = buf,
-            },
-            {
-                lhs = 'k',
-                rhs = 'k',
-                buffer = buf,
-            },
-            {
-                lhs = 'n',
-                rhs = function()
-                    nav_hunk 'next'
-                end,
-                desc = '[N]ext hunk',
-                buffer = buf,
-            },
-            {
-                lhs = 'p',
-                rhs = function()
-                    nav_hunk 'prev'
-                end,
-                desc = '[P]rev hunk',
-                buffer = buf,
-            },
-            {
-                lhs = 'h',
-                rhs = function()
-                    local line = vim.api.nvim_win_get_cursor(0)[1]
-                    gitsigns.stage_hunk { line, line }
-                end,
-                desc = 'Stage line',
-                buffer = buf,
-            },
-            { lhs = 'H', rhs = gitsigns.stage_hunk, desc = 'Stage hunk', buffer = buf },
-            { lhs = 'q', rhs = '<CMD>q<CR>', desc = 'Quit', buffer = buf },
-        },
-    }
+    set('<leader>gg', function()
+        H.hydras.git:activate()
+    end)
 end)
 
 -- only for lazygit
 vim.api.nvim_create_user_command('LazyGitEdit', function()
-    vim.fn.getcharstr()
-    vim.api.nvim_input(vim.g.mapleader .. 'gg')
+    H.hydras.git:activate()
 end, {})
 
 -- LuaSnip
@@ -197,13 +196,16 @@ vim.keymap.set('n', '<leader>qc', '<CMD>cclose<CR>', { desc = '[Q]uickFix [C]los
 vim.keymap.set('n', '<leader>qn', '<CMD>cnext<CR>', { desc = '[Q]uickFix [N]ext' })
 vim.keymap.set('n', '<leader>qp', '<CMD>cprev<CR>', { desc = '[Q]uickFix [P]rev' })
 
-require('config.mini').add_submod {
-    prefix = '<leader>qq',
-    keys = {
-        { lhs = 'o', rhs = '<CMD>lclose<CR><CMD>copen<CR>', desc = '[Q]uickFix [O]pen' },
-        { lhs = 'c', rhs = '<CMD>cclose<CR>', desc = '[Q]uickFix [C]lose' },
-        { lhs = 'n', rhs = '<CMD>cnext<CR>', desc = '[Q]uickFix [N]ext' },
-        { lhs = 'p', rhs = '<CMD>cprev<CR>', desc = '[Q]uickFix [P]rev' },
+H.hydras.qf = Hydra {
+    name = 'QFlist',
+    mode = 'n',
+    body = '<leader>qq',
+    config = {},
+    heads = {
+        { 'n', '<CMD>cnext<CR>', {} },
+        { 'p', '<CMD>cprev<CR>', {} },
+        { 'o', '<CMD>copen<CR>', {} },
+        { 'c', '<CMD>cclose<CR>', { exit = true } },
     },
 }
 
@@ -214,13 +216,16 @@ vim.keymap.set('n', '<leader>lc', '<CMD>lclose<CR>', { desc = '[L]oclist [C]lose
 vim.keymap.set('n', '<leader>ln', '<CMD>lnext<CR>', { desc = '[L]oclist [N]ext' })
 vim.keymap.set('n', '<leader>lp', '<CMD>lprev<CR>', { desc = '[L]oclist [P]rev' })
 
-require('config.mini').add_submod {
-    prefix = '<leader>ll',
-    keys = {
-        { lhs = 'o', rhs = '<CMD>cclose<CR><CMD>lopen<CR>', desc = '[L]oclist [O]pen' },
-        { lhs = 'c', rhs = '<CMD>lclose<CR>', desc = '[L]oclist [C]lose' },
-        { lhs = 'n', rhs = '<CMD>lnext<CR>', desc = '[L]oclist [N]ext' },
-        { lhs = 'p', rhs = '<CMD>lprev<CR>', desc = '[L]oclist [P]rev' },
+H.hydras.loc = Hydra {
+    name = 'Loclist',
+    mode = 'n',
+    body = '<leader>ll',
+    config = {},
+    heads = {
+        { 'n', '<CMD>lnext<CR>', {} },
+        { 'p', '<CMD>lprev<CR>', {} },
+        { 'o', '<CMD>lopen<CR>', {} },
+        { 'c', '<CMD>lclose<CR>', { exit = true } },
     },
 }
 

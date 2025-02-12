@@ -400,30 +400,6 @@ miniclue.setup {
     },
 }
 
-M.add_submod = function(opts)
-    if not opts.prefix then return end
-    local config = vim.tbl_deep_extend('force', {}, MiniClue.config)
-
-    if type(opts.prefix) ~= 'string' then return end
-    local prefix = opts.prefix
-    if type(opts.keys) ~= 'table' then return end
-
-    config.triggers[#config.triggers + 1] = { mode = 'n', keys = prefix }
-    for _, key in ipairs(opts.keys) do
-        if type(key.lhs) == 'string' then
-            vim.keymap.set('n', prefix .. key.lhs, key.rhs, { desc = key.desc, buffer = key.buffer })
-            config.clues[#config.clues + 1] = {
-                mode = 'n',
-                keys = prefix .. key.lhs,
-                desc = key.desc,
-                postkeys = key.quit and '' or prefix,
-            }
-        end
-    end
-
-    MiniClue.setup(config)
-end
-
 -- Sessions
 
 require('mini.sessions').setup {
