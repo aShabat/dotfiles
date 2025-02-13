@@ -370,8 +370,6 @@ require('mini.surround').setup {}
 local miniclue = require 'mini.clue'
 miniclue.setup {
     triggers = {
-        { mode = 'n', keys = 'g' },
-        { mode = 'x', keys = 'g' },
         { mode = 'n', keys = '`' },
         { mode = 'n', keys = "'" },
         { mode = 'x', keys = "'" },
@@ -405,6 +403,7 @@ miniclue.setup {
 
 require('mini.sessions').setup {
     file = '.session.vim',
+    autoread = true,
 }
 
 return M
