@@ -84,7 +84,10 @@ end)
 -- Git
 local gitsigns = require 'gitsigns'
 local nav_hunk = function(direction)
-    gitsigns.nav_hunk(direction, {})
+    vim.api.nvim_feedkeys('lh', 't', true)
+    vim.schedule(function()
+        gitsigns.nav_hunk(direction, {})
+    end)
 end
 
 H.hydras.git = Hydra {
@@ -119,7 +122,7 @@ H.hydras.git = Hydra {
             {},
         },
         { 'H', gitsigns.stage_hunk, {} },
-        -- { 'P', gitsigns.preview_hunk, {} },
+        { 'P', gitsigns.preview_hunk, {} },
     },
 }
 
@@ -128,7 +131,7 @@ require('config.plugins.git').set_git_on_attach(function(buf)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
     end
 
-    set('<leader>gp', gitsigns.preview_hunk_inline, '[G]it [P]review')
+    set('<leader>gp', gitsigns.preview_hunk, '[G]it [P]review')
     set('<leader>gb', gitsigns.toggle_current_line_blame)
     vim.keymap.set('v', 'gh', function()
         local line_start = vim.fn.getpos("'<")[2]
