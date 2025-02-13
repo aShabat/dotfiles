@@ -405,7 +405,7 @@ miniclue.setup {
 -- Sessions
 
 require('mini.sessions').setup {
-    files = '.session.vim',
+    file = '.session.vim',
 }
 
 return M

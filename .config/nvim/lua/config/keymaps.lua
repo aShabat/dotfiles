@@ -56,6 +56,15 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
         end
     else
         MiniSessions.write(name, opts)
+        if local_session == 1 then
+            local cmd = {
+                'ln',
+                '-s',
+                MiniSessions.config.directory .. '/' .. name,
+                vim.fn.getcwd() .. '/' .. MiniSessions.config.file,
+            }
+            vim.system(cmd, {}, nil):wait()
+        end
     end
 end, { nargs = '?', bang = true })
 
@@ -232,6 +241,7 @@ H.hydras.loc = Hydra {
     },
 }
 
+H.diagnostic_loclist = {}
 vim.keymap.set('n', '<leader>ld', function()
     vim.diagnostic.setloclist {}
 end)
