@@ -385,7 +385,6 @@ miniclue.setup {
         { mode = 'x', keys = 'z' },
     },
     clues = {
-        miniclue.gen_clues.g(),
         miniclue.gen_clues.marks(),
         miniclue.gen_clues.registers(),
         miniclue.gen_clues.windows {
