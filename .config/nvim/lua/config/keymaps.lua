@@ -56,6 +56,8 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
         end
     else
         MiniSessions.write(name, opts)
+        local local_session =
+            vim.fn.confirm('Link project in ' .. vim.fn.getcwd() .. ' to session "' .. name .. '"?', '&Yes\n&No')
         if local_session == 1 then
             local cmd = {
                 'ln',
@@ -241,7 +243,6 @@ H.hydras.loc = Hydra {
     },
 }
 
-H.diagnostic_loclist = {}
 vim.keymap.set('n', '<leader>ld', function()
     vim.diagnostic.setloclist {}
 end)
