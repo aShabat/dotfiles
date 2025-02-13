@@ -3,6 +3,7 @@ set -gx VISUAL nvim
 set -gx TERMINAL wezterm
 set -gx PAGER nvimpager
 set -gx GOPATH /home/anton/.local
+set -gx BROWSER firefox-developer-edition
 
 fish_add_path -a /home/anton/.local/bin /home/anton/.cargo/bin
 
