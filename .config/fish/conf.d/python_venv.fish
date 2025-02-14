@@ -20,10 +20,12 @@ function _python_venv_not_active
     end
 end
 
-function _activate_python_venv -v PWD
+function _python_venv_main -v PWD
     if test -n $_python_venv_dir
         _python_venv_active
     else
         _python_venv_not_active
     end
 end
+
+_python_venv_main
