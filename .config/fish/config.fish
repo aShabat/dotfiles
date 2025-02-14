@@ -2,10 +2,10 @@ set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx TERMINAL wezterm
 set -gx PAGER nvimpager
-set -gx GOPATH /home/anton/.local
+set -gx GOPATH /home/anton/.local/go
 set -gx BROWSER firefox-developer-edition
 
-fish_add_path -a /home/anton/.local/bin /home/anton/.cargo/bin
+fish_add_path -a /home/anton/.local/bin /home/anton/.cargo/bin /home/anton/.local/go/bin
 
 abbr -a lg lazygit
 abbr -a s systemctl
