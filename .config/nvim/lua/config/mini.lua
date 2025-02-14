@@ -211,7 +211,11 @@ vim.api.nvim_create_autocmd('User', {
 M.file_explorer = function()
     H.files_show_dot = false
     H.hide_preview()
-    MiniFiles.open(vim.api.nvim_buf_get_name(0), false)
+    local path = vim.api.nvim_buf_get_name(0)
+    path = vim.fs.normalize(path)
+    path = vim.fn.filereadable(path) == 1 and path or vim.fs.dirname(path)
+    path = vim.fn.isdirectory(path) == 1 and path or vim.fn.getcwd()
+    MiniFiles.open(path, false)
     MiniFiles.trim_right()
 end
 
