@@ -1,6 +1,6 @@
-set _python_venv_dir ""
+set -g _python_venv_dir ""
 function _python_venv_active
-    if not string match $_python_venv_dir $PWD
+    if not string match "$_python_venv_dir*" $PWD >/dev/null
         echo "Left $_python_venv_dir Python virtual environment"
         deactivate
         set _python_venv_dir ""
@@ -8,15 +8,15 @@ function _python_venv_active
 end
 
 function _python_venv_not_active
-    set -f _pwd $PWD
-    while test "$PWD" != "$HOME"
-        if test -d ".python"
+    set -f path $PWD
+    while test "$path" != "/"
+        if test -d "$path/.python"
             set _python_venv_dir $PWD
             source "$_python_venv_dir/.python/bin/activate.fish"
             echo "Entered $_python_venv_dir Python virtual environment"
             return
         end
-        cd ..
+        set path (path dirname $path)
     end
 end
 
