@@ -4,7 +4,12 @@ local H = {}
 -- My
 
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
+
 vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
+
+vim.keymap.set('n', 'zw', '<CMD>set invwrap<CR>', { desc = 'Toggle [W]rap' })
+vim.keymap.set('n', 'j', 'gj', { desc = 'wrap-respecting j' })
+vim.keymap.set('n', 'k', 'gk', { desc = 'wrap-respecting k' })
 
 -- Hydra
 
