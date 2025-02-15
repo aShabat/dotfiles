@@ -201,8 +201,8 @@ vim.api.nvim_create_autocmd('User', {
             with_virtual_padding = true,
         })
 
-        win_config.height = 40
-        win_config.width = 100
+        win_config.height = 15
+        win_config.width = 125
         vim.api.nvim_win_set_config(win_id, win_config)
         H.preview.image:render()
     end,
