@@ -8,8 +8,6 @@ vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
 vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
 
 vim.keymap.set('n', 'zw', '<CMD>set invwrap<CR>', { desc = 'Toggle [W]rap' })
-vim.keymap.set('n', 'j', 'gj', { desc = 'wrap-respecting j' })
-vim.keymap.set('n', 'k', 'gk', { desc = 'wrap-respecting k' })
 
 -- Hydra
 
@@ -76,8 +74,7 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
 end, { nargs = '?', bang = true })
 
 -- LSP
-
-require('config.plugins.lsp').set_lsp_on_attach(function(buf)
+M.lsp_keys_setup = function(buf)
     local set = function(keys, func, desc)
         vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
     end
@@ -95,7 +92,8 @@ require('config.plugins.lsp').set_lsp_on_attach(function(buf)
     set('<leader>D', minilsp 'type_definition', '[D]efinition')
     set('<leader>ds', minilsp 'document_symbol', '[D]ocument [S]ymbols')
     set('<leader>ws', minilsp 'workspace_symbol', '[W]orkspace [S]ymbols')
-end)
+end
+require('config.plugins.lsp').set_lsp_on_attach(M.lsp_keys_setup)
 
 -- Git
 local gitsigns = require 'gitsigns'

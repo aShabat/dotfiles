@@ -32,7 +32,15 @@ return {
                 },
                 bashls = {},
                 ts_ls = {},
-                basedpyright = {},
+                basedpyright = {
+                    basedpyright = {
+                        analysis = {
+                            diagnosticSeverityOverrides = {
+                                reportUnusedExpression = 'none',
+                            },
+                        },
+                    },
+                },
                 clangd = {},
             },
         },
