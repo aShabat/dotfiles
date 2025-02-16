@@ -1,9 +1,0 @@
-Plugins
-    mini.pick
-        thinking about changing lsp pickers to auto jump to single result
-    snippets
-        now learn to use it good
-
-My
-    add mini.picker to pick a directory and open it in mini.files
-    maybe allow to switch between it and mini.pick.files

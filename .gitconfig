@@ -13,3 +13,12 @@
 [credential "https://gist.github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
+[diff]
+    external = difft
+;     tool = difftastic
+; [difftool "difftastic"]
+;     cmd = difft "$MERGED" "$LOCAL" "abcdef1" "100644" "$REMOTE" "abcdef2" "100644"
+; [difftool]
+;     prompt = false
+; [pager]
+;     difftool = true

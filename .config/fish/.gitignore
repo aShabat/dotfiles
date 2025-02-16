@@ -1,5 +1,5 @@
 completions
-conf.d
+conf.d/_*
 themes
 *tmp*
 functions/tide

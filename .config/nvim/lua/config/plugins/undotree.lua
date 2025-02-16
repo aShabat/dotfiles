@@ -1,8 +1,8 @@
 return {
-	{
-		'mbbill/undotree',
-		init = function()
-			vim.g.undotree_SetFocusWhenToggle = 1
-		end,
-	},
+    {
+        'mbbill/undotree',
+        config = function()
+            vim.g.undotree_SetFocusWhenToggle = 1
+        end,
+    },
 }

@@ -1,0 +1,8 @@
+git:
+  paging:
+    externalDiffCommand: difft --color=always --display=inline --syntax-highlight=on --tab-width=2
+os:
+  edit: "nvim {{filename}} -Rc LazyGitEdit"
+  open: "wezterm cli spawn -- nvim {{filename}}"
+  openDirInEditor: "wezterm cli spawn -- nvim {{filename}}"
+promptToReturnFromSubprocess: false

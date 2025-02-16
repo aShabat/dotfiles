@@ -1,34 +1,37 @@
 -- Deps
-local path_package = vim.fn.stdpath'data' .. '/site/'
+local path_package = vim.fn.stdpath 'data' .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
 if not vim.loop.fs_stat(mini_path) then
-    vim.cmd'echo "Installing `mini.nvim`" | redraw'
+    vim.cmd 'echo "Installing `mini.nvim`" | redraw'
     local clone_cmd = {
-        'git', 'clone', '--filter=blob:none',
-        'https://github.com/echasnovski/mini.nvim', mini_path,
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/echasnovski/mini.nvim',
+        mini_path,
     }
     vim.fn.system(clone_cmd)
-    vim.cmd'packadd mini.nvim | helptags ALL'
-    vim.cmd'echo "Installed `mini.nvim`" | redraw'
+    vim.cmd 'packadd mini.nvim | helptags ALL'
+    vim.cmd 'echo "Installed `mini.nvim`" | redraw'
 end
 
-require'mini.deps'.setup{ path = { package = path_package } }
+require('mini.deps').setup { path = { package = path_package } }
 
 -- Base16
-if vim.fn.filereadable(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua') ~= 0 then
-    dofile(vim.fn.stdpath'config' .. '/lua/config/minibase16.lua')
+if vim.fn.filereadable(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua') ~= 0 then
+    dofile(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua')
 end
 
 -- Hipatterns
 
-local hipatterns = require'mini.hipatterns'
+local hipatterns = require 'mini.hipatterns'
 
-hipatterns.setup{
+hipatterns.setup {
     highlighters = {
-        fixme     = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
-        hack      = { pattern = 'HACK', group = 'MiniHipatternsHack' },
-        todo      = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
-        note      = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+        fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
+        hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
+        todo = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
+        note = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
 
         hex_color = hipatterns.gen_highlighter.hex_color(),
     },
@@ -36,29 +39,29 @@ hipatterns.setup{
 
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
-now(function ()
-    add'folke/snacks.nvim'
-    require'snacks'.setup{
+now(function()
+    add 'folke/snacks.nvim'
+    require('snacks').setup {
         bigfile = { enable = true },
         quickfile = { enable = true },
     }
 end)
 
-now(function ()
-    add'nvim-treesitter/nvim-treesitter'
-    require'nvim-treesitter.configs'.setup{
-        auto_install = true,
+now(function()
+    add 'nvim-treesitter/nvim-treesitter'
+    require('nvim-treesitter.configs').setup {
+        ensure_installed = 'all',
         highlight = {
             enable = true,
         },
     }
-    add'nvim-treesitter/nvim-treesitter-context'
-    require'treesitter-context'.setup{}
+    add 'nvim-treesitter/nvim-treesitter-context'
+    require('treesitter-context').setup {}
 end)
 
-later(function ()
-    add'ggandor/leap.nvim'
-    local leap = require'leap'
+later(function()
+    add 'ggandor/leap.nvim'
+    local leap = require 'leap'
     leap.opts.equivalence_classes = { ' \t\r\n', '({[', ']})', '\'"`' }
     leap.opts.safe_labels = 'fnut/SFNLHMUGTZ?'
 end)

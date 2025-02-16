@@ -6,6 +6,7 @@ function set_custom_keys
     bind ctrl-right forward-word
     bind ctrl-left backward-word
     bind tab complete
+    bind shift-tab complete-and-search
     bind ctrl-s pager-toggle-search
     bind up up-or-search
     bind down down-or-search

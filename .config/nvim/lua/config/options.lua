@@ -15,7 +15,7 @@ vim.opt.softtabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.smartindent = true
 
-vim.opt.wrap = false
+vim.opt.wrap = true
 
 vim.opt.incsearch = true
 vim.opt.hlsearch = true
@@ -28,7 +28,7 @@ vim.opt.undofile = true
 
 vim.opt.termguicolors = true
 
-vim.opt.signcolumn = 'auto'
+vim.opt.signcolumn = 'auto:9'
 
 vim.opt.clipboard = ''
 
