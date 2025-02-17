@@ -36,13 +36,6 @@ require('mini.comment').setup {}
 require('mini.icons').setup {}
 MiniIcons.mock_nvim_web_devicons()
 
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesActionRename',
-    callback = function(event)
-        Snacks.rename.on_rename_file(event.data.from, event.data.to)
-    end,
-})
-
 -- Git
 require('mini.git').setup {}
 
@@ -164,6 +157,13 @@ require('mini.files').setup {
         go_in_plus = '',
     },
 }
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesActionRename',
+    callback = function(event)
+        Snacks.rename.on_rename_file(event.data.from, event.data.to)
+    end,
+})
 
 vim.api.nvim_create_autocmd('User', {
     pattern = 'MiniFilesBufferCreate',
