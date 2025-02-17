@@ -4,6 +4,7 @@ return {
         '3rd/image.nvim',
         'nvim-treesitter/nvim-treesitter',
         'nvim-treesitter/nvim-treesitter-textobjects',
+        'snacks.nvim',
     },
     config = function()
         require 'config.mini'
