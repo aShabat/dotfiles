@@ -86,3 +86,21 @@ H.default_notebook = [[
     "nbformat_minor": 5
   }
 ]]
+
+vim.api.nvim_create_autocmd('User', {
+    pattern = 'LuasnipPreExpand',
+    callback = function()
+        local snippet = require('luasnip').session.event_node
+        local docstring = snippet:get_docstring()
+        vim.notify(table.concat(docstring, '\n'))
+        if not docstring[#docstring]:match '%$0$' then
+            local luasnip = require 'luasnip'
+            local s = luasnip.s
+            local i = luasnip.i
+            local t = luasnip.t
+            local sur = s('surrounding snippet', { t { '', '' }, i(0) })
+            -- vim.notify(table.concat(sur:get_docstring(), '\n'))
+            luasnip.snip_expand(sur)
+        end
+    end,
+})
