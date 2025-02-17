@@ -1,3 +1,5 @@
+local H = {}
+
 -- Enter triggers
 
 -- vim.api.nvim_create_autocmd('VimEnter', {
