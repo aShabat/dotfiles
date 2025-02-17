@@ -359,6 +359,8 @@ require('mini.ai').setup {
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
     },
+    search_method = 'cover',
+    n_lines = math.huge,
 }
 
 -- Bracketed
