@@ -1,5 +1,4 @@
 require('quarto').activate()
--- require('otter').activate()
 
 -- Keymaps
 require('config.keymaps').lsp_keys_setup(0)
