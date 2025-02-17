@@ -11,6 +11,13 @@ local set = function(lhs, rhs, desc, opts)
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+set(']C', function()
+    MiniAi.move_cursor('left', 'i', 'C', { search_method = 'next' })
+end, 'next [C]ell')
+set('[C', function()
+    MiniAi.move_cursor('left', 'i', 'C', { search_method = 'prev' })
+end, 'prev [C]ell')
+
 set('<leader>re', '<CMD>MoltenEvaluateOperator<CR>', '[R]unner [E]valuate')
 set('<leater>rr', '<CMD>MoltenReevaluateCell<CR>', '[R]unner [R]eevaluate')
 set('<leader>rmd', '<CMD>MoltenDelete<CR>', '[R]unner [M]olten [D]elete')
