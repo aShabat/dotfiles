@@ -1,2 +1,3 @@
 todo
 .session.vim
+.config/nvim/.luarc.json
