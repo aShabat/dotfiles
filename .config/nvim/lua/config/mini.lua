@@ -353,11 +353,14 @@ require('mini.move').setup {
 require('mini.splitjoin').setup {}
 
 -- AI
-require('mini.ai').setup {
+
+local ai = require 'mini.ai'
+ai.setup {
     custom_textobjects = {
         -- Whole region
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
+        C = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
     },
     search_method = 'cover',
     n_lines = math.huge,
