@@ -1,9 +1,0 @@
-{
-    "diagnostics.globals": [
-        "MiniPick",
-        "MiniNotify",
-        "MiniTrailspace",
-        "MiniSessions",
-        "MiniExtra"
-    ]
-}
