@@ -227,7 +227,7 @@ H.file_explorer = function()
     H.hide_preview()
     local path = vim.api.nvim_buf_get_name(0)
     path = vim.fs.normalize(path)
-    if vim.fn.filereadable(path) == 1 then
+    if vim.fn.filereadable(path) == 0 then
         path = vim.fs.dirname(path)
         if vim.fn.isdirectory(path) == 0 then path = vim.fn.getcwd() end
     end
