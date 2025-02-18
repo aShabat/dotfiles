@@ -16,8 +16,6 @@ local Hydra = require 'hydra'
 
 -- TreeSitter
 
-vim.keymap.set('n', '<SC-U>', require('treesitter-context').go_to_context)
-
 -- Mini
 
 vim.keymap.set('n', '<leader>ff', MiniPick.registry.files, { desc = '[F]ind [F]iles' })
