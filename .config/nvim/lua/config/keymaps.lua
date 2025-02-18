@@ -82,14 +82,6 @@ vim.keymap.set({ 's', 'i' }, '<c-k>', function()
     if ls.choice_active() then ls.change_choice() end
 end)
 
--- UndoTree
-
-vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>', { desc = '[U]ndo [T]ree' })
-
--- Suda
-
-vim.api.nvim_create_user_command('W', 'SudaWrite', {})
-
 -- QuickFix
 
 vim.keymap.set('n', '<leader>qo', '<CMD>lclose<CR><CMD>copen<CR>', { desc = '[Q]uickFix [O]pen' })
