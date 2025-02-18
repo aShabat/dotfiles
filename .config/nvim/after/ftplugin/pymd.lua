@@ -1,7 +1,7 @@
 require('quarto').activate()
 
 -- Keymaps
-require('config.keymaps').lsp_keys_setup(0)
+require('config.plugins.lsp').lsp_keymaps {}
 
 local set = function(lhs, rhs, desc, opts)
     opts = vim.tbl_deep_extend('force', { desc = desc, silent = true, buffer = 0 }, opts or {})

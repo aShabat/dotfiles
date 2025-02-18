@@ -73,28 +73,6 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
     end
 end, { nargs = '?', bang = true })
 
--- LSP
-M.lsp_keys_setup = function(buf)
-    local set = function(keys, func, desc)
-        vim.keymap.set('n', keys, func, { buffer = buf, desc = desc })
-    end
-    local minilsp = function(scope)
-        return function()
-            MiniExtra.pickers.lsp { scope = scope }
-        end
-    end
-    set('<leader>rn', vim.lsp.buf.rename)
-    set('<leader>ca', require('fastaction').code_action, '[C]ode [A]ctions')
-    set('gd', minilsp 'definition', '[G]et [D]efinition')
-    set('gD', vim.lsp.buf.declaration, '[G]et [D]eclaration')
-    set('gr', minilsp 'references', '[G]et [R]eferences')
-    set('gI', minilsp 'implementation', '[G]et [I]mplementation')
-    set('<leader>D', minilsp 'type_definition', '[D]efinition')
-    set('<leader>ds', minilsp 'document_symbol', '[D]ocument [S]ymbols')
-    set('<leader>ws', minilsp 'workspace_symbol', '[W]orkspace [S]ymbols')
-end
-require('config.plugins.lsp').set_lsp_on_attach(M.lsp_keys_setup)
-
 -- Git
 local gitsigns = require 'gitsigns'
 local nav_hunk = function(direction)
