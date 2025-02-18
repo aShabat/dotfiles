@@ -14,8 +14,6 @@ vim.keymap.set('n', 'zw', '<CMD>set invwrap<CR>', { desc = 'Toggle [W]rap' })
 H.hydras = {}
 local Hydra = require 'hydra'
 
--- TreeSitter
-
 -- Mini
 
 vim.keymap.set('n', '<leader>ff', MiniPick.registry.files, { desc = '[F]ind [F]iles' })
