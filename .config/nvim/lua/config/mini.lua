@@ -201,8 +201,22 @@ vim.api.nvim_create_autocmd('User', {
             with_virtual_padding = true,
         })
 
-        win_config.height = 15
-        win_config.width = 125
+        local max_height_percentage = 0.9
+        local max_width_percentage = 0.5
+        local term_size = require('image.utils').term.get_size()
+        local height = math.ceil(H.preview.image.image_height / term_size.cell_height)
+        local width = math.ceil(H.preview.image.image_width / term_size.cell_width)
+        if height > max_height_percentage * vim.o.lines then
+            width = math.ceil(width * vim.o.lines * max_height_percentage / height)
+            height = math.ceil(vim.o.lines * max_height_percentage)
+        end
+        if width > max_width_percentage * vim.o.columns then
+            height = math.ceil(height * vim.o.columns * max_width_percentage / width)
+            width = math.ceil(max_width_percentage * vim.o.columns)
+        end
+
+        win_config.height = height
+        win_config.width = width
         vim.api.nvim_win_set_config(win_id, win_config)
         H.preview.image:render()
     end,
