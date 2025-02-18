@@ -2,9 +2,9 @@ local H = {}
 
 local gitsigns = require 'gitsigns'
 local nav_hunk = function(direction)
-    vim.api.nvim_feedkeys('lh', 't', true)
+    vim.api.nvim_feedkeys('jk', 't', true)
     vim.schedule(function()
-        gitsigns.nav_hunk(direction, {})
+        gitsigns.nav_hunk(direction, { target = 'all' })
     end)
 end
 
