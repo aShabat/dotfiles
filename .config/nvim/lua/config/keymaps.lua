@@ -193,11 +193,6 @@ vim.keymap.set({ 's', 'i' }, '<c-k>', function()
     if ls.choice_active() then ls.change_choice() end
 end)
 
--- Leap
-
-vim.keymap.set('n', 'f', '<Plug>(leap)', { desc = '[F]ind' })
-vim.keymap.set('n', 'F', '<Plug>(leap-from-window)', { desc = '[F]ind (other window)' })
-
 -- UndoTree
 
 vim.keymap.set('n', '<leader>ut', '<cmd>UndotreeToggle<cr>', { desc = '[U]ndo [T]ree' })
