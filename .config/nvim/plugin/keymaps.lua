@@ -1,6 +1,9 @@
 local M = {}
 local H = {}
 
+local Hydra = require 'hydra'
+H.hydras = {}
+
 -- My
 
 vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
@@ -8,11 +11,6 @@ vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
 vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
 
 vim.keymap.set('n', 'zw', '<CMD>set invwrap<CR>', { desc = 'Toggle [W]rap' })
-
--- Hydra
-
-H.hydras = {}
-local Hydra = require 'hydra'
 
 -- LuaSnip
 
@@ -38,7 +36,9 @@ H.hydras.qf = Hydra {
     name = 'QFlist',
     mode = 'n',
     body = '<leader>qq',
-    config = {},
+    config = {
+        invoke_on_body = true,
+    },
     heads = {
         { 'n', '<CMD>cnext<CR>', {} },
         { 'p', '<CMD>cprev<CR>', {} },
@@ -58,7 +58,9 @@ H.hydras.loc = Hydra {
     name = 'Loclist',
     mode = 'n',
     body = '<leader>ll',
-    config = {},
+    config = {
+        invoke_on_body = true,
+    },
     heads = {
         { 'n', '<CMD>lnext<CR>', {} },
         { 'p', '<CMD>lprev<CR>', {} },
