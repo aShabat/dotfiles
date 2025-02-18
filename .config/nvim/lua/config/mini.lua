@@ -374,7 +374,7 @@ ai.setup {
         -- Whole region
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
-        C = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
+        c = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
     },
     search_method = 'cover',
     n_lines = math.huge,
