@@ -1,7 +1,7 @@
 return {
     {
         'benlubas/molten-nvim',
-        build = '<CMD>UpdateRemotePlugins',
+        build = ':UpdateRemotePlugins',
         init = function()
             vim.g.molten_auto_open_output = false
             vim.g.molten_image_provider = 'image.nvim'
