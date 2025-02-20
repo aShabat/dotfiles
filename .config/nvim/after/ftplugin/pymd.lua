@@ -41,4 +41,9 @@ set('<leader>rb', runner.run_below, '[R]un [B]elow')
 set('<leader>rA', runner.run_all, '[R]un [A]ll')
 set('<leader>r', runner.run_range, '[R]un', { mode = 'v' })
 
+vim.api.nvim_create_autocmd({ 'BufWritePost', 'FileWritePost' }, {
+    buffer = 0,
+    callback = require('conform').format,
+})
+
 vim.cmd 'MoltenInit'
