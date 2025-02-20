@@ -171,7 +171,6 @@ miniclue.setup {
 -- Sessions
 require('mini.sessions').setup {
     file = '.session.vim',
-    autoread = true,
 }
 
 vim.api.nvim_create_user_command('MSWrite', function(args)
@@ -200,3 +199,19 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
         end
     end
 end, { nargs = '?', bang = true })
+
+-- Starter
+local starter = require 'mini.starter'
+starter.setup {
+    autoopen = true,
+    evaluate_single = true,
+    items = {
+        starter.sections.builtin_actions(),
+        starter.sections.sessions(),
+    },
+    content_hooks = {
+        starter.gen_hook.adding_bullet(),
+        -- starter.gen_hook.indexing(),
+        starter.gen_hook.padding(3, 2),
+    },
+}
