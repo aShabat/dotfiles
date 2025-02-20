@@ -206,7 +206,7 @@ local starter = require 'mini.starter'
 starter.setup {
     autoopen = true,
     evaluate_single = true,
-    header = table.concat(require('ascii').art.text.neovim.bloody, '\n'),
+    header = table.concat(require('ascii').get_random('text', 'neovim'), '\n'),
     items = {
         starter.sections.builtin_actions(),
         starter.sections.sessions(),
