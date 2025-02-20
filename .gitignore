@@ -1,3 +1,4 @@
 todo
 .session.vim
 .config/nvim/.luarc.json
+.config/nvim/lua/config/colors.lua
