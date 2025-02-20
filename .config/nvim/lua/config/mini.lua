@@ -179,6 +179,7 @@ vim.api.nvim_create_user_command('MSWrite', function(args)
     }
     local name = args.fargs[1]
     if not name then
+        opts = vim.tbl_deep_extend('force', opts, { force = true })
         if vim.api.nvim_get_vvar 'this_session' == '' then
             MiniSessions.write(MiniSessions.config.file, opts)
         else
@@ -205,13 +206,13 @@ local starter = require 'mini.starter'
 starter.setup {
     autoopen = true,
     evaluate_single = true,
+    header = table.concat(require('ascii').art.text.neovim.bloody, '\n'),
     items = {
         starter.sections.builtin_actions(),
         starter.sections.sessions(),
     },
     content_hooks = {
-        starter.gen_hook.adding_bullet(),
-        -- starter.gen_hook.indexing(),
-        starter.gen_hook.padding(3, 2),
+        starter.gen_hook.adding_bullet '•',
+        starter.gen_hook.aligning('center', 'center'),
     },
 }
