@@ -38,7 +38,11 @@ H.sync_and_go_in = function()
         MiniFiles.go_in()
     else
         local synced = MiniFiles.synchronize()
-        if synced then MiniFiles.go_in { close_on_file = true } end
+        if synced then
+            while MiniFiles.get_explorer_state() do
+                MiniFiles.go_in { close_on_file = true }
+            end
+        end
     end
 end
 
