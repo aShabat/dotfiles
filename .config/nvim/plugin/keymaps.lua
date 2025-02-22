@@ -6,7 +6,7 @@ H.hydras = {}
 
 -- My
 
-vim.keymap.set('n', '<esc>', '<cmd>noh<cr>', { desc = 'Esc' })
+vim.keymap.set('n', '<Esc>', '<cmd>noh<cr>', { desc = 'Esc' })
 
 vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
 
@@ -72,5 +72,7 @@ vim.keymap.set('n', '<C-Tab>', function()
     end
     vim.api.nvim_tabpage_set_win(0, windows[(current_index % #windows) + 1])
 end)
+
+vim.keymap.set('n', '<C-Esc>', '<C-W>o')
 
 return M
