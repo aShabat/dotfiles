@@ -44,18 +44,13 @@ return {
         { key = 'y', mods = 'ALT|SHIFT', action = act.ActivateCopyMode },
     },
     key_tables = {
-        -- search_mode = {
-        --     { key = 'n', mods = 'CTRL', action = act.CopyMode 'NextMatch' },
-        --     { key = 'p', mods = 'CTRL', action = act.CopyMode 'PriorMatch' },
-        --     { key = 'r', mods = 'CTRL', action = act.CopyMode 'CycleMatchType' },
-        --     { key = 'u', mods = 'CTRL', action = act.CopyMode 'ClearPattern' },
-        -- },
         copy_mode = {
             {
                 key = 'y',
                 mods = 'NONE',
                 action = act.Multiple {
                     { CopyTo = 'ClipboardAndPrimarySelection' },
+                    { CopyMode = 'ClearSelectionMode' },
                     { CopyMode = 'Close' },
                 },
             },
@@ -64,6 +59,7 @@ return {
                 mods = 'SHIFT',
                 action = act.Multiple {
                     { CopyTo = 'ClipboardAndPrimarySelection' },
+                    { CopyMode = 'ClearSelectionMode' },
                     { CopyMode = 'Close' },
                     { PasteFrom = 'Clipboard' },
                 },
@@ -80,8 +76,8 @@ return {
             { key = 'v', mods = 'NONE', action = act.CopyMode { SetSelectionMode = 'Cell' } },
             { key = 'v', mods = 'SHIFT', action = act.CopyMode { SetSelectionMode = 'Line' } },
             { key = 'v', mods = 'CTRL', action = act.CopyMode { SetSelectionMode = 'Block' } },
-            { key = '$', mods = 'NONE', action = act.CopyMode 'MoveToEndOfLineContent' },
-            { key = '^', mods = 'NONE', action = act.CopyMode 'MoveToStartOfLineContent' },
+            { key = '$', mods = 'SHIFT', action = act.CopyMode 'MoveToEndOfLineContent' },
+            { key = '^', mods = 'SHIFT', action = act.CopyMode 'MoveToStartOfLineContent' },
             { key = 'l', mods = 'SHIFT', action = act.CopyMode 'MoveToViewportBottom' },
             { key = 'k', mods = 'SHIFT', action = act.CopyMode 'MoveToViewportTop' },
             { key = 'w', mods = 'NONE', action = act.CopyMode 'MoveForwardWord' },
