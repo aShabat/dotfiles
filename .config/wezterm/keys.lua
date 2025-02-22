@@ -41,7 +41,14 @@ return {
         { key = 'PageDown', mods = 'SHIFT', action = act.ScrollByPage(1) },
         { key = 'Insert', mods = 'SHIFT', action = act.PasteFrom 'PrimarySelection' },
         { key = 'y', mods = 'ALT', action = act.QuickSelect },
-        { key = 'y', mods = 'ALT|SHIFT', action = act.ActivateCopyMode },
+        {
+            key = 'y',
+            mods = 'ALT|SHIFT',
+            action = act.Multiple {
+                act.ActivateCopyMode,
+                { CopyMode = 'ClearPattern' },
+            },
+        },
     },
     key_tables = {
         copy_mode = {
@@ -50,7 +57,6 @@ return {
                 mods = 'NONE',
                 action = act.Multiple {
                     { CopyTo = 'ClipboardAndPrimarySelection' },
-                    { CopyMode = 'ClearSelectionMode' },
                     { CopyMode = 'Close' },
                 },
             },
@@ -59,7 +65,6 @@ return {
                 mods = 'SHIFT',
                 action = act.Multiple {
                     { CopyTo = 'ClipboardAndPrimarySelection' },
-                    { CopyMode = 'ClearSelectionMode' },
                     { CopyMode = 'Close' },
                     { PasteFrom = 'Clipboard' },
                 },
@@ -88,6 +93,28 @@ return {
             { key = 'k', mods = 'NONE', action = act.CopyMode 'MoveUp' },
             { key = 'l', mods = 'NONE', action = act.CopyMode 'MoveRight' },
             { key = 'o', mods = 'NONE', action = act.CopyMode 'MoveToSelectionOtherEnd' },
+            {
+                key = '/',
+                mods = 'NONE',
+                action = act.Multiple {
+                    { CopyMode = 'ClearPattern' },
+                    { Search = { CaseInSensitiveString = '' } },
+                },
+            },
+            { key = 'n', mods = 'NONE', action = act.CopyMode 'NextMatch' },
+            { key = 'n', mods = 'SHIFT', action = act.CopyMode 'PriorMatch' },
+        },
+        search_mode = {
+            {
+                key = 'Escape',
+                mods = 'NONE',
+                action = act.Multiple {
+                    { CopyMode = 'ClearPattern' },
+                    { CopyMode = 'ClearSelectionMode' },
+                    { CopyMode = 'Close' },
+                },
+            },
+            { key = 'Enter', mods = 'NONE', action = act.ActivateCopyMode },
         },
     },
 }
