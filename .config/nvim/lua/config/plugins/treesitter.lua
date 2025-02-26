@@ -23,5 +23,10 @@ return {
     {
         'nvim-treesitter/nvim-treesitter-context',
         opts = '',
+        config = function(_, opts)
+            local context = require 'treesitter-context'
+            context.setup(opts)
+            vim.keymap.set('n', '<SC-U>', context.go_to_context)
+        end,
     },
 }

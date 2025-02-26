@@ -1,33 +1,8 @@
-local M = {}
-
-local H = {}
 -- Extra
 require('mini.extra').setup {}
--- Base16
-if not pcall(function()
-    require 'config.minibase16'
-end) then
-    local base16 = require 'mini.base16'
-    base16.setup { palette = base16.mini_palette('#112641', '#e2e98f', 75) }
-end
 
-H.palette = MiniBase16.config.palette
-H.hl_configs = {
-    LeapLabel = { opts = { fg = H.palette.base06, bg = H.palette.base0A } },
-    LeapBackdrop = { opts = { italic = false }, overwrite = true },
-    Comment = { opts = { italic = true } },
-    Constant = { opts = { bold = true } },
-    Conditional = { opts = { italic = true } },
-    Repeat = { opts = { italic = true } },
-    Keyword = { opts = { italic = true } },
-    String = { opts = { italic = true, bold = true } },
-    Boolean = { opts = { bold = true } },
-}
-for group, config in pairs(H.hl_configs) do
-    local opts = config.opts
-    if not config.overwrite then opts = vim.tbl_deep_extend('force', vim.api.nvim_get_hl(0, { name = group }), opts) end
-    vim.api.nvim_set_hl(0, group, opts)
-end
+-- Base16
+require 'config.mini.base16'
 
 -- Coments
 require('mini.comment').setup {}
@@ -36,23 +11,11 @@ require('mini.comment').setup {}
 require('mini.icons').setup {}
 MiniIcons.mock_nvim_web_devicons()
 
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesActionRename',
-    callback = function(event)
-        Snacks.rename.on_rename_file(event.data.from, event.data.to)
-    end,
-})
-
 -- Git
 require('mini.git').setup {}
 
--- -- Diff
--- require('mini.diff').setup {}
-
 -- Hipatterns
-
 local hipatterns = require 'mini.hipatterns'
-
 hipatterns.setup {
     highlighters = {
         fixme = { pattern = 'FIXME', group = 'MiniHipatternsFixme' },
@@ -102,238 +65,34 @@ require('mini.statusline').setup {
 -- TrailSpace
 require('mini.trailspace').setup {}
 
+vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim, { desc = '[M]ini.[T]rail[S]pace' })
+vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]ini.[T]rim[L]ines' })
+
 -- Notify
 require('mini.notify').setup {}
 vim.notify = MiniNotify.make_notify {}
 
+vim.keymap.set('n', '<leader>mnh', function()
+    local editor_width = vim.o.columns
+    local editor_height = vim.o.lines
+    local win = vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
+        relative = 'editor',
+        width = math.floor(editor_width * 0.9),
+        height = math.floor(editor_height * 0.8),
+        row = math.floor(editor_height * 0.05),
+        col = math.floor(editor_width * 0.05),
+        border = 'single',
+        title = { { 'Notification History', 'MiniFilesTitle' } },
+    })
+    MiniNotify.show_history()
+    vim.api.nvim_buf_set_keymap(0, 'n', 'q', '<CMD>q<CR>', {})
+end, { desc = '[M]ini.[N]otify [H]istory' })
+
 -- Files
-H.files_set_cwd = function(_)
-    local cur_entry_path = MiniFiles.get_fs_entry().path
-    local cur_directory = vim.fs.dirname(cur_entry_path)
-    vim.fn.chdir(cur_directory)
-end
-
-H.files_show_dot = false
-H.files_filter_show = function(_)
-    return true
-end
-H.files_filter_hide = function(fs_entry)
-    return not vim.startswith(fs_entry.name, '.')
-end
-
-H.files_toggle_dotfiles = function()
-    H.files_show_dot = not H.files_show_dot
-
-    local filter = H.files_show_dot and H.files_filter_show or H.files_filter_hide
-    MiniFiles.refresh { content = { filter = filter } }
-end
-
-H.files_show_preview = false
-H.files_toggle_preview = function()
-    H.files_show_preview = not H.files_show_preview
-    MiniFiles.refresh { windows = { preview = H.files_show_preview } }
-    MiniFiles.trim_right()
-end
-H.hide_preview = function()
-    H.files_show_preview = false
-end
-
-H.sync_and_go_in = function()
-    if not MiniFiles.get_explorer_state() then return end
-    local fs_entry = MiniFiles.get_fs_entry()
-    if fs_entry and fs_entry.fs_type == 'directory' then
-        MiniFiles.go_in()
-    else
-        local synced = MiniFiles.synchronize()
-        if synced then MiniFiles.go_in { close_on_file = true } end
-    end
-end
-
-require('mini.files').setup {
-    options = {
-        use_as_default_explorer = true,
-    },
-    content = {
-        filter = H.files_filter_hide,
-    },
-    windows = {
-        width_preview = 100,
-    },
-    mappings = {
-        go_in = 'L',
-        go_in_plus = '',
-    },
-}
-
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesBufferCreate',
-    callback = function(args)
-        vim.keymap.set('n', 'l', H.sync_and_go_in, { buffer = args.data.buf_id, desc = 'Synchronize and go in' })
-        vim.keymap.set('n', 'g~', H.files_set_cwd, { buffer = args.data.buf_id, desc = 'Set cwd' })
-        vim.keymap.set('n', 'g.', H.files_toggle_dotfiles, { buffer = args.data.buf_id, desc = 'Toggle hidden' })
-        vim.keymap.set('n', 'gp', H.files_toggle_preview, { buffer = args.data.buf_id, desc = 'Toggle preview' })
-    end,
-})
-
-H.preview = {}
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesWindowUpdate',
-    callback = function(args)
-        local buf_id, win_id = args.data.buf_id, args.data.win_id
-        if not win_id then return end
-
-        local win_config = vim.api.nvim_win_get_config(win_id)
-        if not win_config.title[1] then return end
-
-        if H.preview.image then H.preview.image:clear() end
-        local image_extensions = { '%.png$', '%.jpg$', '%.jpeg$', '%.gif$', '%.webp$', '%.avif$' }
-        local is_image = false
-        for _, ext in ipairs(image_extensions) do
-            is_image = is_image or win_config.title[1][1]:match(ext)
-        end
-        if not is_image then return end
-
-        vim.api.nvim_buf_set_lines(buf_id, 0, -1, true, {})
-
-        local image = MiniFiles.get_explorer_state().windows[#MiniFiles.get_explorer_state().windows].path
-        H.preview.image = require('image').from_file(image, {
-            window = win_id,
-            with_virtual_padding = true,
-        })
-
-        win_config.height = 40
-        win_config.width = 100
-        vim.api.nvim_win_set_config(win_id, win_config)
-        H.preview.image:render()
-    end,
-})
-
-M.file_explorer = function()
-    H.files_show_dot = false
-    H.hide_preview()
-    local path = vim.api.nvim_buf_get_name(0)
-    path = vim.fs.normalize(path)
-    if vim.fn.filereadable(path) == 1 then
-        path = vim.fs.dirname(path)
-        if vim.fn.isdirectory(path) == 0 then path = vim.fn.getcwd() end
-    end
-    MiniFiles.open(path, false)
-    MiniFiles.trim_right()
-end
+require 'config.mini.files'
 
 -- Pick
-
-require('mini.pick').setup {
-    mappings = {
-        choose_marked = '<C-CR>',
-        choose_all = {
-            char = '<SC-CR>',
-            func = function()
-                vim.api.nvim_input '<C-a><C-CR>'
-            end,
-        },
-    },
-    options = {
-        use_cache = true,
-    },
-    window = {
-        config = {
-            relative = 'editor',
-            row = 0,
-            col = 0,
-        },
-    },
-}
-
-vim.ui.select = MiniPick.ui_select
-
-H.pick_dirs_action = function()
-    local opts = {
-        mappings = {
-            toggle_files_dirs = {
-                char = '<c-d>',
-                func = H.pick_files_action,
-            },
-        },
-        source = {
-            choose = H.open_dir,
-        },
-    }
-    MiniPick.set_picker_opts(opts)
-    MiniPick.set_picker_items_from_cli({ 'fd', '--type=d', '--no-follow', '--color=never' }, {
-        postprocess = function(items)
-            local new_items = { '.' }
-            for i, item in ipairs(items) do
-                new_items[i + 1] = item
-            end
-            return new_items
-        end,
-    })
-end
-H.pick_files_action = function()
-    local opts = {
-        mappings = {
-            toggle_files_dirs = {
-                char = '<c-d>',
-                func = H.pick_dirs_action,
-            },
-        },
-        source = {
-            choose = MiniPick.default_choose,
-        },
-    }
-    MiniPick.set_picker_opts(opts)
-    MiniPick.set_picker_items_from_cli { 'fd', '--type=f', '--no-follow', '--color=never' }
-end
-H.open_dir = function(item)
-    local path = MiniPick.get_picker_opts().source.cwd .. '/' .. item
-    vim.schedule(function()
-        MiniFiles.open(path, false)
-    end)
-end
-MiniPick.registry.files = function(local_opts, opts)
-    if not local_opts or not local_opts.dirs then
-        opts = vim.tbl_deep_extend('force', {
-            mappings = {
-                toggle_files_dirs = {
-                    char = '<c-d>',
-                    func = H.pick_dirs_action,
-                },
-            },
-            source = {
-                name = 'Files/Dirs',
-            },
-        }, opts or {})
-        MiniPick.builtin.files(local_opts, opts)
-    else
-        opts = vim.tbl_deep_extend('force', {
-            mappings = {
-                toggle_files_dirs = {
-                    char = '<c-d>',
-                    func = H.pick_files_action,
-                },
-            },
-            source = {
-                chose = H.open_dir,
-                name = 'Files/Dirs',
-                show = function(buf_id, items_to_show, query)
-                    return MiniPick.default_show(buf_id, items_to_show, query, { show_icons = true })
-                end,
-            },
-        }, opts or {})
-        local_opts = vim.tbl_deep_extend('force', {
-            command = { 'fd', '--type=d', '--no-follow', '--color=never' },
-            postprocess = function(items)
-                local new_items = { '.' }
-                for i, item in ipairs(items) do
-                    new_items[i + 1] = item
-                end
-                return new_items
-            end,
-        }, local_opts or {})
-        MiniPick.builtin.cli(local_opts, opts)
-    end
-end
+require 'config.mini.pick'
 
 -- Move
 require('mini.move').setup {
@@ -353,12 +112,17 @@ require('mini.move').setup {
 require('mini.splitjoin').setup {}
 
 -- AI
-require('mini.ai').setup {
+
+local ai = require 'mini.ai'
+ai.setup {
     custom_textobjects = {
         -- Whole region
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
+        c = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
     },
+    search_method = 'cover',
+    n_lines = math.huge,
 }
 
 -- Bracketed
@@ -372,7 +136,6 @@ require('mini.bracketed').setup {
 require('mini.surround').setup {}
 
 --Clue
-
 local miniclue = require 'mini.clue'
 miniclue.setup {
     triggers = {
@@ -406,10 +169,50 @@ miniclue.setup {
 }
 
 -- Sessions
-
 require('mini.sessions').setup {
     file = '.session.vim',
-    autoread = true,
 }
 
-return M
+vim.api.nvim_create_user_command('MSWrite', function(args)
+    local opts = {
+        force = args.bang,
+    }
+    local name = args.fargs[1]
+    if not name then
+        opts = vim.tbl_deep_extend('force', opts, { force = true })
+        if vim.api.nvim_get_vvar 'this_session' == '' then
+            MiniSessions.write(MiniSessions.config.file, opts)
+        else
+            MiniSessions.write(nil, opts)
+        end
+    else
+        MiniSessions.write(name, opts)
+        local local_session =
+            vim.fn.confirm('Link project in ' .. vim.fn.getcwd() .. ' to session "' .. name .. '"?', '&Yes\n&No')
+        if local_session == 1 then
+            local cmd = {
+                'ln',
+                '-s',
+                MiniSessions.config.directory .. '/' .. name,
+                vim.fn.getcwd() .. '/' .. MiniSessions.config.file,
+            }
+            vim.system(cmd, {}, nil):wait()
+        end
+    end
+end, { nargs = '?', bang = true })
+
+-- Starter
+local starter = require 'mini.starter'
+starter.setup {
+    autoopen = true,
+    evaluate_single = true,
+    header = table.concat(require('ascii').get_random('text', 'neovim'), '\n'),
+    items = {
+        starter.sections.builtin_actions(),
+        starter.sections.sessions(),
+    },
+    content_hooks = {
+        starter.gen_hook.adding_bullet '•',
+        starter.gen_hook.aligning('center', 'center'),
+    },
+}

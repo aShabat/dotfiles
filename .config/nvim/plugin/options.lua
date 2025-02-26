@@ -1,6 +1,3 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -40,3 +37,5 @@ vim.opt.autoread = true
 vim.opt.undofile = true
 vim.opt.swapfile = false
 vim.opt.backup = false
+
+vim.api.nvim_set_var('python3_host_prog', vim.fn.stdpath 'config' .. '/.python/bin/python')

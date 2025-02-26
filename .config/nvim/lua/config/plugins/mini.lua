@@ -3,6 +3,12 @@ return {
     dependencies = {
         '3rd/image.nvim',
         'nvim-treesitter/nvim-treesitter',
+        'nvim-treesitter/nvim-treesitter-textobjects',
+        'snacks.nvim',
+        {
+            'MaximilianLloyd/ascii.nvim',
+            dependencies = 'MunifTanjim/nui.nvim',
+        },
     },
     config = function()
         require 'config.mini'

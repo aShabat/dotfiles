@@ -4,9 +4,10 @@ return {
         -- log_level = vim.log.levels.TRACE,
         formatters_by_ft = {
             lua = { 'stylua' },
-            cmake = { 'gersemi' },
             cpp = { 'clang-format' },
             go = { 'gofumpt', 'goimports-reviser' },
+            python = { 'black' },
+            markdown = { 'injected' },
         },
         default_format_opts = {
             lsp_format = 'fallback',
@@ -16,6 +17,11 @@ return {
             lsp_format = 'fallback',
         },
         formatters = {
+            injected = {
+                options = {
+                    ignore_errors = true,
+                },
+            },
             stylua = {
                 prepend_args = {
                     '--quote-style',
