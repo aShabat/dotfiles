@@ -115,4 +115,11 @@ wezterm.on('move-tab-last', function(window, pane)
     window:perform_action(act.MoveTab(#(window:mux_window():tabs()) - 1), pane)
 end)
 
+wezterm.on('gui-startup', function(cmd)
+    if cmd and cmd.args[1] == 'cxxmatrix' then
+        local _, _, w = wezterm.mux.spawn_window(cmd)
+        w:gui_window():toggle_fullscreen()
+    end
+end)
+
 return M
