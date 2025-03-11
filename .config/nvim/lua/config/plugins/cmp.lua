@@ -2,13 +2,18 @@ return {
     'Saghen/blink.cmp',
     version = '*',
     dependencies = {
-        -- 'rafamadriz/friendly-snippets',
         'echasnovski/mini.nvim',
         'L3MON4D3/LuaSnip',
     },
     opts = {
         keymap = {
             preset = 'default',
+
+            ['<Tab>'] = {},
+            ['<S-Tab>'] = {},
+            ['<C-k>'] = {},
+            ['<Up>'] = {},
+            ['<Down>'] = {},
         },
         appearance = {
             use_nvim_cmp_as_default = true,
@@ -29,11 +34,6 @@ return {
             keyword = { range = 'full' },
             accept = { auto_brackets = { enabled = false } },
             documentation = { auto_show = true },
-            list = {
-                selection = {
-                    auto_insert = true,
-                },
-            },
             menu = {
                 draw = {
                     columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 }, { 'kind' } },
@@ -65,6 +65,13 @@ return {
         signature = {
             enabled = true,
             window = { direction_priority = { 'n', 's' } },
+        },
+        cmdline = {
+            completion = {
+                menu = {
+                    auto_show = true,
+                },
+            },
         },
     },
     opts_extend = { 'sources.default' },
