@@ -22,6 +22,7 @@ hipatterns.setup {
         hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
         todo = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
         note = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+        cells = require('notebook-navigator').minihipatterns_spec,
 
         hex_color = hipatterns.gen_highlighter.hex_color(),
     },
@@ -119,7 +120,7 @@ ai.setup {
         -- Whole region
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
-        c = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
+        C = require('notebook-navigator').miniai_spec,
     },
     search_method = 'cover',
     n_lines = math.huge,

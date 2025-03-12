@@ -1,5 +1,20 @@
 return {
     {
+        'GCBallesteros/NotebookNavigator.nvim',
+        dependencies = {
+            'echanovski/mini.nvim',
+            'benlubas/molten-nvim',
+            'nvimtools/hydra.nvim',
+        },
+        opts = {
+            repl_provider = 'molten',
+        },
+        config = function(_, opts)
+            local nn = require 'notebook-navigator'
+            nn.setup(opts)
+        end,
+    },
+    {
         'benlubas/molten-nvim',
         build = ':UpdateRemotePlugins',
         init = function()
@@ -12,29 +27,10 @@ return {
         end,
     },
     {
-        'quarto-dev/quarto-nvim',
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            {
-                'jmbuhr/otter.nvim',
-                opts = {},
-            },
-        },
-        opts = {
-            lspFeatures = {
-                chunks = 'all',
-            },
-            codeRunner = {
-                default_method = 'molten',
-            },
-        },
-    },
-    {
         'GCBallesteros/jupytext.nvim',
         opts = {
-            style = 'markdown',
-            output_extension = 'md',
-            force_ft = 'markdown.pymd',
+            style = 'percent',
+            output_extension = 'py',
         },
     },
 }
