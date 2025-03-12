@@ -13,7 +13,8 @@ return {
             local nn = require 'notebook-navigator'
             nn.setup(opts)
 
-            vim.keymap.set('n', '<leader>rc', nn.run_cell, { desc = '[R]un [C]ell' })
+            vim.keymap.set('n', '<leader>rC', nn.run_cell, { desc = '[R]un [C]ell' })
+            vim.keymap.set('n', '<leader>rc', nn.run_and_move, { desc = '[R]un [C]ell (and move to the next)' })
         end,
     },
     {
