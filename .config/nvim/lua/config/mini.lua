@@ -5,7 +5,13 @@ require('mini.extra').setup {}
 require 'config.mini.base16'
 
 -- Coments
-require('mini.comment').setup {}
+require('mini.comment').setup {
+    options = {
+        custom_commentstring = function()
+            if vim.bo.filetype == 'cpp' then return '//%s' end
+        end,
+    },
+}
 
 -- Icons
 require('mini.icons').setup {}
