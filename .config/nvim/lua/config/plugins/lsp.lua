@@ -40,6 +40,7 @@ return {
                     dismiss_keys = { 'j', 'k', 'q', '<esc>' },
                 },
             },
+            'https://git.sr.ht/~p00f/clangd_extensions.nvim',
         },
         opts = {
             servers = {
