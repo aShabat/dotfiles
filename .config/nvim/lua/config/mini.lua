@@ -78,6 +78,11 @@ vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]
 -- Notify
 require('mini.notify').setup {}
 vim.notify = MiniNotify.make_notify {}
+print = function(...)
+    for _, v in ipairs { ... } do
+        vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
+    end
+end
 
 vim.keymap.set('n', '<leader>mnh', function()
     local editor_width = vim.o.columns
