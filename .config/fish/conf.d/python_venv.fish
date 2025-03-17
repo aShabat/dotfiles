@@ -10,7 +10,7 @@ function _python_venv_not_active
     set -f path $PWD
     while test "$path" != "/"
         if test -d "$path/.python"
-            set _python_venv_dir $PWD
+            set _python_venv_dir $path
             source "$_python_venv_dir/.python/bin/activate.fish"
             return
         end
