@@ -2,7 +2,7 @@ return {
     {
         'GCBallesteros/NotebookNavigator.nvim',
         dependencies = {
-            'echanovski/mini.nvim',
+            'echasnovski/mini.nvim',
             'benlubas/molten-nvim',
             'nvimtools/hydra.nvim',
         },
@@ -71,7 +71,7 @@ return {
             vim.keymap.set('n', '<leader>rr', '<CMD>MoltenReevaluateCell<CR>', { desc = '[R]e[R]un' })
             vim.keymap.set('n', '<leader>rd', '<CMD>MoltenDelete<CR>', { desc = '[R]unner [D]elete' })
             vim.keymap.set('n', '<leader>ri', '<CMD>MoltenInterrupt<CR>', { desc = '[R]unner [I]nterupt' })
-            vim.keymap.set('n', '<leader>rR', '<CMD>MoltenRestart<CR>', { desc = '[R]unner [R]estart' })
+            vim.keymap.set('n', '<leader>rR', '<CMD>MoltenRestart!<CR>', { desc = '[R]unner [R]estart' })
             vim.keymap.set('v', '<leader>r', '<CMD>MoltenEvaluateVisual<CR>', { desc = '[R]un' })
 
             vim.keymap.set('n', '<leader>oe', '<CMD>noautocmd MoltenEnterOutput<CR>', { desc = '[O]utput [E]nter' })
