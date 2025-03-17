@@ -4,6 +4,7 @@ return {
         main = 'nvim-treesitter.configs',
         opts = {
             auto_install = true,
+            ensure_installed = 'all',
             highlight = {
                 enable = true,
             },
@@ -26,7 +27,7 @@ return {
         config = function(_, opts)
             local context = require 'treesitter-context'
             context.setup(opts)
-            vim.keymap.set('n', '<SC-U>', context.go_to_context)
+            vim.keymap.set({ 'n', 'v', 'o' }, '<SC-U>', context.go_to_context)
         end,
     },
 }
