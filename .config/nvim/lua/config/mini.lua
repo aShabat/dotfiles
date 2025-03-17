@@ -79,8 +79,12 @@ vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]
 require('mini.notify').setup {}
 vim.notify = MiniNotify.make_notify {}
 print = function(...)
-    for _, v in ipairs { ... } do
-        vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
+    if vim.in_fast_event() then
+        print(...)
+    else
+        for _, v in ipairs { ... } do
+            vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
+        end
     end
 end
 
