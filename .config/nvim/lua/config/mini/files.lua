@@ -92,8 +92,9 @@ vim.api.nvim_create_autocmd('User', {
         if H.preview.image then H.preview.image:clear() end
         local image_extensions = { '%.png$', '%.jpg$', '%.jpeg$', '%.gif$', '%.webp$', '%.avif$' }
         local is_image = false
+        local title = vim.trim(win_config.title[1][1])
         for _, ext in ipairs(image_extensions) do
-            is_image = is_image or win_config.title[1][1]:match(ext)
+            is_image = is_image or title:match(ext)
         end
         if not is_image then return end
 

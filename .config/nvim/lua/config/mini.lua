@@ -5,7 +5,13 @@ require('mini.extra').setup {}
 require 'config.mini.base16'
 
 -- Coments
-require('mini.comment').setup {}
+require('mini.comment').setup {
+    options = {
+        custom_commentstring = function()
+            if vim.bo.filetype == 'cpp' then return '//%s' end
+        end,
+    },
+}
 
 -- Icons
 require('mini.icons').setup {}
@@ -22,6 +28,7 @@ hipatterns.setup {
         hack = { pattern = 'HACK', group = 'MiniHipatternsHack' },
         todo = { pattern = 'TODO', group = 'MiniHipatternsTodo' },
         note = { pattern = 'NOTE', group = 'MiniHipatternsNote' },
+        cells = require('notebook-navigator').minihipatterns_spec,
 
         hex_color = hipatterns.gen_highlighter.hex_color(),
     },
@@ -71,6 +78,15 @@ vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]
 -- Notify
 require('mini.notify').setup {}
 vim.notify = MiniNotify.make_notify {}
+print = function(...)
+    if vim.in_fast_event() then
+        print(...)
+    else
+        for _, v in ipairs { ... } do
+            vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
+        end
+    end
+end
 
 vim.keymap.set('n', '<leader>mnh', function()
     local editor_width = vim.o.columns
@@ -119,7 +135,7 @@ ai.setup {
         -- Whole region
         G = MiniExtra.gen_ai_spec.buffer(),
         L = MiniExtra.gen_ai_spec.line(),
-        c = ai.gen_spec.treesitter { a = '@code_cell.outer', i = '@code_cell.inner' },
+        C = require('notebook-navigator').miniai_spec,
     },
     search_method = 'cover',
     n_lines = math.huge,

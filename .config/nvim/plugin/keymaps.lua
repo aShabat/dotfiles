@@ -12,6 +12,8 @@ vim.keymap.set('n', 'R', 'vc', { desc = '[R]eplace' })
 
 vim.keymap.set('n', 'zw', '<CMD>set invwrap<CR>', { desc = 'Toggle [W]rap' })
 
+vim.keymap.set('n', '<C-q>', '<CMD>q<CR>', { desc = '[Q]uit' })
+
 -- QuickFix
 
 vim.keymap.set('n', '<leader>qo', '<CMD>lclose<CR><CMD>copen<CR>', { desc = '[Q]uickFix [O]pen' })

@@ -46,4 +46,6 @@ function set_custom_keys
     bind ctrl-d fzf-cd-widget
     bind enter _tide_enter_transient
     bind \n _tide_enter_transient
+    bind shift-enter 'fish_commandline_append " &>/dev/null &"'
+    bind shift-enter execute
 end

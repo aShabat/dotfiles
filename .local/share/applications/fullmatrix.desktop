@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=Full Matrix
+Exec=wezterm start --always-new-process -- cxxmatrix --color=white --scene=rain-forever --no-twinkle
+Terminal=false
+Type=Application

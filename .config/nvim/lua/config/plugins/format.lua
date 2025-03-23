@@ -46,4 +46,12 @@ return {
             },
         },
     },
+    config = function(_, opts)
+        require('conform').setup(opts)
+
+        vim.keymap.set('n', '<leader>F', require('conform').format, { desc = '[F]ormat' })
+        vim.api.nvim_create_user_command('Format', function(_)
+            require('conform').format()
+        end, {})
+    end,
 }
