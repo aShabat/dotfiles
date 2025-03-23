@@ -10,48 +10,53 @@ return {
             repl_provider = 'molten',
         },
         config = function(_, opts)
-            local nn = require 'notebook-navigator'
-            nn.setup(opts)
+            vim.api.nvim_create_autocmd('FileType', {
+                pattern = 'python',
+                callback = function()
+                    local nn = require 'notebook-navigator'
+                    nn.setup(opts)
 
-            vim.keymap.set('n', '<leader>rC', nn.run_cell, { desc = '[R]un [C]ell' })
-            vim.keymap.set('n', '<leader>rc', nn.run_and_move, { desc = '[R]un [C]ell (and move to the next)' })
+                    vim.keymap.set('n', '<leader>rC', nn.run_cell, { desc = '[R]un [C]ell' })
+                    vim.keymap.set('n', '<leader>rc', nn.run_and_move, { desc = '[R]un [C]ell (and move to the next)' })
 
-            require 'hydra' {
-                name = 'Notebook Navigation',
-                mode = 'n',
-                body = '<leader>R',
-                config = {
-                    foreign_keys = 'warn',
-                    invoke_on_body = true,
-                    on_enter = function()
-                        if #vim.fn.MoltenRunningKernels(true) == 0 then
-                            vim.api.nvim_cmd({
-                                cmd = 'MoltenInit',
-                            }, {})
-                        end
-                    end,
-                },
-                heads = {
-                    { 'r', nn.run_and_move, {} },
-                    { 'o', nn.add_cell_below, {} },
-                    { 'O', nn.add_cell_above, {} },
-                    { 'c', nn.comment_cell, {} },
-                    {
-                        'j',
-                        function()
-                            nn.move_cell 'd'
-                        end,
-                        {},
-                    },
-                    {
-                        'k',
-                        function()
-                            nn.move_cell 'u'
-                        end,
-                        {},
-                    },
-                },
-            }
+                    require 'hydra' {
+                        name = 'Notebook Navigation',
+                        mode = 'n',
+                        body = '<leader>R',
+                        config = {
+                            foreign_keys = 'warn',
+                            invoke_on_body = true,
+                            on_enter = function()
+                                if #vim.fn.MoltenRunningKernels(true) == 0 then
+                                    vim.api.nvim_cmd({
+                                        cmd = 'MoltenInit',
+                                    }, {})
+                                end
+                            end,
+                        },
+                        heads = {
+                            { 'r', nn.run_and_move, {} },
+                            { 'o', nn.add_cell_below, {} },
+                            { 'O', nn.add_cell_above, {} },
+                            { 'c', nn.comment_cell, {} },
+                            {
+                                'j',
+                                function()
+                                    nn.move_cell 'd'
+                                end,
+                                {},
+                            },
+                            {
+                                'k',
+                                function()
+                                    nn.move_cell 'u'
+                                end,
+                                {},
+                            },
+                        },
+                    }
+                end,
+            })
         end,
     },
     {
