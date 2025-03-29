@@ -11,7 +11,7 @@ function set_custom_keys
     bind up up-or-search
     bind down down-or-search
     bind ctrl-l clear-screen
-    bind ctrl-c cancel-commandline
+    bind ctrl-c clear-commandline
     bind ctrl-w backward-kill-path-component
     bind home end-of-line
     bind end beginning-of-line
