@@ -73,22 +73,16 @@ return {
                 config.on_attach = H.lsp_keymaps
                 lspconfig[server].setup(config)
             end
-        end,
-    },
-    {
-        url = 'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-        name = 'lsp_lines',
-        config = function()
-            local lsp_lines = require 'lsp_lines'
-            lsp_lines.setup()
+
             vim.diagnostic.config {
                 virtual_lines = {
-                    only_current_line = function()
-                        return vim.api.nvim_get_mode() == 'n'
-                    end,
+                    current_line = true,
                 },
+                signs = true,
+                update_in_insert = true,
+                severity_sort = true,
+                underline = true,
             }
         end,
     },
-    lsp_keymaps = H.lsp_keymaps,
 }
