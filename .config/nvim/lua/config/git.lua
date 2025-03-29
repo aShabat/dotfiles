@@ -96,4 +96,5 @@ require('gitsigns').setup {
         algorithm = 'histogram',
     },
     on_attach = H.on_attach,
+    sign_priority = 100,
 }
