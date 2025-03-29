@@ -1,5 +1,11 @@
 local wezterm = require 'wezterm'
 local act = wezterm.action
+local H = {}
+
+H.hyperlink_pattens = {}
+for _, tbl in pairs(wezterm.default_hyperlink_rules()) do
+    H.hyperlink_pattens[#H.hyperlink_pattens + 1] = tbl.regex
+end
 
 return {
     keys = {
@@ -34,6 +40,19 @@ return {
             key = 'u',
             mods = 'ALT',
             action = act.CharSelect { copy_on_select = true, copy_to = 'ClipboardAndPrimarySelection' },
+        },
+        {
+            key = 'u',
+            mods = 'ALT|SHIFT',
+            action = act.QuickSelectArgs {
+                label = 'open hyperlink',
+                patterns = H.hyperlink_pattens,
+                action = wezterm.action_callback(function(window, pane)
+                    local url = window:get_selection_text_for_pane(pane)
+                    wezterm.log_info('opening ' .. url)
+                    wezterm.open_with(url)
+                end),
+            },
         },
         { key = 'v', mods = 'ALT', action = act.PasteFrom 'Clipboard' },
         { key = 'c', mods = 'ALT', action = act.CopyTo 'ClipboardAndPrimarySelection' },
