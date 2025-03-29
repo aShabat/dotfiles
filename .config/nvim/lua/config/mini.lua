@@ -88,7 +88,7 @@ print = function(...)
     end
 end
 
-vim.keymap.set('n', '<leader>mnh', function()
+vim.api.nvim_create_user_command('MNHistory', function()
     local editor_width = vim.o.columns
     local editor_height = vim.o.lines
     local win = vim.api.nvim_open_win(vim.api.nvim_create_buf(false, true), true, {
