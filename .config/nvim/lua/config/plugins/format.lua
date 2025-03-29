@@ -35,7 +35,7 @@ return {
                 },
             },
             ['clang-format'] = {
-                append_args = { '-style={IndentWidth: 4}' },
+                append_args = { '-style={BasedOnStyle: Google, IndentWidth: 4}' },
             },
             ['goimports-reviser'] = {
                 prepend_args = {
