@@ -76,13 +76,25 @@ return {
 
             vim.diagnostic.config {
                 virtual_lines = {
-                    current_line = true,
+                    severity = {
+                        min = vim.diagnostic.severity.ERROR,
+                    },
+                },
+                virtual_text = {
+                    severity = {
+                        max = vim.diagnostic.severity.WARN,
+                    },
+                },
+                float = {
+                    scope = 'cursor',
                 },
                 signs = true,
                 update_in_insert = true,
                 severity_sort = true,
                 underline = true,
             }
+
+            vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, { desc = 'open [D]iagnostic' })
         end,
     },
 }

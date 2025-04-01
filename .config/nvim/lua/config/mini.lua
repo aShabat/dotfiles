@@ -144,7 +144,7 @@ ai.setup {
 -- Bracketed
 require('mini.bracketed').setup {
     diagnostic = {
-        options = { float = false },
+        options = { float = true },
     },
 }
 
