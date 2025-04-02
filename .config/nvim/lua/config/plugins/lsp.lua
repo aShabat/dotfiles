@@ -94,7 +94,7 @@ return {
                 underline = true,
             }
 
-            im.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic [F]loat' })
+            vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostic [F]loat' })
         end,
     },
 }
