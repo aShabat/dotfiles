@@ -44,8 +44,6 @@ function set_custom_keys
     bind ctrl-r fzf-history-widget
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
-    bind enter _tide_enter_transient
-    bind \n _tide_enter_transient
     bind shift-enter 'fish_commandline_append " &>/dev/null &"'
     bind shift-enter execute
 end
