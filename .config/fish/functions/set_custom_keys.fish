@@ -7,7 +7,7 @@ function set_custom_keys
     bind ctrl-left backward-word
     bind tab complete
     bind shift-tab complete-and-search
-    bind ctrl-s pager-toggle-search
+    bind ctrl-f pager-toggle-search
     bind up up-or-search
     bind down down-or-search
     bind ctrl-l clear-screen
@@ -15,8 +15,8 @@ function set_custom_keys
     bind ctrl-w backward-kill-path-component
     bind home end-of-line
     bind end beginning-of-line
-    bind ctrl-S 'fish_commandline_prepend sudo'
-    bind ctrl-N edit_command_buffer
+    bind ctrl-s 'fish_commandline_prepend sudo' repaint
+    bind ctrl-n edit_command_buffer
     bind '' self-insert
     bind ' ' self-insert expand-abbr
     bind ';' self-insert expand-abbr
@@ -27,23 +27,12 @@ function set_custom_keys
     bind ')' self-insert expand-abbr
     bind enter execute
     bind ctrl-k kill-line
-    bind ctrl-a beginning-of-line
+    bind ctrl-b beginning-of-line
     bind ctrl-e end-of-line
     bind backspace backward-delete-char
-    bind ctrl-p up-or-search
-    bind ctrl-n down-or-search
-    bind ctrl-f forward-char
-    bind ctrl-b backward-char
-    bind ctrl-T transpose-words
-    bind ctrl-g cancel
-    bind ctrl-z undo
-    bind ctrl-u capitalize-word
-    bind ctrl-U upcase-word
     bind ctrl-backspace backward-kill-word
-    bind ctrl-h backward-kill-word
     bind ctrl-r fzf-history-widget
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
-    bind shift-enter 'fish_commandline_append " &>/dev/null &"'
-    bind shift-enter execute
+    bind ctrl-^ 'fish_commandline_append " &>/dev/null &"' execute
 end
