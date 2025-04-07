@@ -25,7 +25,6 @@ function set_custom_keys
     bind '>' self-insert expand-abbr
     bind '<' self-insert expand-abbr
     bind ')' self-insert expand-abbr
-    bind enter execute
     bind ctrl-k kill-line
     bind ctrl-b beginning-of-line
     bind ctrl-e end-of-line
@@ -35,4 +34,5 @@ function set_custom_keys
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
     bind ctrl-^ 'fish_commandline_append " &>/dev/null &"' execute
+    bind enter transient_execute
 end
