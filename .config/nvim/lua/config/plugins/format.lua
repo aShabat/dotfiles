@@ -8,6 +8,7 @@ return {
             go = { 'gofumpt', 'goimports-reviser' },
             python = { 'black' },
             markdown = { 'injected' },
+            gleam = { 'gleam' },
         },
         default_format_opts = {
             lsp_format = 'fallback',

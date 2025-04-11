@@ -64,6 +64,7 @@ return {
                     },
                 },
                 clangd = {},
+                gleam = {},
             },
         },
         config = function(_, opts)
