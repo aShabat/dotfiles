@@ -29,7 +29,7 @@ function set_custom_keys
     bind ctrl-b beginning-of-line
     bind ctrl-e end-of-line
     bind backspace backward-delete-char
-    bind ctrl-backspace backward-kill-word
+    bind ctrl-h backward-kill-word
     bind ctrl-r fzf-history-widget
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
