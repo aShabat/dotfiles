@@ -23,7 +23,6 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter-context',
-        opts = '',
         config = function(_, opts)
             local context = require 'treesitter-context'
             context.setup(opts)
