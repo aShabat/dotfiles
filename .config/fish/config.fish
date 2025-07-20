@@ -7,6 +7,7 @@ abbr -a ca config add
 abbr -a np nvimpager
 abbr -a n nvim
 abbr -a cpp g++ -std=c++17 -ggdb -pedantic-errors -Wall -Weffc++ -Wextra -Wconversion -Wsign-conversion -Werror
+abbr -a img wezterm imgcat
 
 abbr -a o xdg-open
 abbr -a open xdg-open
