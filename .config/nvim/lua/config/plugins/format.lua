@@ -9,6 +9,10 @@ return {
             python = { 'black' },
             markdown = { 'injected' },
             gleam = { 'gleam' },
+            html = { 'prettier' },
+            css = { 'prettier' },
+            javascript = { 'prettier' },
+            typescript = { 'prettier' },
         },
         default_format_opts = {
             lsp_format = 'fallback',

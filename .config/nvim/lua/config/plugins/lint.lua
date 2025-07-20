@@ -1,7 +1,9 @@
 return {
     'mfussenegger/nvim-lint',
     opts = {
-        linters_by_ft = {},
+        linters_by_ft = {
+            html = { 'htmlhint' },
+        },
     },
     config = function(_, opts)
         require('lint').linters_by_ft = opts.linters_by_ft

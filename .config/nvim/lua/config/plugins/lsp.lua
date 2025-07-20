@@ -65,6 +65,7 @@ return {
                 },
                 clangd = {},
                 gleam = {},
+                emmet_language_server = {},
             },
         },
         config = function(_, opts)
