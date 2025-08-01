@@ -37,5 +37,6 @@ config.keys = require('keys').keys
 config.key_tables = require('keys').key_tables
 
 config.enable_kitty_keyboard = true
+config.enable_kitty_graphics = true
 
 return config
