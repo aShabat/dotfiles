@@ -79,53 +79,54 @@ vim.api.nvim_create_autocmd('User', {
     end,
 })
 
-H.preview = {}
-vim.api.nvim_create_autocmd('User', {
-    pattern = 'MiniFilesWindowUpdate',
-    callback = function(args)
-        local buf_id, win_id = args.data.buf_id, args.data.win_id
-        if not win_id then return end
-
-        local win_config = vim.api.nvim_win_get_config(win_id)
-        if not win_config.title[1] then return end
-
-        if H.preview.image then H.preview.image:clear() end
-        local image_extensions = { '%.png$', '%.jpg$', '%.jpeg$', '%.gif$', '%.webp$', '%.avif$' }
-        local is_image = false
-        local title = vim.trim(win_config.title[1][1])
-        for _, ext in ipairs(image_extensions) do
-            is_image = is_image or title:match(ext)
-        end
-        if not is_image then return end
-
-        vim.api.nvim_buf_set_lines(buf_id, 0, -1, true, {})
-
-        local image = MiniFiles.get_explorer_state().windows[#MiniFiles.get_explorer_state().windows].path
-        H.preview.image = require('image').from_file(image, {
-            window = win_id,
-            with_virtual_padding = true,
-        })
-
-        local max_height_percentage = 0.9
-        local max_width_percentage = 0.5
-        local term_size = require('image.utils').term.get_size()
-        local height = math.ceil(H.preview.image.image_height / term_size.cell_height)
-        local width = math.ceil(H.preview.image.image_width / term_size.cell_width)
-        if height > max_height_percentage * vim.o.lines then
-            width = math.ceil(width * vim.o.lines * max_height_percentage / height)
-            height = math.ceil(vim.o.lines * max_height_percentage)
-        end
-        if width > max_width_percentage * vim.o.columns then
-            height = math.ceil(height * vim.o.columns * max_width_percentage / width)
-            width = math.ceil(max_width_percentage * vim.o.columns)
-        end
-
-        win_config.height = height
-        win_config.width = width
-        vim.api.nvim_win_set_config(win_id, win_config)
-        H.preview.image:render()
-    end,
-})
+-- H.preview = {}
+-- vim.api.nvim_create_autocmd('User', {
+--     pattern = 'MiniFilesWindowUpdate',
+--     callback = function(args)
+--         local buf_id, win_id = args.data.buf_id, args.data.win_id
+--         if not win_id then return end
+--
+--         local win_config = vim.api.nvim_win_get_config(win_id)
+--         if not win_config.title[1] then return end
+--
+--         if H.preview.image then H.preview.image:clear() end
+--         local image_extensions = { '%.png$', '%.jpg$', '%.jpeg$', '%.gif$', '%.webp$', '%.avif$' }
+--         local is_image = false
+--         local title = vim.trim(win_config.title[1][1])
+--         for _, ext in ipairs(image_extensions) do
+--             is_image = is_image or title:match(ext)
+--         end
+--         if not is_image then return end
+--
+--         vim.api.nvim_buf_set_lines(buf_id, 0, -1, true, {})
+--
+--         local image = MiniFiles.get_explorer_state().windows[#MiniFiles.get_explorer_state().windows].path
+--         print(image)
+--         H.preview.image = require('image').from_file(image, {
+--             window = win_id,
+--             with_virtual_padding = true,
+--         })
+--
+--         local max_height_percentage = 0.9
+--         local max_width_percentage = 0.5
+--         local term_size = require('image.utils').term.get_size()
+--         local height = math.ceil(H.preview.image.image_height / term_size.cell_height)
+--         local width = math.ceil(H.preview.image.image_width / term_size.cell_width)
+--         if height > max_height_percentage * vim.o.lines then
+--             width = math.ceil(width * vim.o.lines * max_height_percentage / height)
+--             height = math.ceil(vim.o.lines * max_height_percentage)
+--         end
+--         if width > max_width_percentage * vim.o.columns then
+--             height = math.ceil(height * vim.o.columns * max_width_percentage / width)
+--             width = math.ceil(max_width_percentage * vim.o.columns)
+--         end
+--
+--         win_config.height = height
+--         win_config.width = width
+--         vim.api.nvim_win_set_config(win_id, win_config)
+--         H.preview.image:render()
+--     end,
+-- })
 
 H.file_explorer = function()
     H.files_show_dot = false

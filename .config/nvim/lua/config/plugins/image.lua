@@ -6,6 +6,7 @@ return {
             max_width_windo_percentage = math.huge,
             window_overlap_clear_enabled = true,
             window_overlap_clear_ft_ignore = { 'cmp_menu', 'cmp_docs', '' },
+            hijack_file_patterns = {},
         },
     },
 }

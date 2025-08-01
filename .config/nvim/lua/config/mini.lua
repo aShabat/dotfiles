@@ -76,7 +76,11 @@ vim.keymap.set('n', '<leader>mts', MiniTrailspace.trim, { desc = '[M]ini.[T]rail
 vim.keymap.set('n', '<leader>mtl', MiniTrailspace.trim_last_lines, { desc = '[M]ini.[T]rim[L]ines' })
 
 -- Notify
-require('mini.notify').setup {}
+require('mini.notify').setup {
+    window = {
+        max_width_share = 0.7,
+    },
+}
 vim.notify = MiniNotify.make_notify {}
 print = function(...)
     if vim.in_fast_event() then
