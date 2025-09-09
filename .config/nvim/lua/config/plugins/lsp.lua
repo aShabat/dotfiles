@@ -65,7 +65,6 @@ return {
                 },
                 clangd = {},
                 gleam = {},
-                emmet_language_server = {},
                 postgres_lsp = {
                     filetypes = { 'sql', 'sql.postgres' },
                 },
