@@ -68,6 +68,7 @@ return {
                 postgres_lsp = {
                     filetypes = { 'sql', 'sql.postgres' },
                 },
+                fish_lsp = {},
             },
         },
         config = function(_, opts)
