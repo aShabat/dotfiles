@@ -5,7 +5,7 @@ return {
         formatters_by_ft = {
             lua = { 'stylua' },
             cpp = { 'clang-format' },
-            go = { 'gofumpt', 'goimports-reviser' },
+            go = { 'gofumpt' },
             python = { 'black' },
             markdown = { 'injected' },
             gleam = { 'gleam' },
