@@ -21,6 +21,9 @@ return {
         },
         sources = {
             default = { 'lsp', 'path', 'buffer' },
+            per_filetype = {
+                clojure = { inherit_default = true, 'omni' },
+            },
             providers = {
                 path = {
                     opts = {
