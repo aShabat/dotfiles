@@ -67,8 +67,8 @@ end)
 vim.keymap.set('n', '<C-Tab>', function()
     local windows = {}
     for _, window in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
-        local buf = vim.api.nvim_win_get_buf(window)
-        if vim.bo[buf].buftype ~= 'empty' and vim.bo[buf].buftype ~= 'nofile' then windows[#windows + 1] = window end
+        local config = vim.api.nvim_win_get_config(window)
+        if ((not config.relative) or config.relative == '') and config.focusable then windows[#windows + 1] = window end
     end
     if #windows <= 1 then return end
     local current_win = vim.api.nvim_tabpage_get_win(0)
