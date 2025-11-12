@@ -6,6 +6,7 @@ return {
             lua = { 'stylua' },
             cpp = { 'clang-format' },
             go = { 'gofumpt' },
+            clojure = { 'cljfmt' },
             python = { 'black' },
             markdown = { 'injected' },
             gleam = { 'gleam' },
