@@ -82,15 +82,15 @@ require('mini.notify').setup {
     },
 }
 vim.notify = MiniNotify.make_notify {}
-print = function(...)
-    if vim.in_fast_event() then
-        print(...)
-    else
-        for _, v in ipairs { ... } do
-            vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
-        end
-    end
-end
+-- print = function(...)
+--     if vim.in_fast_event() then
+--         print(...)
+--     else
+--         for _, v in ipairs { ... } do
+--             vim.notify('Print: ' .. tostring(v), vim.log.levels.info)
+--         end
+--     end
+-- end
 
 vim.api.nvim_create_user_command('MNHistory', function()
     local editor_width = vim.o.columns
