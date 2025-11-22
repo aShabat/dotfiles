@@ -132,7 +132,6 @@ require('mini.move').setup {
 require('mini.splitjoin').setup {}
 
 -- AI
-
 local ai = require 'mini.ai'
 ai.setup {
     custom_textobjects = {
@@ -151,6 +150,9 @@ require('mini.bracketed').setup {
         options = { float = true },
     },
 }
+
+-- Pairs
+require('mini.pairs').setup {}
 
 -- Surround
 require('mini.surround').setup {}
