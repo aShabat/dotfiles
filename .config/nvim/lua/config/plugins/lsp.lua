@@ -10,7 +10,7 @@ H.lsp_keymaps = function(event)
             MiniExtra.pickers.lsp { scope = scope }
         end
     end
-    set('<leader>rn', vim.lsp.buf.rename)
+    set('<leader>rn', ':IncRename ', '[R]e[N]ame')
     set('<leader>ca', require('fastaction').code_action, '[C]ode [A]ctions')
     set('gd', minilsp 'definition', '[G]et [D]efinition')
     set('gD', vim.lsp.buf.declaration, '[G]et [D]eclaration')
@@ -41,6 +41,7 @@ return {
                 },
             },
             'https://git.sr.ht/~p00f/clangd_extensions.nvim',
+            { 'smjonas/inc-rename.nvim', opts = {} },
         },
         opts = {
             servers = {
