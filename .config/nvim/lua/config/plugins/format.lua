@@ -6,7 +6,7 @@ return {
             lua = { 'stylua' },
             cpp = { 'clang-format' },
             go = { 'gofumpt' },
-            clojure = { 'cljfmt' },
+            clojure = { 'zprint' },
             python = { 'black' },
             markdown = { 'injected' },
             gleam = { 'gleam' },
@@ -49,6 +49,9 @@ return {
                     '-set-alias',
                     '-separate-named',
                 },
+            },
+            zprint = {
+                prepend_args = { '{:style :community}' },
             },
         },
     },
