@@ -152,7 +152,16 @@ require('mini.bracketed').setup {
 }
 
 -- Pairs
-require('mini.pairs').setup {}
+require('mini.pairs').setup {
+    mappings = {
+        [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+        [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+        ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+        ['"'] = { action = 'close', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
+        ["'"] = { action = 'close', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
+        ['`'] = { action = 'close', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
+    },
+}
 
 -- Surround
 require('mini.surround').setup {}
