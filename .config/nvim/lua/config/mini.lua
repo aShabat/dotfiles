@@ -154,6 +154,9 @@ require('mini.bracketed').setup {
 -- Pairs
 require('mini.pairs').setup {
     mappings = {
+        ['('] = false,
+        ['['] = false,
+        ['{'] = false,
         [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
         [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
         ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
