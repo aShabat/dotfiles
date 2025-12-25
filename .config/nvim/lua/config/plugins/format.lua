@@ -14,6 +14,7 @@ return {
             css = { 'prettier' },
             javascript = { 'prettier' },
             typescript = { 'prettier' },
+            ocaml = { 'ocamlformat' },
         },
         default_format_opts = {
             lsp_format = 'fallback',

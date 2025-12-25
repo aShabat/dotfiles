@@ -71,6 +71,7 @@ return {
                     filetypes = { 'sql', 'sql.postgres' },
                 },
                 fish_lsp = {},
+                ocamllsp = {},
             },
         },
         config = function(_, opts)
