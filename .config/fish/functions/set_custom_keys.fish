@@ -34,5 +34,5 @@ function set_custom_keys
     bind ctrl-t fzf-file-widget
     bind ctrl-d fzf-cd-widget
     bind ctrl-^ 'fish_commandline_append " &>/dev/null &"' execute
-    bind enter transient_execute
+    bind enter execute
 end
