@@ -8,7 +8,7 @@ return {
             go = { 'gofumpt' },
             clojure = { 'zprint' },
             python = { 'black' },
-            markdown = { 'injected' },
+            -- markdown = { 'injected' },
             gleam = { 'gleam' },
             html = { 'prettier' },
             css = { 'prettier' },
