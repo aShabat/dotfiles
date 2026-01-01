@@ -151,20 +151,20 @@ require('mini.bracketed').setup {
     },
 }
 
--- Pairs
-require('mini.pairs').setup {
-    mappings = {
-        ['('] = false,
-        ['['] = false,
-        ['{'] = false,
-        [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
-        [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
-        ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
-        ['"'] = { action = 'close', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
-        ["'"] = { action = 'close', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
-        ['`'] = { action = 'close', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
-    },
-}
+-- -- Pairs
+-- require('mini.pairs').setup {
+--     mappings = {
+--         ['('] = false,
+--         ['['] = false,
+--         ['{'] = false,
+--         [')'] = { action = 'close', pair = '()', neigh_pattern = '[^\\].' },
+--         [']'] = { action = 'close', pair = '[]', neigh_pattern = '[^\\].' },
+--         ['}'] = { action = 'close', pair = '{}', neigh_pattern = '[^\\].' },
+--         ['"'] = { action = 'close', pair = '""', neigh_pattern = '[^\\].', register = { cr = false } },
+--         ["'"] = { action = 'close', pair = "''", neigh_pattern = '[^%a\\].', register = { cr = false } },
+--         ['`'] = { action = 'close', pair = '``', neigh_pattern = '[^\\].', register = { cr = false } },
+--     },
+-- }
 
 -- Surround
 require('mini.surround').setup {}
