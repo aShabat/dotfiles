@@ -54,6 +54,9 @@ return {
             zprint = {
                 prepend_args = { '{:style :community}' },
             },
+            ocamlformat = {
+                prepend_args = { '--profile=janestreet' },
+            },
         },
     },
     config = function(_, opts)
