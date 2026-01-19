@@ -1,3 +1,4 @@
+#better argparse???
 function dotenv
     builtin argparse h/help v/verbose f/file=? -- $argv
     or return 1
@@ -16,11 +17,6 @@ function dotenv
         echo "  FILE            Path to dotenv file (default: .env)"
         return 0
     end
-
-    # if test (builtin count $argv) -gt 1
-    #     echo "Too many arguments. Only one argument is allowed. Use --help for more information."
-    #     return 1
-    # end
 
     set -l dotenv_file ".env"
     if set -q _flag_file
