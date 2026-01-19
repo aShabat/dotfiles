@@ -123,5 +123,7 @@ function dotenv
         end
     end
 
-    $argv
+    if test (builtin count $argv) -gt 0
+        $argv
+    end
 end
