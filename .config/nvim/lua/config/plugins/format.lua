@@ -41,6 +41,11 @@ return {
                     'Tabs',
                 },
             },
+            prettier = {
+                prepend_args = {
+                    '--no-semi',
+                },
+            },
             ['clang-format'] = {
                 append_args = { '-style={BasedOnStyle: Google, IndentWidth: 4}' },
             },
