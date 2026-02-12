@@ -1,0 +1,8 @@
+command=/usr/bin/tmux
+
+confirm-close-surface=false
+maximize=true
+
+theme = Catppuccin Mocha
+
+keybind=clear
