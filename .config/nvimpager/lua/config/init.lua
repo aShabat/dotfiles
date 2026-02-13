@@ -17,11 +17,6 @@ end
 
 require('mini.deps').setup { path = { package = path_package } }
 
--- Base16
-if vim.fn.filereadable(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua') ~= 0 then
-    dofile(vim.fn.stdpath 'config' .. '/lua/config/minibase16.lua')
-end
-
 -- Hipatterns
 
 local hipatterns = require 'mini.hipatterns'
@@ -90,3 +85,12 @@ vim.keymap.set('n', '<esc>', '<cmd>noh<cr>')
 -- Leap
 vim.keymap.set('n', 'f', '<Plug>(leap)')
 vim.keymap.set('n', 'F', '<Plug>(leap-from-window)')
+
+-- Catppuccin
+now(function()
+    add { source = 'catppuccin/nvim', name = 'catppuccin' }
+    require('catppuccin').setup {
+        flavor = 'latte',
+    }
+    vim.cmd.colorscheme 'catppuccin'
+end)
