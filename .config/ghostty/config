@@ -5,7 +5,19 @@ maximize=true
 
 theme = Catppuccin Mocha
 
+font-family="Firacode Nerd Font Mono"
+font-family="Unifont"
+font-family="Unifont Upper"
+font-family="Unifont CSUR"
+font-family-italic="Victor Mono"
+font-family-bold-italic="Victor Mono Oblique"
+font-variation-bold-italic= wght=800
+font-feature= cv01, cv02, ss01, zero, ss05, ss04, cv18, ss03, cv16, cv31, cv29, cv30, ss02, ss09, ss08, cv25, cv26, cv32, ss06, cv27, cv28, ss06, ss07,
+
 keybind=clear
 keybind=alt+shift+equal=increase_font_size:1
 keybind=alt+minus=decrease_font_size:1
 keybind=alt+digit_0=reset_font_size
+keybind=alt+shift+r=reload_config
+keybind=alt+c=copy_to_clipboard
+keybind=alt+p=paste_from_clipboard
