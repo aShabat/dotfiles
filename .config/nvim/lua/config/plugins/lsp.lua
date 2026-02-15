@@ -46,7 +46,6 @@ return {
         opts = {
             servers = {
                 lua_ls = {},
-                -- clojure_lsp = {},
                 gopls = {
                     settings = {
                         gopls = {
