@@ -13,7 +13,9 @@ return {
             html = { 'prettier' },
             css = { 'prettier' },
             javascript = { 'prettier' },
+            javascriptreact = { 'prettier' },
             typescript = { 'prettier' },
+            typescriptreact = { 'prettier' },
             ocaml = { 'ocamlformat' },
         },
         default_format_opts = {
