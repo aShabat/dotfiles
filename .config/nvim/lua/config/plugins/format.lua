@@ -16,6 +16,7 @@ return {
             javascriptreact = { 'prettier' },
             typescript = { 'prettier' },
             typescriptreact = { 'prettier' },
+            json = { 'prettier' },
             ocaml = { 'ocamlformat' },
         },
         default_format_opts = {
